@@ -11,7 +11,10 @@ export default function Layout() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.section`
+  display: flex;
+  justify-content: space-around;
+
   min-height: 100vh;
   padding-top: calc(47px + env(safe-area-inset-top));
   padding-right: 24px;
