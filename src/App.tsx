@@ -1,9 +1,9 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/Home/HomePage";
-import AuthPage from "./pages/Auth/AuthPage";
+import HomePage from "./pages/home/HomePage";
+import AuthPage from "./pages/auth/AuthPage";
 import Layout from "./layout/Layout";
-import WritePage from "./pages/Write/WritePage";
+import WritePage from "./pages/write/WritePage";
 
 function App() {
   return (
