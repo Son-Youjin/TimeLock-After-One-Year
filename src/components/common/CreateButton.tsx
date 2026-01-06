@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { colors } from "../../styles/theme";
-import Button from "../common/Button";
+import Button from "./Button";
 
 export default function CreateButton() {
   const navigate = useNavigate();

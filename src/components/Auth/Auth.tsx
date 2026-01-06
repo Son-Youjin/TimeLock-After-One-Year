@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 import Button from "../common/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Title>TimeLock</Title>
@@ -11,13 +14,13 @@ export default function Auth() {
         bgcolor="#FEE500"
         text="네이버 로그인"
         aria-label="네이버 로그인"
-        onClick={() => console.log("네이버")}
+        onClick={() => navigate("/")}
       />
       <Button
         bgcolor="#03A94D"
         text="카카오 로그인"
         aria-label="카카오 로그인"
-        onClick={() => console.log("카카오")}
+        onClick={() => navigate("/")}
       />
     </Container>
   );

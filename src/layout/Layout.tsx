@@ -13,7 +13,8 @@ export default function Layout() {
 
 const Container = styled.section`
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  /* justify-content: space-around; */
 
   min-height: 100vh;
   padding-top: calc(47px + env(safe-area-inset-top));
