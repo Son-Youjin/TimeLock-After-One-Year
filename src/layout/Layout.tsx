@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
+import Header from "../components/common/Header";
+import { useState } from "react";
+import ModalNotification from "../components/Notification/ModalNotification";
 
 export default function Layout() {
+  const [visible, setVisible] = useState(false);
+
   return (
     <Container>
-      {/* Header 자리 */}
+      <Header onClickBell={() => setVisible(true)} />
+      {visible && <ModalNotification onClose={() => setVisible(false)} />}
       <Outlet />
       {/* Footer 자리 */}
     </Container>
@@ -14,6 +20,7 @@ export default function Layout() {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
   /* justify-content: space-around; */
 
   min-height: 100vh;

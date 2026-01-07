@@ -6,7 +6,6 @@ export default function PreviewMain() {
   return (
     <Container>
       <SubText>올해의 시간이 이렇게 흘러가고 있어요.</SubText>
-
       {/* [ 2026년 진행률 (게이지 바) ] */}
       <SubText>시간이 지나야 열리는 편지를 미래의 나에게 남겨보세요.</SubText>
       <Button

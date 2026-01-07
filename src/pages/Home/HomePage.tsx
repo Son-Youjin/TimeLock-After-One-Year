@@ -1,7 +1,6 @@
 import { useState } from "react";
 import LoginMain from "../../components/main/LoginMain";
 import PreviewMain from "../../components/main/PreviewMain";
-import Header from "../../components/common/Header";
 import styled from "@emotion/styled";
 
 export default function HomePage() {
@@ -12,7 +11,6 @@ export default function HomePage() {
       <Btn onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? "Logoff" : "Login"}
       </Btn>
-      <Header />
 
       {isLogin ? <LoginMain /> : <PreviewMain />}
     </>
