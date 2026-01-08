@@ -3,13 +3,14 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { GoBell } from "react-icons/go";
 
 interface HeaderProps {
+  onClickSide: () => void;
   onClickBell: () => void;
 }
 
-export default function Header({ onClickBell }: HeaderProps) {
+export default function Header({ onClickSide, onClickBell }: HeaderProps) {
   return (
     <Container>
-      <Btn>
+      <Btn onClick={onClickSide}>
         <GiHamburgerMenu />
       </Btn>
       <Btn onClick={onClickBell}>

@@ -1,27 +1,11 @@
-import { useState } from "react";
 import LoginMain from "../../components/main/LoginMain";
 import PreviewMain from "../../components/main/PreviewMain";
-import styled from "@emotion/styled";
 
-export default function HomePage() {
-  const [isLogin, setIsLogin] = useState(true);
-
-  return (
-    <>
-      <Btn onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? "Logoff" : "Login"}
-      </Btn>
-
-      {isLogin ? <LoginMain /> : <PreviewMain />}
-    </>
-  );
+interface HomePageProps {
+  isLogin: boolean;
+  onLogin: () => void;
 }
 
-const Btn = styled.button`
-  display: flex;
-  justify-content: center;
-  width: 50px;
-  border-radius: 25px;
-  border: none;
-  background-color: #ddd;
-`;
+export default function HomePage({ isLogin, onLogin }: HomePageProps) {
+  return <>{isLogin ? <LoginMain /> : <PreviewMain onLogin={onLogin} />}</>;
+}

@@ -2,8 +2,11 @@ import styled from "@emotion/styled";
 import Button from "../common/Button";
 import { colors } from "../../styles/theme";
 import ProgressBar from "../ProgressBar";
+import { useNavigate } from "react-router-dom";
 
-export default function PreviewMain() {
+export default function PreviewMain({ onLogin }: { onLogin: () => void }) {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <SubText>올해의 시간이 흘러가고 있어요.</SubText>
@@ -15,6 +18,8 @@ export default function PreviewMain() {
         bgcolor={colors.Text}
         color={colors.Background}
         text="로그인하고 편지 쓰기"
+        // onClick={() => navigate("/auth")}
+        onClick={onLogin}
       />
     </Container>
   );

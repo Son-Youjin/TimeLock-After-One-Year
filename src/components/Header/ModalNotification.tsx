@@ -14,8 +14,9 @@ export default function ModalNotification({ onClose }: ModalNotificationProps) {
         </Btn>
 
         <Ul>
-          <List>oo님, 1년 전의 편지가 도착했습니다.</List>
-          <List>oo님, 1년 전의 편지가 도착했습니다.</List>
+          {Array.from({ length: 3 }).map(() => (
+            <List>oo님, 1년 전의 편지가 도착했습니다.</List>
+          ))}
         </Ul>
       </Container>
     </BackDrop>
