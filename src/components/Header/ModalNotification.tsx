@@ -14,13 +14,13 @@ export default function ModalNotification({ onClose }: ModalNotificationProps) {
         <Header>
           <Title>알림</Title>
 
-          <Button style={{ margin: "2px" }} onClick={onClose}>
-            <IoMdClose size={18} />
+          <Button style={{ margin: "2px", paddingTop: "2%" }} onClick={onClose}>
+            <IoMdClose size={20} />
           </Button>
         </Header>
 
         <Ul>
-          {Array.from({ length: 3 }).map(() => (
+          {Array.from({ length: 5 }).map(() => (
             <ListItem>oo님, 1년 전의 편지가 도착했습니다.</ListItem>
           ))}
         </Ul>
@@ -43,7 +43,7 @@ const Container = styled.section`
 
   width: 260px;
   height: 180px;
-  padding: 8px 10px;
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
@@ -58,17 +58,18 @@ const Header = styled.div`
   justify-content: space-between;
   height: 28px;
   margin-bottom: 4px;
+  align-items: center;
 `;
 
 const Title = styled.h2`
   font-size: 14px;
-  line-height: 0;
 `;
 
 const Ul = styled.ul`
+  flex: 1;
   padding: 0px;
   margin: 6px 0px 0px;
-  overflow-y: auto;
-  white-space: nowrap;
-  flex-shrink: 0;
+  overflow: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: none;
 `;
