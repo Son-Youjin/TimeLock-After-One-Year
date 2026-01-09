@@ -1,25 +1,28 @@
 import styled from "@emotion/styled";
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  bgcolor: string;
-  text: string;
+  bgcolor?: string;
+  children?: ReactNode;
 }
 
-export default function Button({ bgcolor, color, text, ...rest }: ButtonProps) {
+export default function Button({
+  bgcolor = "transparent",
+  color = "inherit",
+  children,
+  ...rest
+}: ButtonProps) {
   return (
     <Btn bgcolor={bgcolor} color={color} {...rest}>
-      {text}
+      {children}
     </Btn>
   );
 }
 
-const Btn = styled.button<{ bgcolor: string }>`
-  width: 100%;
-  height: 56px;
+const Btn = styled.button<{ bgcolor?: string; color?: string }>`
   border: none;
   border-radius: 8px;
-  margin-bottom: 12px;
+  padding: 0px;
 
   color: ${({ color }) => color};
   background-color: ${({ bgcolor }) => bgcolor};

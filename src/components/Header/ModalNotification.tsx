@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { IoMdClose } from "react-icons/io";
+import Button from "../common/Button";
+import ListItem from "./ListItem";
 
 interface ModalNotificationProps {
   onClose: () => void;
@@ -9,13 +11,17 @@ export default function ModalNotification({ onClose }: ModalNotificationProps) {
   return (
     <BackDrop onClick={onClose}>
       <Container>
-        <Btn onClick={onClose}>
-          <IoMdClose />
-        </Btn>
+        <Header>
+          <Title>알림</Title>
+
+          <Button style={{ margin: "2px" }} onClick={onClose}>
+            <IoMdClose size={18} />
+          </Button>
+        </Header>
 
         <Ul>
           {Array.from({ length: 3 }).map(() => (
-            <List>oo님, 1년 전의 편지가 도착했습니다.</List>
+            <ListItem>oo님, 1년 전의 편지가 도착했습니다.</ListItem>
           ))}
         </Ul>
       </Container>
@@ -32,8 +38,12 @@ const BackDrop = styled.div`
 
 const Container = styled.section`
   position: absolute;
-  top: 12%;
+  top: 11%;
   right: 10%;
+
+  width: 260px;
+  height: 180px;
+  padding: 8px 10px;
 
   display: flex;
   flex-direction: column;
@@ -41,38 +51,24 @@ const Container = styled.section`
   background-color: aliceblue;
   border-radius: 14px;
   border: 1px solid gray;
-
-  width: 240px;
-  height: 140px;
-  padding: 6px;
 `;
 
-const Btn = styled.button`
+const Header = styled.div`
   display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  border: none;
-  margin: 0px 0px 4px 4px;
+  justify-content: space-between;
+  height: 28px;
+  margin-bottom: 4px;
+`;
+
+const Title = styled.h2`
+  font-size: 14px;
+  line-height: 0;
 `;
 
 const Ul = styled.ul`
   padding: 0px;
-  margin: 4px 0px 0px;
-`;
-
-const List = styled.li`
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-
-  font-size: 14px;
-  padding-left: 6px;
-
-  &::after {
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 6px 0px;
-  }
+  margin: 6px 0px 0px;
+  overflow-y: auto;
+  white-space: nowrap;
+  flex-shrink: 0;
 `;

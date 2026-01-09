@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GoBell } from "react-icons/go";
+import Button from "../common/Button";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   onClickSide: () => void;
@@ -8,14 +10,19 @@ interface HeaderProps {
 }
 
 export default function Header({ onClickSide, onClickBell }: HeaderProps) {
+  const navigate = useNavigate();
+
   return (
     <Container>
-      <Btn onClick={onClickSide}>
-        <GiHamburgerMenu />
-      </Btn>
-      <Btn onClick={onClickBell}>
-        <GoBell />
-      </Btn>
+      <Button onClick={onClickSide}>
+        <GiHamburgerMenu size={18} />
+      </Button>
+
+      <Title onClick={() => navigate("/")}>TimeLock</Title>
+
+      <Button onClick={onClickBell}>
+        <GoBell size={18} />
+      </Button>
     </Container>
   );
 }
@@ -23,14 +30,18 @@ export default function Header({ onClickSide, onClickBell }: HeaderProps) {
 const Container = styled.section`
   display: flex;
   width: 100%;
-  height: 3vh;
+  height: 40px;
   justify-content: space-between;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 12px 10px;
   margin: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-const Btn = styled.button`
+const Title = styled.h1`
   display: flex;
-  border: none;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
 `;

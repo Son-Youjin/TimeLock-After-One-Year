@@ -11,10 +11,12 @@ export default function CreateButton() {
 
   return (
     <Button
+      style={{ width: "100%", height: "46px" }}
       bgcolor={colors.Active}
-      text="편지 작성하기"
       color={colors.Background}
       onClick={handleGoWrite}
-    />
+    >
+      편지 작성하기
+    </Button>
   );
 }

@@ -2,15 +2,10 @@ import type { MusicMeta } from "./musicMeta";
 
 export interface Letter {
   id: string;
-  email: string;
-
   title: string;
   content: string;
+  createdAt: number;
+  openAt: number;
 
-  music?: MusicMeta;
-
-  createAt: Date;
-  openAt: Date;
-
-  isOpened: boolean;
+  song: MusicMeta;
 }

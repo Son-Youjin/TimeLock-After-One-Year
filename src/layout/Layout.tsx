@@ -37,16 +37,15 @@ export default function Layout({ isLogin, onLogin, onLogout }: LayoutProps) {
 }
 
 const Container = styled.section`
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-around; */
 
-  min-height: 100vh;
-  /* padding-top: calc(47px + env(safe-area-inset-top)); */
-  padding-top: env(safe-area-inset-top);
+  height: 100vh;
+  padding-top: calc(47px + env(safe-area-inset-top));
   padding-right: 24px;
   padding-left: 24px;
-  /* padding-bottom: calc(34px + env(safe-area-inset-bottom)); */
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: calc(34px + env(safe-area-inset-bottom));
 `;

@@ -15,12 +15,14 @@ export default function PreviewMain({ onLogin }: { onLogin: () => void }) {
 
       <SubText>시간이 지나야 열리는 편지를 미래의 나에게 남겨보세요.</SubText>
       <Button
+        style={{ width: "100%", height: "46px" }}
         bgcolor={colors.Text}
         color={colors.Background}
-        text="로그인하고 편지 쓰기"
         // onClick={() => navigate("/auth")}
         onClick={onLogin}
-      />
+      >
+        로그인하고 편지 쓰기
+      </Button>
     </Container>
   );
 }
