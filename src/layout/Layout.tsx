@@ -21,6 +21,7 @@ export default function Layout({ isLogin, onLogin, onLogout }: LayoutProps) {
         onClickBell={() => setIsBellOpen(true)}
         onClickSide={() => setIsSideOpen(true)}
       />
+
       {isSideOpen && (
         <SideBar
           isLogin={isLogin}
@@ -30,22 +31,29 @@ export default function Layout({ isLogin, onLogin, onLogout }: LayoutProps) {
         />
       )}
       {isBellOpen && <ModalNotification onClose={() => setIsBellOpen(false)} />}
-      <Outlet />
+
+      <Content>
+        <Outlet />
+      </Content>
       {/* Footer 자리 */}
     </Container>
   );
 }
 
 const Container = styled.section`
-  box-sizing: border-box;
-
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  height: 100vh;
-  padding-top: calc(47px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   padding-right: 24px;
   padding-left: 24px;
-  padding-bottom: calc(34px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+`;
+
+const Content = styled.main`
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
 `;
