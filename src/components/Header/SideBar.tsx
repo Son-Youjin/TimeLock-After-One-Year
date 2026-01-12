@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { getLetters } from "../../mock/api/letters";
 import type { Letter } from "../../types/letter";
-import LettersList from "./LettersList";
+import SideLettersList from "./SideLettersList";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
 
@@ -33,12 +33,12 @@ export default function SideBar({
     <BackDrop onClick={onClose}>
       <Container onClick={(e) => e.stopPropagation()}>
         <CloseWrapper>
-          <Button style={{ width: "24px", height: "24px" }}>
-            <IoMdClose />
+          <Button style={{ width: "30px", height: "30px" }} onClick={onClose}>
+            <IoMdClose size={20} />
           </Button>
         </CloseWrapper>
 
-        <LettersList letters={letters} />
+        <SideLettersList letters={letters} />
 
         <LogInOut onClick={isLogin ? onLogin : onLogout}>
           {isLogin ? "로그아웃" : "로그인"}
@@ -62,16 +62,22 @@ const Container = styled.div`
   background-color: aliceblue;
   width: 60%;
   height: 100%;
-  transition: 0.6s ease;
+
+  padding: 8px 12px;
 `;
 
 const CloseWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  text-align: center;
-  margin: 4px;
+  align-items: center;
+  /* margin: 4px; */
 `;
 
 const LogInOut = styled.button`
   border: none;
+  border-radius: 4px;
+  margin-top: 4px;
+  padding: 10px;
+
+  background-color: rgba(0, 0, 0, 0.1);
 `;

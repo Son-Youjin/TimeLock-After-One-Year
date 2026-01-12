@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
-import ListItem from "./ListItem";
+import LetterList from "./letterList";
 
 interface ModalNotificationProps {
   onClose: () => void;
@@ -19,11 +19,7 @@ export default function ModalNotification({ onClose }: ModalNotificationProps) {
           </Button>
         </Header>
 
-        <Ul>
-          {Array.from({ length: 5 }).map(() => (
-            <ListItem>oo님, 1년 전의 편지가 도착했습니다.</ListItem>
-          ))}
-        </Ul>
+        <LetterList />
       </Container>
     </BackDrop>
   );
@@ -63,13 +59,4 @@ const Header = styled.div`
 
 const Title = styled.h2`
   font-size: 14px;
-`;
-
-const Ul = styled.ul`
-  flex: 1;
-  padding: 0px;
-  margin: 6px 0px 0px;
-  overflow: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: none;
 `;
