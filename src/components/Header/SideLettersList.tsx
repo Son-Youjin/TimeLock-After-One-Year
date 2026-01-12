@@ -11,7 +11,7 @@ export default function SideLettersList({ letters }: SideLettersListProps) {
   return (
     <Container>
       {lettersList.map((letter) => (
-        <ListItem>{letter.title}</ListItem>
+        <ListItem key={letter.id}>{letter.title}</ListItem>
       ))}
     </Container>
   );

@@ -10,7 +10,7 @@ export default function ProgressBar() {
     100;
 
   return (
-    <>
+    <Container>
       <BarLine>
         <Fill style={{ width: `${progress}%` }} />
       </BarLine>
@@ -18,18 +18,22 @@ export default function ProgressBar() {
         {now.getFullYear()}년의
         <Number> {Math.floor(progress)}%</Number>가 지났어요.
       </SubText>
-    </>
+    </Container>
   );
 }
 
-const BarLine = styled.div`
+const Container = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
+  margin: 20px 0px;
+`;
+
+const BarLine = styled.div`
   height: 16px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   overflow: hidden;
-  margin: 12px 0 0px;
 `;
 
 const Fill = styled.div`
@@ -39,8 +43,7 @@ const Fill = styled.div`
 `;
 
 const SubText = styled.p`
-  font-size: 12px;
-  margin: 0 0 20px 0;
+  font-size: 14px;
 `;
 
 const Number = styled.span`

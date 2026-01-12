@@ -8,12 +8,14 @@ export default function PreviewMain({ onLogin }: { onLogin: () => void }) {
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <SubText>올해의 시간이 흘러가고 있어요.</SubText>
+    <>
+      <Container>
+        <SubText>올해의 시간이 흘러가고 있어요.</SubText>
 
-      <ProgressBar />
+        <ProgressBar />
 
-      <SubText>시간이 지나야 열리는 편지를 미래의 나에게 남겨보세요.</SubText>
+        <SubText>시간이 지나야 열리는 편지를 미래의 나에게 남겨보세요.</SubText>
+      </Container>
       <Button
         style={{ width: "100%", height: "46px" }}
         bgcolor={colors.Text}
@@ -23,17 +25,19 @@ export default function PreviewMain({ onLogin }: { onLogin: () => void }) {
       >
         로그인하고 편지 쓰기
       </Button>
-    </Container>
+    </>
   );
 }
 
 const Container = styled.section`
   display: flex;
+  width: 100%;
   flex-direction: column;
+  margin: 10px 0px 20px 0px;
 `;
 
 const SubText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   color: ${colors.Text};
-  /* line-height: 0; */
+  align-items: center;
 `;

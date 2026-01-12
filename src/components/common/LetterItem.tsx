@@ -1,19 +1,27 @@
 import styled from "@emotion/styled";
 import { colors } from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
+import { SlEnvolopeLetter } from "react-icons/sl";
+import type { ReactNode } from "react";
 
 interface LetterItemProps {
-  text: string;
+  children: ReactNode;
+  letterId: string;
 }
 
-export default function LetterItem({ text }: LetterItemProps) {
+export default function LetterItem({ children, letterId }: LetterItemProps) {
   const navigate = useNavigate();
 
   // TODO: letter id 수정
-  const id = 1;
 
   return (
-    <LetterBox onClick={() => navigate(`/letter/${id}`)}>{text}</LetterBox>
+    <LetterBox onClick={() => navigate(`/letter/${letterId}`)}>
+      <Icon>
+        <SlEnvolopeLetter size={18} />
+      </Icon>
+
+      {children}
+    </LetterBox>
   );
 }
 
@@ -29,4 +37,10 @@ const LetterBox = styled.div`
 
   font-weight: 600;
   color: ${colors.Active};
+`;
+
+const Icon = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
 `;

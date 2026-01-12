@@ -16,7 +16,7 @@ const Container = styled.section`
 
   width: 300px;
 
-  padding: 24px;
+  /* padding: 24px; */
   border: 1px solid silver;
   border-radius: 24px;
 

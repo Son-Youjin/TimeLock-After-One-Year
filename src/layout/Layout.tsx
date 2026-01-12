@@ -44,16 +44,18 @@ const Container = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 
   padding-top: env(safe-area-inset-top);
-  padding-right: 24px;
-  padding-left: 24px;
+  padding-right: 20px;
+  padding-left: 20px;
   padding-bottom: env(safe-area-inset-bottom);
 `;
 
 const Content = styled.main`
   flex: 1;
+  width: 100%;
   overflow-y: auto;
-  padding: 24px;
+
+  padding: 6px 8px 0;
 `;
