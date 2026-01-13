@@ -55,12 +55,13 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 0px 20px 0px;
+  margin: 10px 0px 40px 0px;
 `;
 
 const SubText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   color: ${colors.Text};
+  padding: 4px 0px 8px 0px;
 `;
 
 const Day = styled.h1`
