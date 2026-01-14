@@ -1,5 +1,4 @@
 export interface MusicMeta {
-  title: string;
+  name: string;
   artist: string;
-  cover: string;
 }

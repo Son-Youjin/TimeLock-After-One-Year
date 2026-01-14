@@ -9,7 +9,7 @@ export const db = {
       createdAt: Date.now() - ONE_DAY * 105,
       openAt: Date.now() + ONE_DAY * 260,
       song: {
-        title: "REBEL HEART",
+        name: "REBEL HEART",
         artist: "IVE",
         cover: "img-url1",
       },
@@ -21,7 +21,7 @@ export const db = {
       createdAt: Date.now() - ONE_DAY * 300,
       openAt: Date.now() + ONE_DAY * 65,
       song: {
-        title: "칵테일 사랑",
+        name: "칵테일 사랑",
         artist: "마로니에",
         cover: "img-url2",
       },
@@ -33,7 +33,7 @@ export const db = {
       createdAt: Date.now() - ONE_DAY * 363,
       openAt: Date.now() + ONE_DAY * 2,
       song: {
-        title: "원더우먼",
+        name: "원더우먼",
         artist: "씨야",
         cover: "img-url3",
       },
