@@ -6,12 +6,14 @@ interface SearchBarProps {
   value: string;
   onKeyword: (value: string) => void;
   onSearch: () => void;
+  onClick: () => void;
 }
 
 export default function SearchBar({
   value,
   onKeyword,
   onSearch,
+  onClick,
 }: SearchBarProps) {
   const handleInputKeyword = (e: ChangeEvent<HTMLInputElement>) => {
     onKeyword(e.target.value);
@@ -24,7 +26,7 @@ export default function SearchBar({
   };
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Icon>
         <IoIosSearch />
       </Icon>
@@ -39,8 +41,10 @@ export default function SearchBar({
 }
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
+  margin-bottom: 20px;
 `;
 
 const Search = styled.input`

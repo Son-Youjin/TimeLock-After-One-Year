@@ -1,26 +1,21 @@
 import styled from "@emotion/styled";
 import SearchBar from "./SearchBar";
-import { useEffect, useState } from "react";
-import { getLetters } from "../../mock/api/letters";
+import { useState } from "react";
 import { searchKeyword } from "../../utils/searchKeyword";
-import type { Letter } from "../../types/letter";
 import type { MusicMeta } from "../../types/musicMeta";
 import MusicList from "./MusicList";
+import SelectedMusic from "./SelectedMusic";
+import Title from "./Title";
+import Button from "../common/Button";
 import { colors } from "../../styles/theme";
 
 export default function Write() {
-  const [letters, setLetters] = useState<Letter[]>([]);
   const [keyword, setKeyword] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<MusicMeta[]>([]);
   const [selectedMusic, setSelectedMusic] = useState<MusicMeta | null>(null);
-
-  useEffect(() => {
-    async function fetch() {
-      const data = await getLetters();
-      setLetters(data);
-    }
-    fetch();
-  }, []);
 
   const handleSearchSong = async () => {
     const results = await searchKeyword(keyword);
@@ -30,22 +25,44 @@ export default function Write() {
 
   return (
     <Container>
-      <SearchBar
-        value={keyword}
-        onKeyword={(value: string) => setKeyword(value)}
-        onSearch={handleSearchSong}
-      />
+      <Title value={title} onChange={setTitle} />
 
       {selectedMusic ? (
-        <SelectedMusic>
-          {selectedMusic.artist} - {selectedMusic.name}
-        </SelectedMusic>
+        <SelectedMusic onSelectedMusic={selectedMusic} />
       ) : (
-        <MusicList
-          onSearchResults={searchResults}
-          onSelectedMusic={setSelectedMusic}
-        />
+        <SearchSection>
+          <SearchBar
+            value={keyword}
+            onKeyword={(value: string) => setKeyword(value)}
+            onSearch={handleSearchSong}
+            onClick={() => setIsOpen(true)}
+          />
+          {isOpen && (
+            <MusicList
+              onSearchResults={searchResults}
+              onSelectedMusic={(music) => {
+                setSelectedMusic(music);
+                setIsOpen(false);
+              }}
+              onClose={() => setIsOpen(false)}
+            />
+          )}
+        </SearchSection>
       )}
+
+      <Content
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="1년 뒤 나에게 편지를 써보세요"
+      />
+
+      <Button
+        style={{ width: "100%", height: "52px" }}
+        bgcolor="#748396"
+        color={colors.Background}
+      >
+        1년 뒤로 보내기
+      </Button>
     </Container>
   );
 }
@@ -54,13 +71,20 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 20px;
 `;
 
-const SelectedMusic = styled.div`
+const SearchSection = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const Content = styled.textarea`
   display: flex;
-  border: 1px solid ${colors.Active};
-  border-radius: 4px;
+  width: 100%;
+  height: 70vh;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
   padding: 10px;
-  margin: 20px 0px;
+  margin-bottom: 12px;
 `;

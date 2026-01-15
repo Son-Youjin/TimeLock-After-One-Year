@@ -4,6 +4,7 @@ import type { MusicMeta } from "../../types/musicMeta";
 interface MusicListProps {
   onSearchResults: MusicMeta[];
   onSelectedMusic: (music: MusicMeta) => void;
+  onClose: () => void;
 }
 
 export default function MusicList({
@@ -11,23 +12,33 @@ export default function MusicList({
   onSelectedMusic,
 }: MusicListProps) {
   return (
-    <Ul>
-      {onSearchResults.map((track, idx) => (
-        <Li key={idx} onClick={() => onSelectedMusic(track)}>
-          {track.artist} - {track.name}
-        </Li>
-      ))}
-    </Ul>
+    <Backdrop>
+      <Ul>
+        {onSearchResults.map((track, idx) => (
+          <Li key={idx} onClick={() => onSelectedMusic(track)}>
+            {track.artist} - {track.name}
+          </Li>
+        ))}
+      </Ul>
+    </Backdrop>
   );
 }
 
-const Ul = styled.ul`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+const Backdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 1;
+`;
 
-  margin: 20px 0px;
+const Ul = styled.ul`
+  position: absolute;
+  top: 140px;
+  left: 0;
+  width: 80%;
+  height: 200px;
+  background-color: skyblue;
+  margin: 14px 0px;
 `;
 
 const Li = styled.li`
