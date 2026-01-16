@@ -5,9 +5,11 @@ import type { Letter } from "../../types/letter";
 import SideLettersList from "./SideLettersList";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
+import { useNavigate } from "react-router-dom";
 
 interface SideBarProps {
   isLogin: boolean;
+  isOpen: boolean;
   onLogin: () => void;
   onLogout: () => void;
   onClose: () => void;
@@ -15,10 +17,12 @@ interface SideBarProps {
 
 export default function SideBar({
   isLogin,
+  isOpen,
   onLogin,
   onLogout,
   onClose,
 }: SideBarProps) {
+  const navigate = useNavigate();
   const [letters, setLetters] = useState<Letter[]>([]);
 
   useEffect(() => {
@@ -29,16 +33,27 @@ export default function SideBar({
     fetch();
   }, []);
 
+  const handleGoLetter = (id: string) => {
+    onClose();
+    setTimeout(() => {
+      navigate(`/letter/${id}`);
+    }, 200);
+  };
+
   return (
     <BackDrop onClick={onClose}>
-      <Container onClick={(e) => e.stopPropagation()}>
+      <Container isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
         <CloseWrapper>
           <Button style={{ width: "30px", height: "30px" }} onClick={onClose}>
             <IoMdClose size={20} />
           </Button>
         </CloseWrapper>
 
-        <SideLettersList letters={letters} />
+        <SideLettersList
+          letters={letters}
+          onGoLetter={handleGoLetter}
+          onClose={onClose}
+        />
 
         <LogInOut onClick={isLogin ? onLogin : onLogout}>
           {isLogin ? "로그아웃" : "로그인"}
@@ -55,7 +70,7 @@ const BackDrop = styled.div`
   z-index: 999;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
 
@@ -64,6 +79,8 @@ const Container = styled.div`
   height: 100%;
 
   padding: 8px 12px;
+  transform: translateX(${({ isOpen }) => (isOpen ? "0" : "-100%")});
+  transition: transform 0.25s ease;
 `;
 
 const CloseWrapper = styled.div`

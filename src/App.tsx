@@ -9,6 +9,7 @@ import { useState } from "react";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOnLogin = () => {
     setIsLogin(true);
@@ -23,6 +24,7 @@ function App() {
           element={
             <Layout
               isLogin={isLogin}
+              isOpen={isOpen}
               onLogin={handleOnLogin}
               onLogout={() => setIsLogin(false)}
             />

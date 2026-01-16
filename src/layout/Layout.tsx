@@ -7,11 +7,17 @@ import SideBar from "../components/Header/SideBar";
 
 interface LayoutProps {
   isLogin: boolean;
+  isOpen: boolean;
   onLogin: () => void;
   onLogout: () => void;
 }
 
-export default function Layout({ isLogin, onLogin, onLogout }: LayoutProps) {
+export default function Layout({
+  isLogin,
+  isOpen,
+  onLogin,
+  onLogout,
+}: LayoutProps) {
   const [isBellOpen, setIsBellOpen] = useState(false);
   const [isSideOpen, setIsSideOpen] = useState(false);
 
@@ -25,6 +31,7 @@ export default function Layout({ isLogin, onLogin, onLogout }: LayoutProps) {
       {isSideOpen && (
         <SideBar
           isLogin={isLogin}
+          isOpen={isSideOpen}
           onLogin={onLogin}
           onLogout={onLogout}
           onClose={() => setIsSideOpen(false)}

@@ -30,8 +30,8 @@ export const db = {
       id: "3",
       title: "기죽지말거라",
       content: "하다보면 되겠지",
-      createdAt: Date.now() - ONE_DAY * 363,
-      openAt: Date.now() + ONE_DAY * 2,
+      createdAt: Date.now() - ONE_DAY * 366,
+      openAt: Date.now() + ONE_DAY * -1,
       song: {
         name: "원더우먼",
         artist: "씨야",

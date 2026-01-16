@@ -3,15 +3,29 @@ import type { Letter } from "../../types/letter";
 
 interface SideLettersListProps {
   letters: Letter[];
+  onGoLetter: (id: string) => void;
+  onClose: () => void;
 }
 
-export default function SideLettersList({ letters }: SideLettersListProps) {
+export default function SideLettersList({
+  letters,
+  onGoLetter,
+  onClose,
+}: SideLettersListProps) {
   const lettersList = [...letters];
 
   return (
     <Container>
       {lettersList.map((letter) => (
-        <ListItem key={letter.id}>{letter.title}</ListItem>
+        <ListItem
+          onClick={() => {
+            onClose();
+            onGoLetter(letter.id);
+          }}
+          key={letter.id}
+        >
+          {letter.title}
+        </ListItem>
       ))}
     </Container>
   );
