@@ -10,16 +10,19 @@ interface MusicListProps {
 export default function MusicList({
   onSearchResults,
   onSelectedMusic,
+  onClose,
 }: MusicListProps) {
   return (
-    <Backdrop>
-      <Ul>
-        {onSearchResults.map((track, idx) => (
-          <Li key={idx} onClick={() => onSelectedMusic(track)}>
-            {track.artist} - {track.name}
-          </Li>
-        ))}
-      </Ul>
+    <Backdrop onClick={onClose}>
+      {onSearchResults.length > 0 && (
+        <Ul>
+          {onSearchResults.map((track, idx) => (
+            <Li key={idx} onClick={() => onSelectedMusic(track)}>
+              {track.artist} - {track.name}
+            </Li>
+          ))}
+        </Ul>
+      )}
     </Backdrop>
   );
 }
@@ -28,20 +31,25 @@ const Backdrop = styled.div`
   position: fixed;
   inset: 0;
   background: transparent;
-  z-index: 1;
+  z-index: 30;
 `;
 
 const Ul = styled.ul`
   position: absolute;
-  top: 140px;
-  left: 0;
-  width: 80%;
+  top: 135px;
+  left: 29px;
+  width: 85%;
   height: 200px;
-  background-color: skyblue;
+  border-radius: 10px;
+  padding-left: 10px;
   margin: 14px 0px;
+
+  overflow-y: auto;
 `;
 
 const Li = styled.li`
+  list-style: none;
+  font-size: 16px;
   width: 100%;
   padding: 10px;
 

@@ -3,16 +3,17 @@ import type { MusicMeta } from "../../types/musicMeta";
 import { IoIosMusicalNotes } from "react-icons/io";
 
 interface SelectedMusicProps {
-  onSelectedMusic: MusicMeta;
+  music: MusicMeta;
+  onOpen: () => void;
 }
 
-export default function SelectedMusic({ onSelectedMusic }: SelectedMusicProps) {
+export default function SelectedMusic({ music, onOpen }: SelectedMusicProps) {
   return (
-    <Container>
+    <Container onClick={onOpen}>
       <Icon>
         <IoIosMusicalNotes size={18} />
       </Icon>
-      {onSelectedMusic.artist} - {onSelectedMusic.name}
+      {music.artist} - {music.name}
     </Container>
   );
 }

@@ -27,28 +27,29 @@ export default function Write() {
     <Container>
       <Title value={title} onChange={setTitle} />
 
-      {selectedMusic ? (
-        <SelectedMusic onSelectedMusic={selectedMusic} />
-      ) : (
-        <SearchSection>
+      <SearchSection>
+        {selectedMusic ? (
+          <SelectedMusic music={selectedMusic} onOpen={() => setIsOpen(true)} />
+        ) : (
           <SearchBar
             value={keyword}
             onKeyword={(value: string) => setKeyword(value)}
             onSearch={handleSearchSong}
             onClick={() => setIsOpen(true)}
           />
-          {isOpen && (
-            <MusicList
-              onSearchResults={searchResults}
-              onSelectedMusic={(music) => {
-                setSelectedMusic(music);
-                setIsOpen(false);
-              }}
-              onClose={() => setIsOpen(false)}
-            />
-          )}
-        </SearchSection>
-      )}
+        )}
+
+        {isOpen && (
+          <MusicList
+            onSearchResults={searchResults}
+            onSelectedMusic={(music) => {
+              setSelectedMusic(music);
+              setIsOpen(false);
+            }}
+            onClose={() => setIsOpen(false)}
+          />
+        )}
+      </SearchSection>
 
       <Content
         value={content}
@@ -60,6 +61,7 @@ export default function Write() {
         style={{ width: "100%", height: "52px" }}
         bgcolor="#748396"
         color={colors.Background}
+        disabled={!content.trim()}
       >
         1년 뒤로 보내기
       </Button>
@@ -87,4 +89,10 @@ const Content = styled.textarea`
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 12px;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;

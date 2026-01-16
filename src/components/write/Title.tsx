@@ -36,4 +36,12 @@ const Input = styled.input`
   height: 38px;
   border: none;
   font-size: 14px;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+  }
 `;

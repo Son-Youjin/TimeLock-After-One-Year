@@ -52,8 +52,15 @@ const Search = styled.input`
   height: 30px;
   border-radius: 20px;
   border: none;
+  outline: none;
   background-color: rgba(0, 0, 0, 0.1);
   padding-left: 36px;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const Icon = styled.div`

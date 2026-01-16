@@ -28,4 +28,10 @@ const Btn = styled.button<{ bgcolor?: string; color?: string }>`
   background-color: ${({ bgcolor }) => bgcolor};
 
   cursor: pointer;
+
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    cursor: not-allowed;
+  }
 `;
