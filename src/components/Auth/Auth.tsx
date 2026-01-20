@@ -1,27 +1,20 @@
 import styled from "@emotion/styled";
-import Button from "../common/Button";
-import { useNavigate } from "react-router-dom";
+import AuthButton from "./AuthButton";
+import type { AuthProvider } from "../../types/auth";
 
-export default function Auth() {
-  const navigate = useNavigate();
+interface AuthProps {
+  onLogin: (provider: AuthProvider) => void;
+}
 
+export default function Auth({ onLogin }: AuthProps) {
   return (
     <Container>
-      <Title>TimeLock</Title>
-      <Subtitle>: 1년 뒤에 열리는 편지</Subtitle>
+      <TextContainer>
+        <Title>TimeLock</Title>
+        <Subtitle>: 1년 뒤에 열리는 편지</Subtitle>
+      </TextContainer>
 
-      <Button
-        bgcolor="#FEE500"
-        text="네이버 로그인"
-        aria-label="네이버 로그인"
-        onClick={() => navigate("/")}
-      />
-      <Button
-        bgcolor="#03A94D"
-        text="카카오 로그인"
-        aria-label="카카오 로그인"
-        onClick={() => navigate("/")}
-      />
+      <AuthButton onLogin={onLogin} />
     </Container>
   );
 }
@@ -29,32 +22,20 @@ export default function Auth() {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 152px 24px;
+  justify-content: space-around;
+  width: 100%;
+  height: 70vh;
+  padding: 20px;
+  margin-top: 80px;
 `;
+
+const TextContainer = styled.div``;
 
 const Title = styled.h1`
   font-size: 26px;
-  line-height: 0%;
+  margin-bottom: 6px;
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
-  line-height: 0%;
-  margin-bottom: 98px;
 `;
-
-// TODO: 네이버 카카오 비율이 안 맞아서, 추후 직접 레이아웃
-// const Button = styled.button<Button>`
-//   width: 100%;
-//   height: 56px;
-//   border: none;
-//   border-radius: 8px;
-//   margin-bottom: 12px;
-
-//   background-image: url(${({ bgImg }) => bgImg});
-//   background-size: 100% 100%;
-//   background-position: center;
-//   background-repeat: no-repeat;
-
-//   cursor: pointer;
-// `;

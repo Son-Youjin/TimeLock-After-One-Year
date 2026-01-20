@@ -20,8 +20,7 @@ export default function PreviewMain({ onLogin }: { onLogin: () => void }) {
         style={{ width: "100%", height: "46px" }}
         bgcolor={colors.Text}
         color={colors.Background}
-        // onClick={() => navigate("/auth")}
-        onClick={onLogin}
+        onClick={() => navigate("/auth")}
       >
         로그인하고 편지 쓰기
       </Button>
