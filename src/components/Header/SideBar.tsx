@@ -69,11 +69,14 @@ export default function SideBar({
               </Button>
             </CloseWrapper>
 
-            <SideLettersList
-              letters={letters}
-              onGoLetter={handleGoLetter}
-              onClose={onClose}
-            />
+            {/* //TODO: 다른 방법 생각해보기..(예시를 보여줄까? or 아예 공백으로 둘까?) */}
+            {isLogin && (
+              <SideLettersList
+                letters={letters}
+                onGoLetter={handleGoLetter}
+                onClose={onClose}
+              />
+            )}
 
             <LogInOut onClick={isLogin ? onLogin : onLogout}>
               {isLogin ? "로그아웃" : "로그인"}

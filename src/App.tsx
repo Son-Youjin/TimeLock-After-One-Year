@@ -10,7 +10,6 @@ import type { AuthProvider } from "./types/auth";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (provider: AuthProvider) => {
@@ -28,7 +27,6 @@ function App() {
           element={
             <Layout
               isLogin={isLogin}
-              isOpen={isOpen}
               onLogin={() => navigate("/auth")}
               onLogout={() => setIsLogin(false)}
             />

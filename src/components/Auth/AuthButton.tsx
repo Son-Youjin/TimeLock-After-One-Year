@@ -9,14 +9,14 @@ export default function AuthButton({ onLogin }: AuthButtonProps) {
   return (
     <Container>
       <AuthBtn
-        bgcolor="#FEE500"
+        bgcolor="#03A94D"
         aria-label="네이버 로그인"
         onClick={() => onLogin("naver")}
       >
         네이버 로그인
       </AuthBtn>
       <AuthBtn
-        bgcolor="#03A94D"
+        bgcolor="#FEE500"
         aria-label="카카오 로그인"
         onClick={() => onLogin("kakao")}
       >

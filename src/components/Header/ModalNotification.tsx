@@ -4,10 +4,14 @@ import Button from "../common/Button";
 import LetterList from "./letterList";
 
 interface ModalNotificationProps {
+  isLogin: boolean;
   onClose: () => void;
 }
 
-export default function ModalNotification({ onClose }: ModalNotificationProps) {
+export default function ModalNotification({
+  isLogin,
+  onClose,
+}: ModalNotificationProps) {
   return (
     <BackDrop onClick={onClose}>
       <Container>
@@ -18,8 +22,7 @@ export default function ModalNotification({ onClose }: ModalNotificationProps) {
             <IoMdClose size={20} />
           </Button>
         </Header>
-
-        <LetterList />
+        {isLogin && <LetterList />}
       </Container>
     </BackDrop>
   );
