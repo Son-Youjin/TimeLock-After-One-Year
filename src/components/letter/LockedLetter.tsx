@@ -1,29 +1,26 @@
 import styled from "@emotion/styled";
 import DDayCard from "../clock/DDayCard";
 import { colors } from "../../styles/theme";
-import { useEffect, useState } from "react";
 import type { Letter } from "../../types/letter";
-import { getLetters } from "../../mock/api/letters";
-import { useParams } from "react-router-dom";
+import { SlEnvolopeLetter } from "react-icons/sl";
 
-export default function LockedLetter() {
-  const { id } = useParams<{ id: string }>();
-  const [letters, setLetters] = useState<Letter[]>([]);
+interface LockedLetterProps {
+  letter: Letter | null;
+}
 
-  const letter = letters.find((letter) => letter.id === id);
-
-  useEffect(() => {
-    async function fetch() {
-      const data = await getLetters();
-      setLetters(data);
-    }
-    fetch();
-  }, []);
+export default function LockedLetter({ letter }: LockedLetterProps) {
+  if (!letter) return null;
 
   return (
     <Container>
-      <Title>{letter?.title}</Title>
-      <DDayCard />
+      <Title>
+        <Icon>
+          <SlEnvolopeLetter size={18} />
+        </Icon>
+        {letter?.title}
+      </Title>
+
+      <DDayCard letter={letter} />
     </Container>
   );
 }
@@ -34,16 +31,18 @@ const Container = styled.section`
   width: 100%;
   height: auto;
   align-items: center;
-  /* justify-content: center; */
+  margin-top: 40px;
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  display: flex;
+  font-size: 20px;
   color: ${colors.Text};
-  padding: 4px 0px 8px 0px;
-  margin-bottom: 10px;
+  padding: 10px 0px;
 `;
 
-// const Day = styled.h1`
-//   color: ${colors.Text};
-// `;
+const Icon = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+`;

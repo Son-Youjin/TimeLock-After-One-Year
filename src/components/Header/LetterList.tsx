@@ -20,8 +20,8 @@ export default function LetterList() {
     <>
       {showTop && <TopFade />}
       <Ul onScroll={handleScroll}>
-        {Array.from({ length: 20 }).map(() => (
-          <ListItem>oo님, 1년 전의 편지가 도착했습니다.</ListItem>
+        {Array.from({ length: 20 }).map((_, idx) => (
+          <ListItem key={idx}>oo님, 1년 전의 편지가 도착했습니다.</ListItem>
         ))}
       </Ul>
       {showBottom && <BottomFade />}

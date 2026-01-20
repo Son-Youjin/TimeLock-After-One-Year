@@ -1,25 +1,52 @@
 import styled from "@emotion/styled";
 import { colors } from "../../styles/theme";
 import Clock from "./Clock";
-import Border from "../common/Border";
+import type { Letter } from "../../types/letter";
+import TODAY_TIMESTAMP from "../../utils/todayTimestamp";
+import calcDDay from "../../utils/calcDDay";
 
-export default function DDayCard() {
+interface DDayCardProps {
+  letter: Letter;
+}
+
+export default function DDayCard({ letter }: DDayCardProps) {
+  if (!letter) return null;
+
+  const comingDDay = calcDDay(letter.openAt, TODAY_TIMESTAMP);
+
   return (
-    <Border>
-      <SubText>열리는 날까지 남은 시간</SubText>
-      <Day>D-135</Day>
+    <Container>
+      <Border>
+        <SubText>열리는 날까지 남은 시간</SubText>
+        <Day>D-{comingDDay}</Day>
 
-      <Clock />
-    </Border>
+        <Clock />
+      </Border>
+    </Container>
   );
 }
 
-const SubText = styled.p`
-  font-size: 14px;
-  color: ${colors.Text};
-  line-height: 0;
+const Container = styled.div`
+  display: flex;
+  margin: 30px 0px;
 `;
 
-const Day = styled.h1`
-  line-height: 0;
+const Border = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 300px;
+  height: 100%;
+
+  padding: 24px;
+  border: 1px solid silver;
+  border-radius: 24px;
 `;
+
+const SubText = styled.p`
+  font-size: 16px;
+  color: ${colors.Text};
+`;
+
+const Day = styled.h1``;

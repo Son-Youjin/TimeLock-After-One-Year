@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Border from "../common/Border";
 import CreateButton from "../common/CreateButton";
 import { colors } from "../../styles/theme";
 import LetterItem from "../common/LetterItem";
@@ -56,6 +55,18 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   margin: 10px 0px 40px 0px;
+`;
+
+const Border = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 300px;
+
+  padding: 24px;
+  border: 1px solid silver;
+  border-radius: 24px;
 `;
 
 const SubText = styled.p`
