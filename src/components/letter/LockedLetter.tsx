@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import DDayCard from "../clock/DDayCard";
 import { colors } from "../../styles/theme";
 import type { Letter } from "../../types/letter";
-import { SlEnvolopeLetter } from "react-icons/sl";
+import { FaLock } from "react-icons/fa";
 
 interface LockedLetterProps {
   letter: Letter | null;
@@ -15,7 +15,7 @@ export default function LockedLetter({ letter }: LockedLetterProps) {
     <Container>
       <Title>
         <Icon>
-          <SlEnvolopeLetter size={18} />
+          <FaLock size={18} />
         </Icon>
         {letter?.title}
       </Title>

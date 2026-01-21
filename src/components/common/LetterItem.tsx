@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { colors } from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
-import { SlEnvolopeLetter } from "react-icons/sl";
 import type { ReactNode } from "react";
+import { FaLock } from "react-icons/fa";
 
 interface LetterItemProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ export default function LetterItem({ children, letterId }: LetterItemProps) {
   return (
     <LetterBox onClick={() => navigate(`/letter/${letterId}`)}>
       <Icon>
-        <SlEnvolopeLetter size={18} />
+        <FaLock size={18} />
       </Icon>
 
       {children}

@@ -7,6 +7,7 @@ import WritePage from "./pages/write/WritePage";
 import LetterPage from "./pages/letter/LetterPage";
 import { useState } from "react";
 import type { AuthProvider } from "./types/auth";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -39,7 +40,14 @@ function App() {
             }
           />
           <Route path="/write" element={<WritePage />} />
-          <Route path="/letter/:id" element={<LetterPage />} />
+          <Route
+            path="/letter/:id"
+            element={
+              <ProtectedRoute isLogin={isLogin}>
+                <LetterPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </>
