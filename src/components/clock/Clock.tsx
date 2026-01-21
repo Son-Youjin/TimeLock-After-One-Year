@@ -1,24 +1,16 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
 import describeSector from "../../utils/describeSector";
 
-export default function Clock() {
-  const [writtenDay, setWrittenDay] = useState(0);
-  const totalDays = 60;
+interface ClockProps {
+  progress: number;
+}
 
+export default function Clock({ progress }: ClockProps) {
   const r = 40;
-  const progress = writtenDay / totalDays;
-  const angle = Math.min(progress, 1) * 360;
+  const angle = Math.min(Math.max(progress, 0), 1) * 360;
 
   const isHalfPassed = progress >= 0.5;
   const isComplete = progress >= 1;
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setWrittenDay((prev) => (prev >= totalDays ? prev : prev + 1));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <ClockContainer>
@@ -86,16 +78,6 @@ export default function Clock() {
         ))}
 
         <circle cx={50} cy={50} r={1} fill="#ccc" stroke="#ccc" />
-
-        {/* <line
-          x1={50}
-          y1={10}
-          x2={50}
-          y2={50}
-          stroke="#2F3A4A"
-          strokeLinecap="round"
-          transform={`rotate(${angle} 50 50)`}
-        /> */}
       </svg>
     </ClockContainer>
   );

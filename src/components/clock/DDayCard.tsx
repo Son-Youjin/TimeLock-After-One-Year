@@ -12,15 +12,19 @@ interface DDayCardProps {
 export default function DDayCard({ letter }: DDayCardProps) {
   if (!letter) return null;
 
+  const totalDuration = letter.openAt - letter.createdAt;
+  const passedDuration = TODAY_TIMESTAMP - letter.createdAt;
+  const progress = passedDuration / totalDuration;
+
   const comingDDay = calcDDay(letter.openAt, TODAY_TIMESTAMP);
 
   return (
     <Container>
       <Border>
         <SubText>열리는 날까지 남은 시간</SubText>
-        <Day>D-{comingDDay}</Day>
+        {comingDDay && <Day> D-{comingDDay}</Day>}
 
-        <Clock />
+        <Clock progress={progress} />
       </Border>
     </Container>
   );

@@ -6,8 +6,6 @@ interface OpenedLetterProps {
 }
 
 export default function OpenedLetter({ letter }: OpenedLetterProps) {
-  console.log(letter);
-
   return (
     <Container>
       <Title>{letter.title}</Title>

@@ -3,12 +3,30 @@ import DDayCard from "../clock/DDayCard";
 import { colors } from "../../styles/theme";
 import type { Letter } from "../../types/letter";
 import { FaLock } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 interface LockedLetterProps {
   letter: Letter | null;
 }
 
 export default function LockedLetter({ letter }: LockedLetterProps) {
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    if (!letter) return;
+
+    const now = Date.now();
+    const untilOpen = letter.openAt - now;
+
+    if (untilOpen <= 0) return;
+
+    const timer = setTimeout(() => {
+      setTick((acc) => acc + 1);
+    }, untilOpen);
+
+    return () => clearTimeout(timer);
+  }, [letter]);
+
   if (!letter) return null;
 
   return (
