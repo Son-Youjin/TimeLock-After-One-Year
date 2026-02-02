@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import SearchBar from "./SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { searchKeyword } from "../../utils/searchKeyword";
 import type { MusicMeta } from "../../types/musicMeta";
 import MusicList from "./MusicList";
@@ -8,6 +8,7 @@ import SelectedMusic from "./SelectedMusic";
 import Title from "./Title";
 import Button from "../common/Button";
 import { colors } from "../../styles/theme";
+import SuccessModal from "./SuccessModal";
 
 export default function Write() {
   const [keyword, setKeyword] = useState("");
@@ -16,11 +17,22 @@ export default function Write() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<MusicMeta[]>([]);
   const [selectedMusic, setSelectedMusic] = useState<MusicMeta | null>(null);
+  const [successSave, setSuccessSave] = useState(false);
 
   const handleSearchSong = async () => {
     const results = await searchKeyword(keyword);
     setSearchResults(results);
     setKeyword("");
+  };
+
+  const handleResetText = () => {
+    setTitle("");
+    setContent("");
+    setSelectedMusic(null);
+    setKeyword("");
+    setSearchResults([]);
+    setIsOpen(false);
+    setSuccessSave(true);
   };
 
   return (
@@ -61,10 +73,12 @@ export default function Write() {
         style={{ width: "100%", height: "52px" }}
         bgcolor="#748396"
         color={colors.Background}
-        disabled={!content.trim()}
+        onClick={handleResetText}
+        // disabled={!content.trim()}
       >
         1년 뒤로 보내기
       </Button>
+      {successSave && <SuccessModal onClose={() => setSuccessSave(false)} />}
     </Container>
   );
 }
