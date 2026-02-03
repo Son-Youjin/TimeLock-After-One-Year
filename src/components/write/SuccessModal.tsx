@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import Button from "../common/Button";
+import { colors } from "../../styles/theme";
 
 interface SuccessModalProps {
   onClose: () => void;
@@ -9,7 +11,19 @@ export default function SuccessModal({ onClose }: SuccessModalProps) {
     <BackDrop onClick={onClose}>
       <Container>
         <Title>저장 완료</Title>
-        <Text>1년 뒤에 열릴 편지가 안전하게 저장되었어요.</Text>
+        <Text>편지가 안전하게 저장되었어요.</Text>
+
+        <Layout>
+          <Button
+            style={{ width: "100%", height: "40px" }}
+            bgcolor={colors.Active}
+            color={colors.Background}
+            onClick={onClose}
+          >
+            확인
+          </Button>
+          <Guide>2초 뒤에 자동으로 닫혀요!</Guide>
+        </Layout>
       </Container>
     </BackDrop>
   );
@@ -29,7 +43,7 @@ const BackDrop = styled.div`
 const Container = styled.div`
   transform: translateY(-40px);
 
-  width: min(90% 320px);
+  width: 260px;
   min-height: 100px;
   padding: 18px 14px;
 
@@ -49,4 +63,14 @@ const Title = styled.h1`
 
 const Text = styled.p`
   font-size: 14px;
+`;
+
+const Layout = styled.div`
+  margin-top: 24px;
+`;
+
+const Guide = styled.p`
+  font-size: 12px;
+  color: gray;
+  margin-top: 10px;
 `;

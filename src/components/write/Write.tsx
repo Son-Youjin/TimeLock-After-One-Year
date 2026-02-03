@@ -19,6 +19,16 @@ export default function Write() {
   const [selectedMusic, setSelectedMusic] = useState<MusicMeta | null>(null);
   const [successSave, setSuccessSave] = useState(false);
 
+  useEffect(() => {
+    if (!successSave) return;
+
+    const timer = setTimeout(() => {
+      setSuccessSave(false);
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, [successSave]);
+
   const handleSearchSong = async () => {
     const results = await searchKeyword(keyword);
     setSearchResults(results);
@@ -74,7 +84,7 @@ export default function Write() {
         bgcolor="#748396"
         color={colors.Background}
         onClick={handleResetText}
-        // disabled={!content.trim()}
+        disabled={!content.trim()}
       >
         1년 뒤로 보내기
       </Button>
