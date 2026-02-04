@@ -1,24 +1,23 @@
 import styled from "@emotion/styled";
-import type { AuthProvider } from "../../types/auth";
 
 interface AuthButtonProps {
-  onLogin: (provider: AuthProvider) => void;
+  onLoginGoogle: () => void;
 }
 
-export default function AuthButton({ onLogin }: AuthButtonProps) {
+export default function AuthButton({ onLoginGoogle }: AuthButtonProps) {
   return (
     <Container>
       <AuthBtn
-        bgcolor="#03A94D"
-        aria-label="네이버 로그인"
-        onClick={() => onLogin("naver")}
+        bgcolor="#ffffff"
+        aria-label="구글 로그인"
+        onClick={onLoginGoogle}
       >
-        네이버 로그인
+        구글 로그인
       </AuthBtn>
       <AuthBtn
         bgcolor="#FEE500"
         aria-label="카카오 로그인"
-        onClick={() => onLogin("kakao")}
+        // onClick={() => onLogin("kakao")}
       >
         카카오 로그인
       </AuthBtn>

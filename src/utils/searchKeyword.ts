@@ -1,6 +1,6 @@
 import type { MusicMeta } from "../types/musicMeta";
 
-const API_KEY = import.meta.env.VITE_MY_API_KEY;
+const API_KEY = import.meta.env.VITE_SEARCH_KEYWORD_API_KEY;
 
 export async function searchKeyword(keyword: string) {
   const baseUrl = "https://ws.audioscrobbler.com/2.0/";

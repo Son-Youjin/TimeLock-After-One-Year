@@ -1,12 +1,8 @@
 import styled from "@emotion/styled";
 import AuthButton from "./AuthButton";
-import type { AuthProvider } from "../../types/auth";
+import { signInWithGoogle } from "../../api/auth";
 
-interface AuthProps {
-  onLogin: (provider: AuthProvider) => void;
-}
-
-export default function Auth({ onLogin }: AuthProps) {
+export default function Auth() {
   return (
     <Container>
       <TextContainer>
@@ -14,7 +10,7 @@ export default function Auth({ onLogin }: AuthProps) {
         <Subtitle>: 1년 뒤에 열리는 편지</Subtitle>
       </TextContainer>
 
-      <AuthButton onLogin={onLogin} />
+      <AuthButton onLoginGoogle={() => signInWithGoogle()} />
     </Container>
   );
 }

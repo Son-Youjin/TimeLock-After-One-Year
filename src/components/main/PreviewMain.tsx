@@ -4,7 +4,7 @@ import { colors } from "../../styles/theme";
 import ProgressBar from "../ProgressBar";
 import { useNavigate } from "react-router-dom";
 
-export default function PreviewMain({ onLogin }: { onLogin: () => void }) {
+export default function PreviewMain() {
   const navigate = useNavigate();
 
   return (
