@@ -3,6 +3,7 @@ import {
   signInWithRedirect,
   signOut,
   onAuthStateChanged,
+  getRedirectResult,
 } from "firebase/auth";
 import { auth } from "./firebase";
 
@@ -10,6 +11,19 @@ const provider = new GoogleAuthProvider();
 
 export function signInWithGoogle() {
   return signInWithRedirect(auth, provider);
+}
+
+export async function handleRedirectResult() {
+  const result = await getRedirectResult(auth);
+
+  if (!result) return null;
+
+  const credential = GoogleAuthProvider.credentialFromResult(result);
+
+  return {
+    user: result.user,
+    accessToken: credential?.accessToken ?? null,
+  };
 }
 
 export function logout() {

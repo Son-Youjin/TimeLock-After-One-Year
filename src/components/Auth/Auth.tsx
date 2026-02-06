@@ -10,7 +10,7 @@ export default function Auth() {
         <Subtitle>: 1년 뒤에 열리는 편지</Subtitle>
       </TextContainer>
 
-      <AuthButton onLoginGoogle={() => signInWithGoogle()} />
+      <AuthButton onLoginGoogle={signInWithGoogle} />
     </Container>
   );
 }
