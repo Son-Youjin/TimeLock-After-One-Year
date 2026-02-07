@@ -7,7 +7,7 @@ import WritePage from "./pages/write/WritePage";
 import LetterPage from "./pages/letter/LetterPage";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import { handleRedirectResult, logout, subscribeAuth } from "./api/auth";
+import { logout, subscribeAuth } from "./api/auth";
 import { type User } from "firebase/auth";
 import Callback from "./pages/auth/Callback";
 
@@ -17,13 +17,8 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    handleRedirectResult().then((data) => {
-      if (data?.user) {
-        console.log("로그인 성공", "google");
-      }
-    });
-
     const unsubscribe = subscribeAuth((user) => {
+      console.log("최종 auth user:", user);
       setUser(user);
       setAuthReady(true);
     });
@@ -36,7 +31,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/auth" element={<AuthPage isLogin={isLogin} />} />
+        <Route
+          path="/auth"
+          element={<AuthPage isLogin={isLogin} authReady={authReady} />}
+        />
 
         <Route
           element={
@@ -47,10 +45,21 @@ function App() {
             />
           }
         >
-          <Route path="/" element={<HomePage isLogin={isLogin} />} />
+          <Route
+            path="/"
+            element={<HomePage isLogin={isLogin} authReady={authReady} />}
+          />
+
           <Route path="/callback" element={<Callback />} />
 
-          <Route path="/write" element={<WritePage />} />
+          <Route
+            path="/write"
+            element={
+              <ProtectedRoute isLogin={isLogin} authReady={authReady}>
+                <WritePage />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/letter/:id"
