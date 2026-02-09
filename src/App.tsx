@@ -1,15 +1,16 @@
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { type User } from "firebase/auth";
+
 import HomePage from "./pages/home/HomePage";
 import AuthPage from "./pages/auth/AuthPage";
 import Layout from "./layout/Layout";
 import WritePage from "./pages/write/WritePage";
 import LetterPage from "./pages/letter/LetterPage";
-import { useEffect, useState } from "react";
 import ProtectedRoute from "./pages/ProtectedRoute";
+
 import { logout, subscribeAuth } from "./api/auth";
-import { type User } from "firebase/auth";
-import Callback from "./pages/auth/Callback";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -18,7 +19,6 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = subscribeAuth((user) => {
-      console.log("최종 auth user:", user);
       setUser(user);
       setAuthReady(true);
     });
@@ -28,13 +28,14 @@ function App() {
 
   const isLogin = !!user;
 
+  if (!authReady) {
+    return null;
+  }
+
   return (
     <>
       <Routes>
-        <Route
-          path="/auth"
-          element={<AuthPage isLogin={isLogin} authReady={authReady} />}
-        />
+        <Route path="/auth" element={<AuthPage isLogin={isLogin} />} />
 
         <Route
           element={
@@ -45,17 +46,12 @@ function App() {
             />
           }
         >
-          <Route
-            path="/"
-            element={<HomePage isLogin={isLogin} authReady={authReady} />}
-          />
-
-          <Route path="/callback" element={<Callback />} />
+          <Route path="/" element={<HomePage isLogin={isLogin} />} />
 
           <Route
             path="/write"
             element={
-              <ProtectedRoute isLogin={isLogin} authReady={authReady}>
+              <ProtectedRoute isLogin={isLogin}>
                 <WritePage />
               </ProtectedRoute>
             }
@@ -64,7 +60,7 @@ function App() {
           <Route
             path="/letter/:id"
             element={
-              <ProtectedRoute isLogin={isLogin} authReady={authReady}>
+              <ProtectedRoute isLogin={isLogin}>
                 <LetterPage />
               </ProtectedRoute>
             }

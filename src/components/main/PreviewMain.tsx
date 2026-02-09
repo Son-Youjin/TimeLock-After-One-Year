@@ -4,7 +4,7 @@ import { colors } from "../../styles/theme";
 import ProgressBar from "../ProgressBar";
 import { useNavigate } from "react-router-dom";
 
-export default function PreviewMain({ isLogin }: { isLogin: boolean }) {
+export default function PreviewMain() {
   const navigate = useNavigate();
 
   return (
@@ -20,9 +20,7 @@ export default function PreviewMain({ isLogin }: { isLogin: boolean }) {
         style={{ width: "100%", height: "46px" }}
         bgcolor={colors.Text}
         color={colors.Background}
-        onClick={() => {
-          if (!isLogin) navigate("/auth");
-        }}
+        onClick={() => navigate("/auth")}
       >
         로그인하고 편지 쓰기
       </Button>

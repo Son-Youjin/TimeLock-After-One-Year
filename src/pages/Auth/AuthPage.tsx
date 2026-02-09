@@ -1,24 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import Auth from "../../components/auth/Auth";
 import { useEffect } from "react";
-import Callback from "./Callback";
 
-export default function AuthPage({
-  isLogin,
-  authReady,
-}: {
-  isLogin: boolean;
-  authReady: boolean;
-}) {
+export default function AuthPage({ isLogin }: { isLogin: boolean }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authReady && isLogin) {
+    if (isLogin) {
       navigate("/", { replace: true });
     }
-  }, [authReady, isLogin, navigate]);
-
-  if (!authReady) return <Callback />;
+  }, [isLogin, navigate]);
 
   return <Auth />;
 }
