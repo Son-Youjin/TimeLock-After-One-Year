@@ -52,7 +52,7 @@ function App() {
             path="/write"
             element={
               <ProtectedRoute isLogin={isLogin}>
-                <WritePage />
+                <WritePage user={user} />
               </ProtectedRoute>
             }
           />

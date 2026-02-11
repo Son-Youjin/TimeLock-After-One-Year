@@ -9,14 +9,18 @@ import Title from "./Title";
 import Button from "../common/Button";
 import { colors } from "../../styles/theme";
 import SuccessModal from "./SuccessModal";
+import { Timestamp } from "firebase/firestore";
+import { createLetter } from "../../api/letters";
+import type { User } from "firebase/auth";
 
-export default function Write() {
+export default function Write({ user }: { user: User }) {
   const [keyword, setKeyword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<MusicMeta[]>([]);
   const [selectedMusic, setSelectedMusic] = useState<MusicMeta | null>(null);
+  const [videoId, setvideoId] = useState("");
   const [successSave, setSuccessSave] = useState(false);
 
   useEffect(() => {
@@ -33,6 +37,26 @@ export default function Write() {
     const results = await searchKeyword(keyword);
     setSearchResults(results);
     setKeyword("");
+  };
+
+  const handleSubmit = async () => {
+    const nextYear = new Date();
+    nextYear.setFullYear(nextYear.getFullYear() + 1);
+    nextYear.setHours(0, 0, 0, 0);
+
+    const openAt = Timestamp.fromDate(nextYear);
+
+    await createLetter({
+      userId: user.uid,
+      title,
+      content,
+      openAt,
+      musicTitle: selectedMusic?.name ?? "",
+      musicArtist: selectedMusic?.artist ?? "",
+      videoId: videoId ?? "",
+    });
+
+    handleResetText();
   };
 
   const handleResetText = () => {
@@ -83,7 +107,7 @@ export default function Write() {
         style={{ width: "100%", height: "52px" }}
         bgcolor="#748396"
         color={colors.Background}
-        onClick={handleResetText}
+        onClick={handleSubmit}
         disabled={!content.trim()}
       >
         1년 뒤로 보내기
