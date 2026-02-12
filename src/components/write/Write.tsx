@@ -12,6 +12,7 @@ import SuccessModal from "./SuccessModal";
 import { Timestamp } from "firebase/firestore";
 import { createLetter } from "../../api/letters";
 import type { User } from "firebase/auth";
+import { searchYoutubeVideo } from "../../utils/searchYoutube";
 
 export default function Write({ user }: { user: User }) {
   const [keyword, setKeyword] = useState("");
@@ -20,7 +21,7 @@ export default function Write({ user }: { user: User }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<MusicMeta[]>([]);
   const [selectedMusic, setSelectedMusic] = useState<MusicMeta | null>(null);
-  const [videoId, setvideoId] = useState("");
+  const [videoId, setVideoId] = useState("");
   const [successSave, setSuccessSave] = useState(false);
 
   useEffect(() => {
@@ -88,9 +89,17 @@ export default function Write({ user }: { user: User }) {
         {isOpen && (
           <MusicList
             onSearchResults={searchResults}
-            onSelectedMusic={(music) => {
+            onSelectedMusic={async (music) => {
               setSelectedMusic(music);
               setIsOpen(false);
+
+              const youtubeVideoId = await searchYoutubeVideo(
+                music.name,
+                music.artist,
+              );
+
+              setVideoId(youtubeVideoId ?? "");
+              console.log(youtubeVideoId);
             }}
             onClose={() => setIsOpen(false)}
           />
