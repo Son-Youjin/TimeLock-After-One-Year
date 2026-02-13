@@ -4,14 +4,21 @@ import Header from "../components/Header/Header";
 import { useState } from "react";
 import ModalNotification from "../components/Header/ModalNotification";
 import SideBar from "../components/Header/SideBar";
+import type { User } from "firebase/auth";
 
 interface LayoutProps {
   isLogin: boolean;
   onLogin: () => void;
   onLogout: () => void;
+  user: User | null;
 }
 
-export default function Layout({ isLogin, onLogin, onLogout }: LayoutProps) {
+export default function Layout({
+  isLogin,
+  onLogin,
+  onLogout,
+  user,
+}: LayoutProps) {
   const [isBellOpen, setIsBellOpen] = useState(false);
   const [isSideOpen, setIsSideOpen] = useState(false);
 
@@ -29,6 +36,7 @@ export default function Layout({ isLogin, onLogin, onLogout }: LayoutProps) {
           onLogin={onLogin}
           onLogout={onLogout}
           onClose={() => setIsSideOpen(false)}
+          user={user}
         />
       )}
       {isBellOpen && (

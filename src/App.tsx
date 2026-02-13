@@ -41,12 +41,16 @@ function App() {
           element={
             <Layout
               isLogin={isLogin}
+              user={user}
               onLogin={() => navigate("/auth")}
               onLogout={logout}
             />
           }
         >
-          <Route path="/" element={<HomePage isLogin={isLogin} />} />
+          <Route
+            path="/"
+            element={<HomePage isLogin={isLogin} user={user} />}
+          />
 
           <Route
             path="/write"

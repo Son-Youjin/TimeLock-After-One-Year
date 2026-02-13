@@ -22,7 +22,7 @@ export default function LetterPage() {
 
   if (!letter) return null;
 
-  const isOpen = TODAY_TIMESTAMP >= letter.openAt.toDate().getTime();
+  const isOpen = TODAY_TIMESTAMP >= letter.openAt;
 
   return isOpen ? (
     <OpenedLetter letter={letter} />

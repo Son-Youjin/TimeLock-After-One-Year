@@ -2,32 +2,27 @@ import styled from "@emotion/styled";
 import CreateButton from "../common/CreateButton";
 import { colors } from "../../styles/theme";
 import LetterItem from "../common/LetterItem";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Letter } from "../../types/letter";
-import { getLetters } from "../../mock/api/letters";
 import TODAY_TIMESTAMP from "../../utils/todayTimestamp";
 import calcDDay from "../../utils/calcDDay";
+import { getNextComingLetter } from "../../api/letters";
+import type { User } from "firebase/auth";
 
-export default function LoginMain() {
-  const [letters, setLetters] = useState<Letter[]>([]);
-
-  const comingOpen = useMemo(() => {
-    if (letters.length === 0) return;
-
-    return (
-      letters
-        .filter((letter) => letter.openAt > TODAY_TIMESTAMP)
-        .sort((a, b) => a.openAt - b.openAt)[0] ?? null
-    );
-  }, [letters]);
+export default function LoginMain({ user }: { user: User | null }) {
+  const [comingOpen, setComingOpen] = useState<Letter | null>(null);
 
   useEffect(() => {
+    if (!user) return;
+
+    const uid = user?.uid;
+
     async function fetch() {
-      const data = await getLetters();
-      setLetters(data);
+      const data = await getNextComingLetter(uid);
+      setComingOpen(data);
     }
     fetch();
-  }, []);
+  }, [user]);
 
   return (
     <>

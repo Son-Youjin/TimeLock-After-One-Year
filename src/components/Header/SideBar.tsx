@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { getLetters } from "../../mock/api/letters";
 import type { Letter } from "../../types/letter";
 import SideLettersList from "./SideLettersList";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
+import { getLettersByUser } from "../../api/letters";
+import type { User } from "firebase/auth";
 
 interface SideBarProps {
   isLogin: boolean;
@@ -13,11 +14,13 @@ interface SideBarProps {
   onLogin: () => void;
   onLogout: () => void;
   onClose: () => void;
+  user: User | null;
 }
 
 export default function SideBar({
   isLogin,
   isOpen,
+  user,
   onLogin,
   onLogout,
   onClose,
@@ -34,12 +37,16 @@ export default function SideBar({
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isLogin || !user) return;
+
+    const uid = user?.uid;
+
     async function fetch() {
-      const data = await getLetters();
+      const data = await getLettersByUser(uid);
       setLetters(data);
     }
     fetch();
-  }, []);
+  }, [isLogin, user]);
 
   const handleGoLetter = (id: string) => {
     onClose();
