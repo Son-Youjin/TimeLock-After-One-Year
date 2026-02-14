@@ -8,6 +8,7 @@ import TODAY_TIMESTAMP from "../../utils/todayTimestamp";
 import calcDDay from "../../utils/calcDDay";
 import { getNextComingLetter } from "../../api/letters";
 import type { User } from "firebase/auth";
+import { isOpenByDate } from "../../utils/isOpenByDate";
 
 export default function LoginMain({ user }: { user: User | null }) {
   const [comingOpen, setComingOpen] = useState<Letter | null>(null);
@@ -19,7 +20,12 @@ export default function LoginMain({ user }: { user: User | null }) {
 
     async function fetch() {
       const data = await getNextComingLetter(uid);
-      setComingOpen(data);
+
+      if (data && isOpenByDate(data?.openAt)) {
+        setComingOpen(null);
+      } else {
+        setComingOpen(data);
+      }
     }
     fetch();
   }, [user]);

@@ -16,12 +16,12 @@ import {
 } from "firebase/firestore";
 
 export async function getNextComingLetter(uid: string) {
-  const now = Timestamp.fromMillis(TODAY_TIMESTAMP);
+  const now = Timestamp.fromMillis(Date.now());
 
   const que = query(
     collection(db, "letters"),
     where("userId", "==", uid),
-    where("openAt", ">", now),
+    where("openAt", ">=", now),
     orderBy("openAt", "asc"),
     limit(1),
   );
