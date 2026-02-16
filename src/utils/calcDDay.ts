@@ -7,7 +7,5 @@ export default function calcDDay(openAt: number, today: number) {
   targetDate.setHours(0, 0, 0, 0);
   nowDate.setHours(0, 0, 0, 0);
 
-  console.log(targetDate.getTime(), nowDate.getTime());
-
   return Math.floor((targetDate.getTime() - nowDate.getTime()) / dayMs);
 }

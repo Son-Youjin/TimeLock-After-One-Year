@@ -20,7 +20,7 @@ export default function LetterItem({ children, letterId }: LetterItemProps) {
         <FaLock size={18} />
       </Icon>
 
-      {children}
+      <Text>{children}</Text>
     </LetterBox>
   );
 }
@@ -43,4 +43,10 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   margin-right: 8px;
+`;
+
+const Text = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;

@@ -22,7 +22,7 @@ export default function DDayCard({ letter }: DDayCardProps) {
     <Container>
       <Border>
         <SubText>열리는 날까지 남은 시간</SubText>
-        {comingDDay && <Day> D-{comingDDay}</Day>}
+        <Day> D-{comingDDay}</Day>
 
         <Clock progress={progress} />
       </Border>

@@ -35,7 +35,8 @@ export default function LockedLetter({ letter }: LockedLetterProps) {
         <Icon>
           <FaLock size={18} />
         </Icon>
-        {letter?.title}
+
+        <Text>{letter?.title}</Text>
       </Title>
 
       <DDayCard letter={letter} />
@@ -63,4 +64,10 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   margin-right: 8px;
+`;
+
+const Text = styled.div`
+  white-space: normal;
+  word-break: keep-all;
+  line-height: 1.4;
 `;

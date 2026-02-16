@@ -1,5 +1,4 @@
 import type { Letter } from "../types/letter";
-import TODAY_TIMESTAMP from "../utils/todayTimestamp";
 import { db } from "./firebase";
 import {
   addDoc,
@@ -42,14 +41,22 @@ export async function getLetter(id: string) {
 
   if (!snapshot.exists()) return null;
 
+  const data = snapshot.data();
+
   return {
     id: snapshot.id,
-    ...snapshot.data(),
+    ...data,
+    openAt: data.openAt.toMillis(),
+    createdAt: data.createdAt.toMillis(),
   } as Letter;
 }
 
 export async function getLettersByUser(userId: string) {
-  const que = query(collection(db, "letters"), where("userId", "==", userId));
+  const que = query(
+    collection(db, "letters"),
+    where("userId", "==", userId),
+    orderBy("createdAt", "desc"),
+  );
 
   const snapshot = await getDocs(que);
 
@@ -79,12 +86,15 @@ export async function createLetter({
   return addDoc(collection(db, "letters"), {
     userId,
     title,
-    musicTitle,
-    musicArtist,
     content,
     openAt,
-    videoId,
     isOpened: false,
     createdAt: serverTimestamp(),
+
+    song: {
+      name: musicTitle,
+      artist: musicArtist,
+      videoId,
+    },
   });
 }

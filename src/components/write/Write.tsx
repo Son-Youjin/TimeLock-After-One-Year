@@ -99,7 +99,6 @@ export default function Write({ user }: { user: User }) {
               );
 
               setVideoId(youtubeVideoId ?? "");
-              console.log(youtubeVideoId);
             }}
             onClose={() => setIsOpen(false)}
           />

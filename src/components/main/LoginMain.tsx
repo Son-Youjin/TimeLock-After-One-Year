@@ -37,6 +37,7 @@ export default function LoginMain({ user }: { user: User | null }) {
           <SubText>다음 편지가 열리기까지</SubText>
           {comingOpen && (
             <>
+              {/* TODO:제목이 긴 편지 레이아웃 대응 */}
               <LetterItem letterId={comingOpen.id}>
                 {comingOpen.title}
               </LetterItem>
