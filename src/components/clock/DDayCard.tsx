@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 import { colors } from "../../styles/theme";
 import Clock from "./Clock";
 import type { Letter } from "../../types/letter";
-import TODAY_TIMESTAMP from "../../utils/todayTimestamp";
-import calcDDay from "../../utils/calcDDay";
+import { getLetterTime, getLetterStatus } from "../../utils/getLetterStatus";
 
 interface DDayCardProps {
   letter: Letter;
@@ -12,19 +11,16 @@ interface DDayCardProps {
 export default function DDayCard({ letter }: DDayCardProps) {
   if (!letter) return null;
 
-  const totalDuration = letter.openAt - letter.createdAt;
-  const passedDuration = TODAY_TIMESTAMP - letter.createdAt;
-  const progress = passedDuration / totalDuration;
-
-  const comingDDay = calcDDay(letter.openAt, TODAY_TIMESTAMP);
+  const timeInfo = getLetterTime(letter);
+  const status = getLetterStatus(letter);
 
   return (
     <Container>
       <Border>
         <SubText>열리는 날까지 남은 시간</SubText>
-        <Day> D-{comingDDay}</Day>
+        <Day> D-{timeInfo.dDay}</Day>
 
-        <Clock progress={progress} />
+        <Clock progress={timeInfo.progress} status={status} />
       </Border>
     </Container>
   );

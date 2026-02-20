@@ -1,16 +1,22 @@
 import styled from "@emotion/styled";
 import describeSector from "../../utils/describeSector";
+import type { LetterStatus } from "../../types/letterStatus";
 
 interface ClockProps {
   progress: number;
+  status: LetterStatus;
 }
 
-export default function Clock({ progress }: ClockProps) {
+export default function Clock({ progress, status }: ClockProps) {
   const r = 40;
   const angle = Math.min(Math.max(progress, 0), 1) * 360;
 
-  const isHalfPassed = progress >= 0.5;
-  const isComplete = progress >= 1;
+  const statusColorMap: Record<LetterStatus, string> = {
+    PENDING: "url(#earlyGradient)",
+    HALF: "url(#lateGradient)",
+    ONE_DAY: "url(#lateGradient)",
+    OPENED: "url(#goldGradient)",
+  };
 
   return (
     <ClockContainer>
@@ -53,11 +59,7 @@ export default function Clock({ progress }: ClockProps) {
         <path
           d={describeSector(angle, r)}
           clipPath="url(#clockClip)"
-          fill={
-            isComplete
-              ? "url(#goldGradient)"
-              : `url(#${isHalfPassed ? "lateGradient" : "earlyGradient"})`
-          }
+          fill={statusColorMap[status]}
           style={{
             transition: "fill 0.6s ease, d 0.6s ease",
           }}
