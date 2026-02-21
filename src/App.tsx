@@ -32,6 +32,11 @@ function App() {
     return null;
   }
 
+  const handleLogout = async () => {
+    await logout();
+    setUser(null);
+  };
+
   return (
     <>
       <Routes>
@@ -43,7 +48,7 @@ function App() {
               isLogin={isLogin}
               user={user}
               onLogin={() => navigate("/auth")}
-              onLogout={logout}
+              onLogout={handleLogout}
             />
           }
         >

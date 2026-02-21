@@ -76,16 +76,20 @@ export default function SideBar({
               </Button>
             </CloseWrapper>
 
-            {/* //TODO: 다른 방법 생각해보기..(예시를 보여줄까? or 아예 공백으로 둘까?) */}
-            {isLogin && (
+            {isLogin ? (
               <SideLettersList
                 letters={letters}
                 onGoLetter={handleGoLetter}
                 onClose={onClose}
               />
+            ) : (
+              // 레이아웃 고민...로그아웃 버튼을 올려 내려
+              <GuestMessage>
+                로그인하면 내 편지를 확인 할 수 있어요
+              </GuestMessage>
             )}
 
-            <LogInOut onClick={isLogin ? onLogin : onLogout}>
+            <LogInOut onClick={isLogin ? onLogout : onLogin}>
               {isLogin ? "로그아웃" : "로그인"}
             </LogInOut>
           </Container>
@@ -124,7 +128,6 @@ const CloseWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* margin: 4px; */
 `;
 
 const LogInOut = styled.button`
@@ -134,4 +137,10 @@ const LogInOut = styled.button`
   padding: 10px;
 
   background-color: rgba(0, 0, 0, 0.1);
+`;
+
+const GuestMessage = styled.div`
+  margin: 40px 0;
+  text-align: center;
+  font-size: 14px;
 `;
