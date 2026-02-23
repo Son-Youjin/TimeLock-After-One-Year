@@ -1,6 +1,7 @@
 * {
+  font-family: "IBM Plex Sans KR", "Noto Sans KR", sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #f5f7fa;
+  /* background-color: #f5f7fa; */
 }

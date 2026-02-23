@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import googleLogo from "../../assets/googleLogo.svg";
+import appleLogo from "../../assets/appleLogo_black.svg";
 
 interface AuthButtonProps {
   onLoginGoogle: () => void;
@@ -12,14 +14,17 @@ export default function AuthButton({ onLoginGoogle }: AuthButtonProps) {
         aria-label="구글 로그인"
         onClick={onLoginGoogle}
       >
-        구글 로그인
+        <img src={googleLogo} width={20} height={20} alt="Google 로고" />
+        Google로 시작하기
       </AuthBtn>
+
       <AuthBtn
-        bgcolor="#FEE500"
-        aria-label="카카오 로그인"
+        bgcolor="#ffffff"
+        aria-label="애플 로그인"
         // onClick={() => onLogin("kakao")}
       >
-        카카오 로그인
+        <img src={appleLogo} width={20} height={20} alt="Apple 로고" />
+        Apple로 시작하기
       </AuthBtn>
     </Container>
   );
@@ -28,16 +33,25 @@ export default function AuthButton({ onLoginGoogle }: AuthButtonProps) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-// TODO: 네이버 카카오 비율이 안 맞아서, 추후 직접 레이아웃
 const AuthBtn = styled.button<{ bgcolor: string }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  font-weight: 500;
+
   width: 100%;
+  max-width: 320px;
   height: 56px;
+  gap: 8px;
+
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
   margin-bottom: 12px;
-  font-size: 14px;
   cursor: pointer;
 
   background-color: ${({ bgcolor }) => bgcolor};

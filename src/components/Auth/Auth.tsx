@@ -20,18 +20,25 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  height: 70vh;
-  padding: 20px;
-  margin-top: 80px;
+
+  /* margin-top: 100px; */
+  gap: 200px;
+  max-width: 380px;
+  /* padding: 40px 20px; */
+  margin-bottom: 20px;
 `;
 
-const TextContainer = styled.div``;
+const TextContainer = styled.div`
+  text-align: center;
+`;
 
 const Title = styled.h1`
-  font-size: 26px;
+  font-size: 30px;
+  letter-spacing: -0.5px;
   margin-bottom: 6px;
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
+  opacity: 0.7;
 `;
