@@ -7,6 +7,7 @@ import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
 import { getLettersByUser } from "../../api/letters";
 import type { User } from "firebase/auth";
+import { colors } from "../../styles/theme";
 
 interface SideBarProps {
   isLogin: boolean;
@@ -77,21 +78,28 @@ export default function SideBar({
             </CloseWrapper>
 
             {isLogin ? (
-              <SideLettersList
-                letters={letters}
-                onGoLetter={handleGoLetter}
-                onClose={onClose}
-              />
+              <ContentArea>
+                <SideLettersList
+                  letters={letters}
+                  onGoLetter={handleGoLetter}
+                  onClose={onClose}
+                />
+              </ContentArea>
             ) : (
               // 레이아웃 고민...로그아웃 버튼을 올려 내려
-              <GuestMessage>
-                로그인하면 내 편지를 확인 할 수 있어요
-              </GuestMessage>
+              <ContentArea>
+                <GuestMessage>
+                  잊혀질 오늘이 <br />
+                  내일의 위로가 되길.
+                </GuestMessage>
+              </ContentArea>
             )}
 
             <LogInOut onClick={isLogin ? onLogout : onLogin}>
               {isLogin ? "로그아웃" : "로그인"}
             </LogInOut>
+
+            <BottomText>당신의 1년을 함께 기다립니다.</BottomText>
           </Container>
         </BackDrop>
       )}
@@ -118,10 +126,16 @@ const Container = styled.div<{ isOpen: boolean }>`
 
   width: 60%;
   height: 100%;
+  background-color: ${colors.Background};
 
   padding: 8px 12px;
   transform: translateX(${({ isOpen }) => (isOpen ? "0" : "-100%")});
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
+const ContentArea = styled.div`
+  flex: 1;
+  overflow-y: auto;
 `;
 
 const CloseWrapper = styled.div`
@@ -130,17 +144,32 @@ const CloseWrapper = styled.div`
   align-items: center;
 `;
 
-const LogInOut = styled.button`
-  border: none;
-  border-radius: 4px;
-  margin-top: 4px;
-  padding: 10px;
-
-  background-color: rgba(0, 0, 0, 0.1);
-`;
-
 const GuestMessage = styled.div`
   margin: 40px 0;
   text-align: center;
   font-size: 14px;
+`;
+
+const LogInOut = styled.button`
+  margin-top: auto;
+  margin-bottom: 8px;
+
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+
+  background-color: ${colors.Border};
+  color: ${colors.Text};
+
+  &::before {
+    content: "";
+    border-top: 1px solid ${colors.Text};
+  }
+`;
+
+const BottomText = styled.p`
+  color: ${colors.Text};
+  margin-bottom: 8px;
+  opacity: 0.6;
+  font-size: 12px;
 `;

@@ -22,7 +22,7 @@ const Container = styled.section`
   width: 100%;
 
   /* margin-top: 100px; */
-  gap: 200px;
+  gap: 210px;
   max-width: 380px;
   /* padding: 40px 20px; */
   margin-bottom: 20px;

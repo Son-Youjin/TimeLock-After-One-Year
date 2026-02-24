@@ -10,15 +10,18 @@ export default function PreviewMain() {
   return (
     <>
       <Container>
-        <SubText>올해의 시간이 흘러가고 있어요.</SubText>
+        {/* <SubText>올해의 시간이 흘러가고 있어요.</SubText> */}
 
         <ProgressBar />
 
-        <SubText>시간이 지나야 열리는 편지를 미래의 나에게 남겨보세요.</SubText>
+        <SubText>
+          시간이 지나야 열리는 편지를
+          <tr /> 미래의 나에게 남겨보세요.
+        </SubText>
       </Container>
       <Button
         style={{ width: "100%", height: "46px" }}
-        bgcolor={colors.Text}
+        bgcolor={"#6082A1"}
         color={colors.Background}
         onClick={() => navigate("/auth")}
       >
@@ -38,5 +41,6 @@ const Container = styled.section`
 const SubText = styled.p`
   font-size: 16px;
   color: ${colors.Text};
-  align-items: center;
+  text-align: center;
+  margin: 10px 0px;
 `;

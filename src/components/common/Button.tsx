@@ -21,7 +21,8 @@ export default function Button({
 
 const Btn = styled.button<{ bgcolor?: string; color?: string }>`
   border: none;
-  border-radius: 8px;
+  font-size: 14px;
+  border-radius: 12px;
   padding: 0px;
 
   color: ${({ color }) => color};

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import googleLogo from "../../assets/googleLogo.svg";
 import appleLogo from "../../assets/appleLogo_black.svg";
+import { colors } from "../../styles/theme";
 
 interface AuthButtonProps {
   onLoginGoogle: () => void;
@@ -45,14 +46,42 @@ const AuthBtn = styled.button<{ bgcolor: string }>`
   font-weight: 500;
 
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   height: 56px;
   gap: 8px;
 
   border: none;
-  border-radius: 25px;
+  border-radius: 28px;
   margin-bottom: 12px;
   cursor: pointer;
 
   background-color: ${({ bgcolor }) => bgcolor};
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+
+  &:active {
+    transform: translateY(0) scale(0.98);
+    background-color: ${colors.Active};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${colors.Focus};
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${colors.Active};
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+  }
 `;
