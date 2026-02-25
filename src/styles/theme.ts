@@ -13,16 +13,17 @@ export const colors = {
   Primary: "#bdd6e4ff",
   Skyblue: "#BADEF3",
   Blue: "#BADEF3",
+  DeepBlue: "#6082A1",
   Darkblue: "#4C9DBD",
   Text: "#4A5568",
+  Text_light: "#6a7383ff",
   Active: "#CBD5E0",
   Focus: "#afbfcfff",
   Surface: "#FFFFFF",
   Border: "#E2E8F0",
   Gray: "#e6e6e6ff",
-  fontWeight: {
-    medium: 500,
-  },
+
+  radius: "24px",
 };
 
 export const theme = { colors };

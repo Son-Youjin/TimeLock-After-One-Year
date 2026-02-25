@@ -31,13 +31,13 @@ const Container = styled.div`
 
   width: 100%;
   height: 140px;
-  border-radius: 20px;
+  border-radius: ${colors.radius};
 
-  background-color: #fff;
+  background-color: #fffdf8;
   border: 1px solid #e2e8f0;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 
-  padding: 0px 18px;
+  padding: 6px 18px;
   margin: 20px 0px;
 `;
 

@@ -10,8 +10,6 @@ export default function PreviewMain() {
   return (
     <>
       <Container>
-        {/* <SubText>올해의 시간이 흘러가고 있어요.</SubText> */}
-
         <ProgressBar />
 
         <SubText>
@@ -21,11 +19,11 @@ export default function PreviewMain() {
       </Container>
       <Button
         style={{ width: "100%", height: "46px" }}
-        bgcolor={"#6082A1"}
+        bgcolor={colors.DeepBlue}
         color={colors.Background}
         onClick={() => navigate("/auth")}
       >
-        로그인하고 편지 쓰기
+        지금 이 순간 기록하기
       </Button>
     </>
   );
@@ -35,12 +33,13 @@ const Container = styled.section`
   display: flex;
   width: 100%;
   flex-direction: column;
-  margin: 10px 0px 20px 0px;
+  margin: 32px 0px 20px 0px;
 `;
 
 const SubText = styled.p`
   font-size: 16px;
   color: ${colors.Text};
   text-align: center;
+  line-height: 1.45;
   margin: 10px 0px;
 `;

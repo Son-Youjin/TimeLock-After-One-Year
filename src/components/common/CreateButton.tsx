@@ -12,11 +12,11 @@ export default function CreateButton() {
   return (
     <Button
       style={{ width: "100%", height: "46px" }}
-      bgcolor={colors.Active}
+      bgcolor={colors.DeepBlue}
       color={colors.Background}
       onClick={handleGoWrite}
     >
-      편지 작성하기
+      새 편지 쓰기
     </Button>
   );
 }

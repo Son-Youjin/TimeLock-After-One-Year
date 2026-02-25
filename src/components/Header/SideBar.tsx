@@ -86,7 +86,6 @@ export default function SideBar({
                 />
               </ContentArea>
             ) : (
-              // 레이아웃 고민...로그아웃 버튼을 올려 내려
               <ContentArea>
                 <GuestMessage>
                   잊혀질 오늘이 <br />
@@ -145,7 +144,8 @@ const CloseWrapper = styled.div`
 `;
 
 const GuestMessage = styled.div`
-  margin: 40px 0;
+  margin-top: 32px;
+  margin-bottom: 0;
   text-align: center;
   font-size: 14px;
 `;
@@ -160,11 +160,6 @@ const LogInOut = styled.button`
 
   background-color: ${colors.Border};
   color: ${colors.Text};
-
-  &::before {
-    content: "";
-    border-top: 1px solid ${colors.Text};
-  }
 `;
 
 const BottomText = styled.p`
@@ -172,4 +167,5 @@ const BottomText = styled.p`
   margin-bottom: 8px;
   opacity: 0.6;
   font-size: 12px;
+  text-align: center;
 `;

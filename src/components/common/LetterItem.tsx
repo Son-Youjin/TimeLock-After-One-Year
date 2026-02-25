@@ -28,12 +28,10 @@ export default function LetterItem({ children, letterId }: LetterItemProps) {
 const LetterBox = styled.div`
   display: flex;
   width: 100%;
-  padding: 12px 0;
-  margin: 8px 0 16px;
+  padding-top: 14px;
   justify-content: center;
 
-  border-top: 1px dashed rgba(47, 58, 74, 0.25);
-  border-bottom: 1px dashed rgba(47, 58, 74, 0.25);
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
 
   font-weight: 600;
   color: ${colors.Active};
@@ -43,10 +41,12 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   margin-right: 8px;
+  color: ${colors.Text_light};
 `;
 
 const Text = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: ${colors.Text_light};
 `;
