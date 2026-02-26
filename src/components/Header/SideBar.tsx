@@ -159,14 +159,14 @@ const LogInOut = styled.button`
   border-radius: 8px;
   padding: 12px;
 
-  background-color: ${colors.Border};
+  background-color: ${colors.Background_warm};
   color: ${colors.Text};
 `;
 
 const BottomText = styled.p`
-  color: ${colors.Text};
+  color: ${colors.Text_light};
   margin-bottom: 8px;
-  opacity: 0.6;
+  opacity: 0.7;
   font-size: 12px;
   text-align: center;
 `;

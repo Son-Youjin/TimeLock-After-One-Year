@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import type { Letter } from "../../types/letter";
+import { colors } from "../../styles/theme";
 
 interface SideLettersListProps {
   letters: Letter[];
@@ -49,11 +50,30 @@ const ListItem = styled.li`
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
+  transition:
+    background-color 0.3s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
 
   &:active {
-    background-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(0) scale(0.98);
+    background-color: ${colors.Active};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${colors.Focus};
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${colors.Active};
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
   }
 `;

@@ -61,8 +61,8 @@ const Container = styled.section`
   align-items: stretch;
 
   padding-top: env(safe-area-inset-top);
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-right: 16px;
+  padding-left: 16px;
   padding-bottom: env(safe-area-inset-bottom);
 `;
 

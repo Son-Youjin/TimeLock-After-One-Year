@@ -36,7 +36,7 @@ export default function LoginMain({ user }: { user: User | null }) {
     <>
       <Container>
         <Title>
-          <Name>{name}님,</Name> 오늘도 시간이 흐르고 있어요
+          <Name>{name}님,</Name> 오늘의 시간도 차곡차곡 쌓이고 있어요.
         </Title>
 
         <Card>
@@ -62,12 +62,12 @@ export default function LoginMain({ user }: { user: User | null }) {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 32px 0px 24px 0px;
+  margin: 20px 0px 24px 0px;
 `;
 
 const Title = styled.span`
   font-size: 16px;
-  color: ${colors.Text};
+  color: ${colors.Text_light};
   font-weight: 500;
 `;
 
@@ -88,14 +88,14 @@ const Card = styled.div`
   border: 1px solid #e2e8f0;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
 
-  padding: 36px 20px;
-  margin: 32px 0px 32px 0px;
+  padding: 32px 20px;
+  margin: 24px 0px 28px 0px;
 `;
 
 const SubText = styled.p`
-  font-size: 16px;
-  font-weight: 600;
-  opacity: 0.6;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.7;
   color: ${colors.Text_light};
 `;
 
@@ -103,16 +103,15 @@ const Day = styled.h1`
   width: 100%;
   text-align: center;
 
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
-  letter-spacing: -1px;
   color: ${colors.Darkblue};
-  margin: 12px 0;
+  margin: 16px 0;
 `;
 
 const OpenDate = styled.p`
-  font-size: 13px;
+  font-size: 14px;
   color: ${colors.Text};
   opacity: 0.5;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 `;
