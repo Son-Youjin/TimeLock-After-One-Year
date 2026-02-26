@@ -40,7 +40,7 @@ export default function LoginMain({ user }: { user: User | null }) {
         </Title>
 
         <Card>
-          <SubText>다음 편지</SubText>
+          <SubText>기록된 진심이 열리기까지</SubText>
 
           {comingOpen && (
             <>
@@ -62,7 +62,7 @@ export default function LoginMain({ user }: { user: User | null }) {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 32px 0px 20px 0px;
+  margin: 32px 0px 24px 0px;
 `;
 
 const Title = styled.span`
@@ -81,37 +81,38 @@ const Card = styled.div`
   align-items: center;
 
   width: 100%;
-  min-height: 160px;
+  min-height: 200px;
 
   border-radius: ${colors.radius};
-  background-color: #fffdf8;
+  background-color: ${colors.Card_Background};
   border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
 
-  padding: 24px 18px;
-  margin: 20px 0px;
+  padding: 36px 20px;
+  margin: 32px 0px 32px 0px;
 `;
 
 const SubText = styled.p`
   font-size: 16px;
   font-weight: 600;
-  color: ${colors.Text};
+  opacity: 0.6;
+  color: ${colors.Text_light};
 `;
 
 const Day = styled.h1`
   width: 100%;
   text-align: center;
-  /* padding-top: 20px; */
 
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: -1px;
   color: ${colors.Darkblue};
+  margin: 12px 0;
 `;
 
 const OpenDate = styled.p`
-  font-size: 14px;
+  font-size: 13px;
   color: ${colors.Text};
-  opacity: 0.8;
-  margin: 0px 0 12px 0;
+  opacity: 0.5;
+  margin-bottom: 18px;
 `;

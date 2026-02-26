@@ -12,7 +12,7 @@ export default function CreateButton() {
   return (
     <Button
       style={{ width: "100%", height: "46px" }}
-      bgcolor={colors.DeepBlue}
+      bgcolor={colors.ClearBlue}
       color={colors.Background}
       onClick={handleGoWrite}
     >

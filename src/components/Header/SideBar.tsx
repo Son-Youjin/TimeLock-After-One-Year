@@ -72,6 +72,7 @@ export default function SideBar({
               <Button
                 style={{ width: "30px", height: "30px" }}
                 onClick={handleClose}
+                bgcolor={colors.Card_Background}
               >
                 <IoMdClose size={20} />
               </Button>
@@ -125,7 +126,7 @@ const Container = styled.div<{ isOpen: boolean }>`
 
   width: 60%;
   height: 100%;
-  background-color: ${colors.Background};
+  background-color: ${colors.Card_Background};
 
   padding: 8px 12px;
   transform: translateX(${({ isOpen }) => (isOpen ? "0" : "-100%")});

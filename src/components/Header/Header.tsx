@@ -30,7 +30,9 @@ export default function Header({ onClickSide, onClickBell }: HeaderProps) {
 const Container = styled.section`
   display: flex;
   width: 100%;
-  height: 40px;
+  /* min-height: 56px; */
+
+  height: 44px;
   justify-content: space-between;
   align-items: center;
   padding: 0 12px 10px;

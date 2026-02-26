@@ -28,10 +28,11 @@ export default function LetterItem({ children, letterId }: LetterItemProps) {
 const LetterBox = styled.div`
   display: flex;
   width: 100%;
-  padding-top: 14px;
+  padding-top: 30px;
   justify-content: center;
 
-  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  border-top: 1px dashed rgba(0, 0, 0, 0.12);
+  margin-bottom: 6px;
 
   font-weight: 600;
   color: ${colors.Active};
