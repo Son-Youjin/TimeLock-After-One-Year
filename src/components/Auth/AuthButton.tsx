@@ -15,16 +15,22 @@ export default function AuthButton({ onLoginGoogle }: AuthButtonProps) {
         aria-label="구글 로그인"
         onClick={onLoginGoogle}
       >
-        <img src={googleLogo} width={20} height={20} alt="Google 로고" />
+        <img
+          src={googleLogo}
+          width={20}
+          height={20}
+          alt=""
+          aria-hidden="true"
+        />
         Google로 시작하기
       </AuthBtn>
 
       <AuthBtn
         bgcolor="#ffffff"
         aria-label="애플 로그인"
-        // onClick={() => onLogin("kakao")}
+        // onClick={() => onLogin("apple")}
       >
-        <img src={appleLogo} width={20} height={20} alt="Apple 로고" />
+        <img src={appleLogo} width={20} height={20} alt="" aria-hidden="true" />
         Apple로 시작하기
       </AuthBtn>
     </Container>
@@ -47,12 +53,12 @@ const AuthBtn = styled.button<{ bgcolor: string }>`
 
   width: 100%;
   max-width: 300px;
-  height: 56px;
+  height: 60px;
   gap: 8px;
 
   border: none;
   border-radius: 28px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   cursor: pointer;
 
   background-color: ${({ bgcolor }) => bgcolor};

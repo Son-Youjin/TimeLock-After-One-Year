@@ -20,7 +20,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   max-width: 380px;
 
@@ -39,6 +39,7 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.p`
+  font-size: 16px;
   color: ${colors.Text};
   opacity: 0.8;
   letter-spacing: -0.2px;
