@@ -13,6 +13,7 @@ import { Timestamp } from "firebase/firestore";
 import { createLetter } from "../../api/letters";
 import type { User } from "firebase/auth";
 import { searchYoutubeVideo } from "../../utils/searchYoutube";
+import { randomColor } from "../../utils/randomColor";
 
 export default function Write({ user }: { user: User }) {
   const [keyword, setKeyword] = useState("");
@@ -23,6 +24,7 @@ export default function Write({ user }: { user: User }) {
   const [selectedMusic, setSelectedMusic] = useState<MusicMeta | null>(null);
   const [videoId, setVideoId] = useState("");
   const [successSave, setSuccessSave] = useState(false);
+  const [paperColor, setPaperColor] = useState(() => randomColor());
 
   useEffect(() => {
     if (!successSave) return;
@@ -68,6 +70,7 @@ export default function Write({ user }: { user: User }) {
     setSearchResults([]);
     setIsOpen(false);
     setSuccessSave(true);
+    setPaperColor(randomColor());
   };
 
   return (
@@ -109,11 +112,12 @@ export default function Write({ user }: { user: User }) {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="1년 뒤 나에게 편지를 써보세요"
+        paperColor={paperColor}
       />
 
       <Button
-        style={{ width: "100%", height: "52px" }}
-        bgcolor="#748396"
+        style={{ width: "100%", height: "50px" }}
+        bgcolor={colors.ClearBlue}
         color={colors.Background}
         onClick={handleSubmit}
         disabled={!content.trim()}
@@ -129,6 +133,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
+  margin: 20px 0;
 `;
 
 const SearchSection = styled.div`
@@ -136,19 +141,24 @@ const SearchSection = styled.div`
   width: 100%;
 `;
 
-const Content = styled.textarea`
+const Content = styled.textarea<{ paperColor: string }>`
   display: flex;
   width: 100%;
-  height: 70vh;
+  min-height: 45vh;
   border: none;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  padding: 10px;
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  border-radius: 18px;
+  padding: 16px;
+  background-color: ${({ paperColor }) => paperColor};
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   margin-bottom: 12px;
 
-  &:focus,
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(100, 120, 255, 0.15);
+  }
+
   &:focus-visible {
     outline: none;
-    background-color: rgba(0, 0, 0, 0.1);
   }
 `;

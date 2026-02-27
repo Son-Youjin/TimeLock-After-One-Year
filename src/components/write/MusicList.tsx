@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import type { MusicMeta } from "../../types/musicMeta";
+import { colors } from "../../styles/theme";
 
 interface MusicListProps {
   onSearchResults: MusicMeta[];
@@ -36,13 +37,14 @@ const Backdrop = styled.div`
 
 const Ul = styled.ul`
   position: absolute;
-  top: 135px;
+  top: 194px;
   left: 29px;
   width: 85%;
   height: 200px;
-  border-radius: 10px;
-  padding-left: 10px;
+  border-radius: 12px;
+  padding-left: 12px;
   margin: 14px 0px;
+  background-color: ${colors.Background};
 
   overflow-y: auto;
 `;
@@ -51,10 +53,18 @@ const Li = styled.li`
   list-style: none;
   font-size: 16px;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
 
-  &:hover,
   &:active {
-    background-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(0) scale(0.98);
+    background-color: ${colors.Border};
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${colors.Border};
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
   }
 `;

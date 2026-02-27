@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import type { ChangeEvent, KeyboardEvent } from "react";
 import { IoIosSearch } from "react-icons/io";
+import { colors } from "../../styles/theme";
 
 interface SearchBarProps {
   value: string;
@@ -28,7 +29,7 @@ export default function SearchBar({
   return (
     <Container onClick={onClick}>
       <Icon>
-        <IoIosSearch />
+        <IoIosSearch size={20} />
       </Icon>
       <Search
         placeholder="노래 제목 또는 아티스트를 작성해주세요!"
@@ -44,23 +45,21 @@ const Container = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 `;
 
 const Search = styled.input`
   width: 100%;
-  height: 30px;
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  background-color: rgba(0, 0, 0, 0.1);
-  padding-left: 36px;
+  height: 46px;
+  font-size: 15px;
+  border-radius: 16px;
 
-  &:focus,
-  &:focus-visible {
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  outline: none;
+  background: #fff;
+  padding-left: 36px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  color: ${colors.Text};
 `;
 
 const Icon = styled.div`
@@ -71,8 +70,9 @@ const Icon = styled.div`
   height: 25px;
   border-radius: 25px;
   pointer-events: none;
+  color: ${colors.Text};
 
   position: absolute;
-  top: 2px;
-  left: 4px;
+  top: 8px;
+  left: 8px;
 `;
