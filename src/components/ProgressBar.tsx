@@ -18,7 +18,7 @@ export default function ProgressBar() {
       </SubText>
 
       <BarLine>
-        <Fill style={{ width: `${progress}%` }} />
+        <Fill progress={progress} />
       </BarLine>
     </Container>
   );
@@ -30,7 +30,7 @@ const Container = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 140px;
+  min-height: 140px;
   border-radius: ${colors.radius};
 
   background-color: #fffdf8;
@@ -48,7 +48,8 @@ const BarLine = styled.div`
   overflow: hidden;
 `;
 
-const Fill = styled.div`
+const Fill = styled.div<{ progress: number }>`
+  width: ${({ progress }) => progress}%;
   height: 100%;
   border-radius: 8px;
   background-color: ${colors.Skyblue};

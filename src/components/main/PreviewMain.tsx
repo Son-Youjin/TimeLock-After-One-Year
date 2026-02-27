@@ -14,12 +14,12 @@ export default function PreviewMain() {
 
         <SubText>
           시간이 지나야 열리는 편지를
-          <tr /> 미래의 나에게 남겨보세요.
+          <br /> 미래의 나에게 남겨보세요.
         </SubText>
       </Container>
       <Button
-        style={{ width: "100%", height: "46px" }}
-        bgcolor={colors.DeepBlue}
+        style={{ width: "100%", height: "60px" }}
+        bgcolor={colors.ClearBlue}
         color={colors.Background}
         onClick={() => navigate("/auth")}
       >
@@ -33,7 +33,7 @@ const Container = styled.section`
   display: flex;
   width: 100%;
   flex-direction: column;
-  margin: 32px 0px 20px 0px;
+  margin: 20px 0px;
 `;
 
 const SubText = styled.p`
