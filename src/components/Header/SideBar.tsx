@@ -74,7 +74,7 @@ export default function SideBar({
                 onClick={handleClose}
                 bgcolor={colors.Card_Background}
               >
-                <IoMdClose size={20} />
+                <IoMdClose size={22} />
               </Button>
             </CloseWrapper>
 
@@ -124,8 +124,8 @@ const Container = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
 
-  width: 60%;
-  height: 100%;
+  width: min(82vw, 320px);
+  height: 100vh;
   background-color: ${colors.Card_Background};
 
   padding: 8px 12px;
@@ -142,6 +142,7 @@ const CloseWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding-top: 8px;
 `;
 
 const GuestMessage = styled.div`
@@ -156,8 +157,8 @@ const LogInOut = styled.button`
   margin-bottom: 8px;
 
   border: none;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 12px;
+  padding: 18px;
 
   background-color: ${colors.Background_warm};
   color: ${colors.Text};
@@ -167,6 +168,6 @@ const BottomText = styled.p`
   color: ${colors.Text_light};
   margin-bottom: 8px;
   opacity: 0.7;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
 `;
