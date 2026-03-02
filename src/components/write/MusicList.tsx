@@ -5,48 +5,46 @@ import { colors } from "../../styles/theme";
 interface MusicListProps {
   onSearchResults: MusicMeta[];
   onSelectedMusic: (music: MusicMeta) => void;
-  onClose: () => void;
 }
 
 export default function MusicList({
   onSearchResults,
   onSelectedMusic,
-  onClose,
 }: MusicListProps) {
+  if (onSearchResults.length === 0) return null;
+
   return (
-    <Backdrop onClick={onClose}>
-      {onSearchResults.length > 0 && (
-        <Ul>
-          {onSearchResults.map((track, idx) => (
-            <Li key={idx} onClick={() => onSelectedMusic(track)}>
-              {track.artist} - {track.name}
-            </Li>
-          ))}
-        </Ul>
-      )}
-    </Backdrop>
+    <>
+      <Ul>
+        {onSearchResults.map((track, idx) => (
+          <Li key={idx} onClick={() => onSelectedMusic(track)}>
+            {track.artist} - {track.name}
+          </Li>
+        ))}
+      </Ul>
+    </>
   );
 }
 
-const Backdrop = styled.div`
-  position: fixed;
-  inset: 0;
-  background: transparent;
-  z-index: 30;
-`;
-
 const Ul = styled.ul`
   position: absolute;
-  top: 194px;
-  left: 29px;
-  width: 85%;
-  height: 200px;
-  border-radius: 12px;
-  padding-left: 12px;
-  margin: 14px 0px;
-  background-color: ${colors.Background};
+  top: 100%;
+  left: 0;
+  width: 100%;
 
+  max-height: 240px;
   overflow-y: auto;
+
+  border-radius: 16px;
+  padding: 8px 0;
+  margin: 0;
+
+  background: ${colors.White};
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+
+  z-index: 50;
 `;
 
 const Li = styled.li`

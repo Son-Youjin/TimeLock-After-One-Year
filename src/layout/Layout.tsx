@@ -63,8 +63,8 @@ const Container = styled.section`
   padding-top: env(safe-area-inset-top);
   //TODO: 확인차 해둔 것 지우기!!
   margin-top: 40px;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 18px;
+  padding-left: 18px;
   padding-bottom: env(safe-area-inset-bottom);
 `;
 

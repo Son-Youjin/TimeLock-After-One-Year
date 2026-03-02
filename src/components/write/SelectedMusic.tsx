@@ -24,18 +24,38 @@ export default function SelectedMusic({ music, onOpen }: SelectedMusicProps) {
 
 const Container = styled.div`
   display: flex;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  align-items: center;
+  height: 34px;
+  border-radius: 16px;
+  padding: 0 12px;
+
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:active {
+    background-color: rgba(120, 140, 255, 0.1);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(120, 140, 255, 0.1);
+    }
+  }
 `;
 
 const Icon = styled.div`
   display: flex;
-  margin-right: 4px;
-  padding: 4px 4px 4px 0px;
-  color: ${colors.Text};
+  align-items: center;
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.45);
 `;
 
 const Text = styled.div`
   font-size: 16px;
   color: ${colors.Text};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

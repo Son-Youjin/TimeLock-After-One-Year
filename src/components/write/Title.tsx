@@ -23,7 +23,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  margin: 20px 0 12px 0;
+  margin-bottom: 8px;
 `;
 
 const Label = styled.p`
@@ -35,21 +35,22 @@ const Label = styled.p`
 
 const Input = styled.input`
   flex: 1;
-  height: 48px;
+  height: 46px;
   font-size: 15px;
   line-height: 1.4;
-  background-color: #fff;
-  border-radius: 14px;
-  padding: 0 12px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 0 16px;
 
-  &:focus {
-    background-color: rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-    transition: background-color 0.2s ease;
+  background-color: ${colors.White};
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.5);
   }
 
-  &:focus-visible {
+  &:focus {
     outline: none;
+    box-shadow: 0 0 0 1px rgba(120, 140, 255, 0.25);
   }
 `;

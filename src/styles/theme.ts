@@ -6,6 +6,7 @@ export const colors = {
   //   fontWeight: {
   //     medium: 500,
   //   },
+  White: "#ffffffe5",
   Background: "#F8F9FA",
   sky: "#dee9f5ff",
   Background_warm: "#f5f2ed",

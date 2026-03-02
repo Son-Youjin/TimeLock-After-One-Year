@@ -90,21 +90,24 @@ export default function Write({ user }: { user: User }) {
         )}
 
         {isOpen && (
-          <MusicList
-            onSearchResults={searchResults}
-            onSelectedMusic={async (music) => {
-              setSelectedMusic(music);
-              setIsOpen(false);
+          <>
+            <Backdrop onClick={() => setIsOpen(false)} />
 
-              const youtubeVideoId = await searchYoutubeVideo(
-                music.name,
-                music.artist,
-              );
+            <MusicList
+              onSearchResults={searchResults}
+              onSelectedMusic={async (music) => {
+                setSelectedMusic(music);
+                setIsOpen(false);
 
-              setVideoId(youtubeVideoId ?? "");
-            }}
-            onClose={() => setIsOpen(false)}
-          />
+                const youtubeVideoId = await searchYoutubeVideo(
+                  music.name,
+                  music.artist,
+                );
+
+                setVideoId(youtubeVideoId ?? "");
+              }}
+            />
+          </>
         )}
       </SearchSection>
 
@@ -116,7 +119,7 @@ export default function Write({ user }: { user: User }) {
       />
 
       <Button
-        style={{ width: "100%", height: "50px" }}
+        style={{ width: "100%", height: "54px" }}
         bgcolor={colors.ClearBlue}
         color={colors.Background}
         onClick={handleSubmit}
@@ -139,26 +142,36 @@ const Container = styled.section`
 const SearchSection = styled.div`
   position: relative;
   width: 100%;
+  margin-bottom: 20px;
+`;
+
+const Backdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 40;
 `;
 
 const Content = styled.textarea<{ paperColor: string }>`
-  display: flex;
   width: 100%;
-  min-height: 45vh;
-  border: none;
-  /* background-color: rgba(255, 255, 255, 0.4); */
-  border-radius: 18px;
-  padding: 16px;
-  background-color: ${({ paperColor }) => paperColor};
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  margin-bottom: 12px;
+  min-height: 52vh;
+  border-radius: 20px;
+  padding: 20px;
+  line-height: 1.6;
+  font-size: 15px;
 
-  &:focus {
-    box-shadow: 0 0 0 2px rgba(100, 120, 255, 0.15);
+  background-color: ${({ paperColor }) => paperColor};
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+
+  margin-bottom: 24px;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
   }
 
-  &:focus-visible {
+  &:focus {
     outline: none;
+    box-shadow: 0 0 0 1px rgba(120, 140, 255, 0.25);
   }
 `;

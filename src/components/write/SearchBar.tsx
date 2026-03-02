@@ -45,7 +45,6 @@ const Container = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  margin-bottom: 14px;
 `;
 
 const Search = styled.input`
@@ -53,13 +52,21 @@ const Search = styled.input`
   height: 46px;
   font-size: 15px;
   border-radius: 16px;
+  padding-left: 40px;
 
-  outline: none;
-  background: #fff;
-  padding-left: 36px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-
+  background: ${colors.White};
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
   color: ${colors.Text};
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(120, 140, 255, 0.25);
+  }
 `;
 
 const Icon = styled.div`
