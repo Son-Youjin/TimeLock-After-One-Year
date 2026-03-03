@@ -19,6 +19,15 @@ const Wrapper = styled.div`
   width: 100%;
   padding-bottom: 56.25%;
   height: 0;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
 `;
 
 const StyledIframe = styled.iframe`
@@ -27,4 +36,5 @@ const StyledIframe = styled.iframe`
   left: 0;
   width: 100%;
   height: 100%;
+  border: none;
 `;
