@@ -51,23 +51,36 @@ const Container = styled.section`
   height: auto;
   align-items: center;
   margin-top: 40px;
+
+  background-color: ${colors.Background};
+  border-radius: 20px;
+
+  padding: 20px 10px;
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
   display: flex;
-  font-size: 20px;
-  color: ${colors.Text};
-  padding: 10px 0px;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
 `;
 
 const Icon = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 8px;
+  color: ${colors.Text};
+  margin-bottom: 2px;
 `;
 
 const Text = styled.div`
+  font-size: 18px;
+  color: ${colors.Text};
+  font-weight: 600;
+
+  text-align: center;
   white-space: normal;
   word-break: keep-all;
-  line-height: 1.4;
+  line-height: 1.5;
+  max-width: 280px;
 `;
