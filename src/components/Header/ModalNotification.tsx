@@ -1,3 +1,5 @@
+// TODO: 알림 모달 ui 변경
+
 import styled from "@emotion/styled";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
@@ -22,6 +24,7 @@ export default function ModalNotification({
             <IoMdClose size={20} />
           </Button>
         </Header>
+
         {isLogin && <LetterList />}
       </Container>
     </BackDrop>

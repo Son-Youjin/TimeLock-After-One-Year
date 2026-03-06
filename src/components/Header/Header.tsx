@@ -1,3 +1,5 @@
+// TODO: 모바일 UI로 header 수정, 햄버거 + 알림도
+
 import styled from "@emotion/styled";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GoBell } from "react-icons/go";

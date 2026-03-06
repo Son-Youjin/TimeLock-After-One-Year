@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import SearchBar from "./SearchBar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { searchKeyword } from "../../utils/searchKeyword";
 import type { MusicMeta } from "../../types/musicMeta";
 import MusicList from "./MusicList";
@@ -14,6 +14,7 @@ import { createLetter } from "../../api/letters";
 import type { User } from "firebase/auth";
 import { searchYoutubeVideo } from "../../utils/searchYoutube";
 import { randomColor } from "../../utils/randomColor";
+import { useNavigate } from "react-router-dom";
 
 export default function Write({ user }: { user: User }) {
   const [keyword, setKeyword] = useState("");
@@ -26,15 +27,7 @@ export default function Write({ user }: { user: User }) {
   const [successSave, setSuccessSave] = useState(false);
   const [paperColor, setPaperColor] = useState(() => randomColor());
 
-  useEffect(() => {
-    if (!successSave) return;
-
-    const timer = setTimeout(() => {
-      setSuccessSave(false);
-    }, 2000);
-
-    return () => clearInterval(timer);
-  }, [successSave]);
+  const navigate = useNavigate();
 
   const handleSearchSong = async () => {
     const results = await searchKeyword(keyword);
@@ -43,23 +36,32 @@ export default function Write({ user }: { user: User }) {
   };
 
   const handleSubmit = async () => {
-    const nextYear = new Date();
-    nextYear.setFullYear(nextYear.getFullYear() + 1);
-    nextYear.setHours(0, 0, 0, 0);
+    try {
+      const nextYear = new Date();
+      nextYear.setFullYear(nextYear.getFullYear() + 1);
+      nextYear.setHours(0, 0, 0, 0);
 
-    const openAt = Timestamp.fromDate(nextYear);
+      const openAt = Timestamp.fromDate(nextYear);
 
-    await createLetter({
-      userId: user.uid,
-      title,
-      content,
-      openAt,
-      musicTitle: selectedMusic?.name ?? "",
-      musicArtist: selectedMusic?.artist ?? "",
-      videoId: videoId ?? "",
-    });
+      await createLetter({
+        userId: user.uid,
+        title,
+        content,
+        openAt,
+        musicTitle: selectedMusic?.name ?? "",
+        musicArtist: selectedMusic?.artist ?? "",
+        videoId: videoId ?? "",
+      });
 
-    handleResetText();
+      handleResetText();
+    } catch (err) {
+      console.log("편지 저장 실패", err);
+    }
+  };
+
+  const handleSuccessClose = () => {
+    setSuccessSave(false);
+    navigate("/");
   };
 
   const handleResetText = () => {
@@ -127,7 +129,7 @@ export default function Write({ user }: { user: User }) {
       >
         1년 뒤로 보내기
       </Button>
-      {successSave && <SuccessModal onClose={() => setSuccessSave(false)} />}
+      {successSave && <SuccessModal onClose={handleSuccessClose} />}
     </Container>
   );
 }

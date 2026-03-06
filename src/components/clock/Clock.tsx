@@ -11,8 +11,7 @@ export default function Clock({ progress }: ClockProps) {
 
   const r = 40;
   const stroke = 6;
-  const normalizedRadius = r;
-  const circumference = 2 * Math.PI * normalizedRadius;
+  const circumference = 2 * Math.PI * r;
   const offset = circumference - animatedProgress * circumference;
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function Clock({ progress }: ClockProps) {
         <circle
           cx="50"
           cy="50"
-          r={normalizedRadius}
+          r={r}
           fill="transparent"
           stroke="rgba(0,0,0,0.06)"
           strokeWidth={stroke}
@@ -46,7 +45,7 @@ export default function Clock({ progress }: ClockProps) {
         <circle
           cx="50"
           cy="50"
-          r={normalizedRadius}
+          r={r}
           fill="transparent"
           stroke={colors.ClearBlue}
           strokeWidth={stroke}
