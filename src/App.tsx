@@ -9,6 +9,7 @@ import Layout from "./layout/Layout";
 import WritePage from "./pages/write/WritePage";
 import LetterPage from "./pages/letter/LetterPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import AuthLoading from "./pages/auth/AuthLoading";
 
 import { logout, subscribeAuth } from "./api/auth";
 
@@ -29,7 +30,7 @@ function App() {
   const isLogin = !!user;
 
   if (!authReady) {
-    return null;
+    return <AuthLoading />;
   }
 
   const handleLogout = async () => {
