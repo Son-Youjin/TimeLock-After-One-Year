@@ -17,33 +17,60 @@ export default function Header({ onClickSide, onClickBell }: HeaderProps) {
 
   return (
     <Container>
-      <Button onClick={onClickSide}>
-        <GiHamburgerMenu size={18} />
-      </Button>
+      <IconButton onClick={onClickSide}>
+        <GiHamburgerMenu size={22} />
+      </IconButton>
 
       <Title onClick={() => navigate("/")}>TimeLock</Title>
 
-      <Button onClick={onClickBell}>
-        <GoBell size={18} />
-      </Button>
+      <IconButton onClick={onClickBell}>
+        <GoBell size={22} />
+      </IconButton>
     </Container>
   );
 }
 
-const Container = styled.section`
+const Container = styled.header`
+  position: relative;
   display: flex;
-
-  height: 50px;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  height: 60px;
   padding: 0 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 `;
 
 const Title = styled.h1`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+
+  color: ${colors.Text};
+  cursor: pointer;
+`;
+
+const IconButton = styled(Button)`
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+
+  width: 40px;
+  height: 40px;
+
+  color: ${colors.Text};
+  opacity: 0.85;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${colors.Active};
+      border-radius: 25px;
+    }
+  }
 `;

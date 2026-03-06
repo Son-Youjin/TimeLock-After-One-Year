@@ -69,6 +69,7 @@ const Title = styled.span`
   font-size: 16px;
   color: ${colors.Text_light};
   font-weight: 500;
+  margin-top: 12px;
 `;
 
 const Name = styled(Title)`
