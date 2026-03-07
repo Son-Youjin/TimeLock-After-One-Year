@@ -1,19 +1,15 @@
-// TODO: 알림 모달 ui 변경
+// TODO: 알림 싹 지우고 Info로 싹 바꿔버리기~
 
 import styled from "@emotion/styled";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
-import LetterList from "./letterList";
 
 interface ModalNotificationProps {
   isLogin: boolean;
   onClose: () => void;
 }
 
-export default function ModalNotification({
-  isLogin,
-  onClose,
-}: ModalNotificationProps) {
+export default function ModalNotification({ onClose }: ModalNotificationProps) {
   return (
     <BackDrop onClick={onClose}>
       <Container>
@@ -24,8 +20,6 @@ export default function ModalNotification({
             <IoMdClose size={20} />
           </Button>
         </Header>
-
-        {isLogin && <LetterList />}
       </Container>
     </BackDrop>
   );

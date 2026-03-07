@@ -1,18 +1,16 @@
-// TODO: 모바일 UI로 header 수정, 햄버거 + 알림도
-
 import styled from "@emotion/styled";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { GoBell } from "react-icons/go";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
 import { colors } from "../../styles/theme";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 interface HeaderProps {
   onClickSide: () => void;
-  onClickBell: () => void;
+  onClickInfo: () => void;
 }
 
-export default function Header({ onClickSide, onClickBell }: HeaderProps) {
+export default function Header({ onClickSide, onClickInfo }: HeaderProps) {
   const navigate = useNavigate();
 
   return (
@@ -23,8 +21,8 @@ export default function Header({ onClickSide, onClickBell }: HeaderProps) {
 
       <Title onClick={() => navigate("/")}>TimeLock</Title>
 
-      <IconButton onClick={onClickBell}>
-        <GoBell size={22} />
+      <IconButton onClick={onClickInfo}>
+        <AiOutlineInfoCircle size={22} />
       </IconButton>
     </Container>
   );

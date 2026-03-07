@@ -2,9 +2,9 @@ import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import Header from "../components/Header/Header";
 import { useState } from "react";
-import ModalNotification from "../components/Header/ModalNotification";
 import SideBar from "../components/Header/SideBar";
 import type { User } from "firebase/auth";
+import Info from "../components/Header/Info";
 
 interface LayoutProps {
   isLogin: boolean;
@@ -19,13 +19,13 @@ export default function Layout({
   onLogout,
   user,
 }: LayoutProps) {
-  const [isBellOpen, setIsBellOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isSideOpen, setIsSideOpen] = useState(false);
 
   return (
     <Container>
       <Header
-        onClickBell={() => setIsBellOpen(true)}
+        onClickInfo={() => setIsInfoOpen(true)}
         onClickSide={() => setIsSideOpen(true)}
       />
 
@@ -39,11 +39,8 @@ export default function Layout({
           user={user}
         />
       )}
-      {isBellOpen && (
-        <ModalNotification
-          isLogin={isLogin}
-          onClose={() => setIsBellOpen(false)}
-        />
+      {isInfoOpen && (
+        <Info isLogin={isLogin} onClose={() => setIsInfoOpen(false)} />
       )}
 
       <Content>
