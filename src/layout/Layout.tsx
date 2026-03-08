@@ -4,7 +4,7 @@ import Header from "../components/Header/Header";
 import { useState } from "react";
 import SideBar from "../components/Header/SideBar";
 import type { User } from "firebase/auth";
-import Info from "../components/Header/Info";
+import GuideModal from "../components/Header/GuideModal";
 
 interface LayoutProps {
   isLogin: boolean;
@@ -40,7 +40,7 @@ export default function Layout({
         />
       )}
       {isInfoOpen && (
-        <Info isLogin={isLogin} onClose={() => setIsInfoOpen(false)} />
+        <GuideModal user={user} onClose={() => setIsInfoOpen(false)} />
       )}
 
       <Content>

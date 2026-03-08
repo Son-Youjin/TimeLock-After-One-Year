@@ -5,58 +5,54 @@ import { useEffect, useState } from "react";
 import type { Letter } from "../../types/letter";
 import { getLetter } from "../../api/letters";
 import UnlockTransition from "../../components/letter/UnlockTransition";
-import type { openStage } from "../../types/openStage";
 
 export default function LetterPage() {
   const { id } = useParams<{ id: string }>();
   const [letter, setLetter] = useState<Letter | null>(null);
-  const [stage, setStage] = useState<openStage>("locked");
+  const [transition, setTransition] = useState(false);
+  const [isLocked, setIsLocked] = useState(true);
 
   useEffect(() => {
     async function fetch() {
       if (!id) return;
       const data = await getLetter(id);
+
+      if (!data) return;
+
       setLetter(data);
+      const now = Date.now();
+
+      if (data.openAt > now) {
+        setIsLocked(true);
+        return;
+      }
+
+      setIsLocked(false);
+
+      const viewed = localStorage.getItem(`opened-${data.id}`);
+
+      if (!viewed) {
+        setTransition(true);
+
+        setTimeout(() => {
+          setTransition(false);
+          localStorage.setItem(`opened-${data.id}`, "true");
+        }, 1000);
+      }
     }
+
     fetch();
   }, [id]);
 
-  useEffect(() => {
-    if (!letter) return;
-
-    const viewed = localStorage.getItem(`opened-${letter.id}`);
-
-    if (viewed) {
-      setStage("opened");
-      return;
-    }
-
-    const now = Date.now();
-    const untilOpen = letter.openAt - now;
-
-    const openTimer = setTimeout(
-      () => {
-        setStage("transition");
-
-        setTimeout(() => {
-          setStage("opened");
-          localStorage.setItem(`opened-${letter.id}`, "true");
-        }, 1000);
-      },
-
-      Math.max(untilOpen, 0),
-    );
-
-    return () => clearTimeout(openTimer);
-  }, [letter]);
-
   if (!letter) return null;
 
-  if (stage === "locked") {
+  if (isLocked) {
     return <LockedLetter letter={letter} />;
   }
 
-  if (stage === "transition") {
+  const viewed = localStorage.getItem(`opened-${letter.id}`);
+
+  if (!viewed && transition) {
     return <UnlockTransition />;
   }
 
