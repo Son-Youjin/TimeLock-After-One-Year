@@ -4,14 +4,24 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { colors } from "../../styles/theme";
 
-export default function AuthPage({ isLogin }: { isLogin: boolean }) {
+export default function AuthPage({
+  isLogin,
+  authReady,
+}: {
+  isLogin: boolean;
+  authReady: boolean;
+}) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLogin) {
+    if (authReady && isLogin) {
       navigate("/", { replace: true });
     }
-  }, [isLogin, navigate]);
+  }, [authReady, isLogin, navigate]);
+
+  if (authReady && isLogin) {
+    return null;
+  }
 
   return (
     <PageWrapper>

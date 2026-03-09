@@ -1,8 +1,8 @@
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
-import { type User } from "firebase/auth";
 import { logout, subscribeAuth } from "./api/auth";
+import type { User } from "firebase/auth";
 
 import Layout from "./layout/Layout";
 import ProtectedRoute from "./pages/ProtectedRoute";
@@ -27,7 +27,7 @@ function App() {
     return unsubscribe;
   }, []);
 
-  const isLogin = !!user;
+  const isLogin = user !== null;
 
   if (!authReady) {
     return <AuthLoading />;
@@ -41,7 +41,10 @@ function App() {
   return (
     <Suspense fallback={<AuthLoading />}>
       <Routes>
-        <Route path="/auth" element={<AuthPage isLogin={isLogin} />} />
+        <Route
+          path="/auth"
+          element={<AuthPage isLogin={isLogin} authReady={authReady} />}
+        />
 
         <Route
           element={
