@@ -42,7 +42,10 @@ export default function SuccessModal({ onClose }: SuccessModalProps) {
 }
 
 const Container = styled.div`
-  transform: translateY(-20px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
 
   width: 260px;
   min-height: 100px;
