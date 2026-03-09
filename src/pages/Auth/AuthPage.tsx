@@ -3,6 +3,8 @@ import Auth from "../../components/auth/Auth";
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { colors } from "../../styles/theme";
+import { isInAppBrowser } from "../../utils/isInAppBrowser";
+import InAppBrowserBlock from "../../components/auth/InAppBrowserBlock";
 
 export default function AuthPage({
   isLogin,
@@ -19,8 +21,8 @@ export default function AuthPage({
     }
   }, [authReady, isLogin, navigate]);
 
-  if (authReady && isLogin) {
-    return null;
+  if (!isLogin && isInAppBrowser()) {
+    return <InAppBrowserBlock />;
   }
 
   return (
