@@ -13,10 +13,12 @@ import { formatDate } from "../../utils/formatDate";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../api/firebase";
 import GuideModal from "../Header/GuideModal";
+import DdayCardSkeleton from "./DdayCardSkeleton";
 
 export default function LoginMain({ user }: { user: User | null }) {
   const [comingOpen, setComingOpen] = useState<Letter | null>(null);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const name = user?.displayName ?? "";
 
   useEffect(() => {
@@ -25,26 +27,30 @@ export default function LoginMain({ user }: { user: User | null }) {
     const uid = user.uid;
 
     async function fetch() {
-      const userRef = doc(db, "users", uid);
-      const [letter, snap] = await Promise.all([
-        getNextComingLetter(uid),
-        getDoc(userRef),
-      ]);
+      try {
+        const userRef = doc(db, "users", uid);
+        const [letter, snap] = await Promise.all([
+          getNextComingLetter(uid),
+          getDoc(userRef),
+        ]);
 
-      if (letter && isOpenByDate(letter.openAt)) {
-        setComingOpen(null);
-      } else {
-        setComingOpen(letter);
-      }
+        if (letter && isOpenByDate(letter.openAt)) {
+          setComingOpen(null);
+        } else {
+          setComingOpen(letter);
+        }
 
-      if (!snap.exists()) return;
+        if (snap.exists()) {
+          const userData = snap.data();
 
-      const userData = snap.data();
-
-      if (!userData.hasSeenGuide) {
-        setTimeout(() => {
-          setIsGuideOpen(true);
-        }, 800);
+          if (!userData.hasSeenGuide) {
+            setTimeout(() => {
+              setIsGuideOpen(true);
+            }, 800);
+          }
+        }
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -61,7 +67,9 @@ export default function LoginMain({ user }: { user: User | null }) {
         <Card>
           <SubText>기록된 진심이 열리기까지</SubText>
 
-          {comingOpen && (
+          {loading ? (
+            <DdayCardSkeleton />
+          ) : comingOpen ? (
             <>
               <Day>D-{calcDDay(comingOpen.openAt, TODAY_TIMESTAMP)}</Day>
               <OpenDate>{formatDate(comingOpen.openAt)}에 열립니다</OpenDate>
@@ -70,6 +78,8 @@ export default function LoginMain({ user }: { user: User | null }) {
                 {comingOpen.title}
               </LetterItem>
             </>
+          ) : (
+            <EmptyText>예정된 편지가 없어요.</EmptyText>
           )}
         </Card>
       </Container>
@@ -138,4 +148,11 @@ const OpenDate = styled.p`
   color: ${colors.Text};
   opacity: 0.5;
   margin-bottom: 22px;
+`;
+
+const EmptyText = styled.p`
+  font-size: 15px;
+  color: ${colors.Text_light};
+  opacity: 0.8;
+  margin: 48px 0 20px;
 `;
