@@ -1,17 +1,17 @@
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { type User } from "firebase/auth";
+import { logout, subscribeAuth } from "./api/auth";
 
-import HomePage from "./pages/home/HomePage";
-import AuthPage from "./pages/auth/AuthPage";
 import Layout from "./layout/Layout";
-import WritePage from "./pages/write/WritePage";
-import LetterPage from "./pages/letter/LetterPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import AuthLoading from "./pages/auth/AuthLoading";
 
-import { logout, subscribeAuth } from "./api/auth";
+const HomePage = lazy(() => import("./pages/home/HomePage"));
+const AuthPage = lazy(() => import("./pages/auth/AuthPage"));
+const WritePage = lazy(() => import("./pages/write/WritePage"));
+const LetterPage = lazy(() => import("./pages/letter/LetterPage"));
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <>
+    <Suspense fallback={<AuthLoading />}>
       <Routes>
         <Route path="/auth" element={<AuthPage isLogin={isLogin} />} />
 
@@ -77,7 +77,7 @@ function App() {
           />
         </Route>
       </Routes>
-    </>
+    </Suspense>
   );
 }
 
