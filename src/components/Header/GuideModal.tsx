@@ -18,26 +18,26 @@ interface GuideModalProps {
 const guides = [
   {
     title: "TimeLock",
-    desc: "미래에 열리는 편지를 남기는 서비스입니다.",
+    desc: "지금의 생각을 기록하면,\n1년 뒤 열어볼 수 있는 편지가 됩니다.",
   },
   {
     title: "편지 작성",
-    desc: "새 편지 쓰기를 눌러 기록을 남겨보세요.",
+    desc: "새 편지 쓰기를 눌러\n오늘의 마음이나 하루를 기록해보세요.",
     img: loginMainImg,
   },
   {
     title: "잠금 시스템",
-    desc: "설정한 날짜까지 편지는 열리지 않습니다.",
+    desc: "작성한 편지는 자동으로 잠기며\n정확히 1년 뒤에 열립니다.",
     img: lockedPageImg,
   },
   {
     title: "D-Day 확인",
-    desc: "메인 화면에서 가장 가까운 편지를 확인할 수 있습니다.",
+    desc: "메인 화면에서 가장 먼저 열릴 편지와\n남은 시간을 확인할 수 있어요.",
     img: DdayImg,
   },
   {
     title: "앱으로 설치하기",
-    desc: "홈 화면에 추가하면 더 빠르게 편지를 확인할 수 있어요.",
+    desc: "홈 화면에 추가하면\n앱처럼 빠르게 TimeLock을 열 수 있어요.",
     img: pwaGuideModal,
   },
 ];
@@ -105,7 +105,7 @@ export default function GuideModal({ user, onClose }: GuideModalProps) {
           {step > 0 ? <NavButton onClick={prev}>이전</NavButton> : <div />}
 
           <NavButton onClick={isLast ? finishGuide : next}>
-            {isLast ? "시작하기" : "다음"}
+            {isLast ? "편지 쓰기" : "다음"}
           </NavButton>
         </Footer>
       </Container>
@@ -176,6 +176,7 @@ const GuideTitle = styled.h3`
 const GuideText = styled.p`
   font-size: 14px;
   color: #555;
+  white-space: pre-line;
 `;
 
 const ImageBox = styled.div`
