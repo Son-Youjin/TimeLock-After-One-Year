@@ -1,29 +1,21 @@
 import styled from "@emotion/styled";
-import type { ChangeEvent, KeyboardEvent } from "react";
+import type { ChangeEvent } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { colors } from "../../styles/theme";
 
 interface SearchBarProps {
   value: string;
   onKeyword: (value: string) => void;
-  onSearch: () => void;
   onClick: () => void;
 }
 
 export default function SearchBar({
   value,
   onKeyword,
-  onSearch,
   onClick,
 }: SearchBarProps) {
   const handleInputKeyword = (e: ChangeEvent<HTMLInputElement>) => {
     onKeyword(e.target.value);
-  };
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      onSearch();
-    }
   };
 
   return (
@@ -35,7 +27,6 @@ export default function SearchBar({
         placeholder="노래 제목 또는 아티스트를 작성해주세요!"
         value={value}
         onChange={handleInputKeyword}
-        onKeyDown={handleKeyDown}
       />
     </Container>
   );

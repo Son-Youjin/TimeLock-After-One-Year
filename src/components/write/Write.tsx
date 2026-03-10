@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import SearchBar from "./SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { searchKeyword } from "../../utils/searchKeyword";
 import type { MusicMeta } from "../../types/musicMeta";
 import MusicList from "./MusicList";
@@ -29,11 +29,20 @@ export default function Write({ user }: { user: User }) {
 
   const navigate = useNavigate();
 
-  const handleSearchSong = async () => {
-    const results = await searchKeyword(keyword);
-    setSearchResults(results);
-    setKeyword("");
-  };
+  useEffect(() => {
+    const trimmed = keyword.trim();
+
+    const timer = setTimeout(async () => {
+      if (trimmed.length < 2) {
+        setSearchResults([]);
+        return;
+      }
+      const results = await searchKeyword(trimmed);
+      setSearchResults(results);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [keyword]);
 
   const handleSubmit = async () => {
     try {
@@ -85,8 +94,7 @@ export default function Write({ user }: { user: User }) {
         ) : (
           <SearchBar
             value={keyword}
-            onKeyword={(value: string) => setKeyword(value)}
-            onSearch={handleSearchSong}
+            onKeyword={setKeyword}
             onClick={() => setIsOpen(true)}
           />
         )}
