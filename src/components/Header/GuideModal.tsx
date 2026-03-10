@@ -5,8 +5,10 @@ import Button from "../common/Button";
 import type { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../api/firebase";
-import loginMainImg from "../../assets/LoginMain.JPG";
-import lockedPageImg from "../../assets/LockedPage.JPG";
+import loginMainImg from "../../assets/loginMainImg.svg";
+import DdayImg from "../../assets/Dday.svg";
+import lockedPageImg from "../../assets/lockedPageImg.svg";
+import pwaGuideModal from "../../assets/pwaGuideModal.svg";
 
 interface GuideModalProps {
   user: User | null;
@@ -31,7 +33,12 @@ const guides = [
   {
     title: "D-Day 확인",
     desc: "메인 화면에서 가장 가까운 편지를 확인할 수 있습니다.",
-    img: loginMainImg,
+    img: DdayImg,
+  },
+  {
+    title: "앱으로 설치하기",
+    desc: "홈 화면에 추가하면 더 빠르게 편지를 확인할 수 있어요.",
+    img: pwaGuideModal,
   },
 ];
 
@@ -117,9 +124,10 @@ const BackDrop = styled.div`
 `;
 
 const Container = styled.section`
-  width: 300px;
-  height: 340px;
-  padding: 18px;
+  width: 320px;
+  min-height: 340px;
+  max-height: 420px;
+  padding: 22px;
   transform: translateY(-20%);
 
   background: white;
@@ -162,7 +170,7 @@ const Content = styled.div`
 
 const GuideTitle = styled.h3`
   font-size: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 `;
 
 const GuideText = styled.p`
@@ -173,7 +181,7 @@ const GuideText = styled.p`
 const ImageBox = styled.div`
   width: 100%;
   height: 120px;
-  margin-top: 12px;
+  margin: 14px 0;
 
   display: flex;
   justify-content: center;
@@ -192,7 +200,7 @@ const Dots = styled.div`
   display: flex;
   justify-content: center;
   gap: 6px;
-  margin-bottom: 20px;
+  margin: 14px 0 20px 0;
 `;
 
 const Dot = styled.div<{ active: boolean }>`
