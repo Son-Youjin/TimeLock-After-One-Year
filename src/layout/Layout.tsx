@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import Header from "../components/Header/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideBar from "../components/Header/SideBar";
 import type { User } from "firebase/auth";
 import GuideModal from "../components/Header/GuideModal";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../api/firebase";
 
 interface LayoutProps {
   isLogin: boolean;
@@ -21,6 +23,23 @@ export default function Layout({
 }: LayoutProps) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isSideOpen, setIsSideOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
+
+  useEffect(() => {
+    async function checkGuide() {
+      if (!user) return;
+
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+
+      if (!snap.exists() || !snap.data()?.hasSeenGuide) {
+        setIsGuideOpen(true);
+        return;
+      }
+    }
+
+    checkGuide();
+  }, [user]);
 
   return (
     <Container>
@@ -39,14 +58,19 @@ export default function Layout({
           user={user}
         />
       )}
-      {isInfoOpen && (
-        <GuideModal user={user} onClose={() => setIsInfoOpen(false)} />
+      {(isInfoOpen || isGuideOpen) && (
+        <GuideModal
+          user={user}
+          onClose={() => {
+            setIsInfoOpen(false);
+            setIsGuideOpen(false);
+          }}
+        />
       )}
 
       <Content>
         <Outlet />
       </Content>
-      {/* Footer 자리 */}
     </Container>
   );
 }

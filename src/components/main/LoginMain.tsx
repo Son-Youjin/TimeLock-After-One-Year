@@ -65,12 +65,11 @@ export default function LoginMain({ user }: { user: User | null }) {
         </Title>
 
         <Card>
-          <SubText>기록된 진심이 열리기까지</SubText>
-
           {loading ? (
             <DdayCardSkeleton />
           ) : comingOpen ? (
             <>
+              <SubText>기록된 진심이 열리기까지</SubText>
               <Day>D-{calcDDay(comingOpen.openAt, TODAY_TIMESTAMP)}</Day>
               <OpenDate>{formatDate(comingOpen.openAt)}에 열립니다</OpenDate>
 

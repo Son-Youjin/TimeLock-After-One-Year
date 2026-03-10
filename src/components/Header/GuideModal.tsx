@@ -76,7 +76,7 @@ export default function GuideModal({ user, onClose }: GuideModalProps) {
   }
 
   return (
-    <BackDrop onClick={onClose}>
+    <BackDrop onClick={finishGuide}>
       <Container onClick={(e) => e.stopPropagation()}>
         <Header>
           <Title>가이드</Title>
