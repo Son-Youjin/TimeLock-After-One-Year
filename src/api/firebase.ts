@@ -5,6 +5,8 @@ import {
   browserLocalPersistence,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getFunctions } from "firebase/functions";
+import { getMessaging, isSupported, type Messaging } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,7 +19,14 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+export const messagingPromise: Promise<Messaging | null> = (async () => {
+  const supported = await isSupported();
+  return supported ? getMessaging(app) : null;
+})();
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const functions = getFunctions(app);
 
 setPersistence(auth, browserLocalPersistence);

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import Header from "../components/Header/Header";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SideBar from "../components/Header/SideBar";
 import type { User } from "firebase/auth";
 import GuideModal from "../components/Header/GuideModal";
@@ -21,20 +21,24 @@ export default function Layout({
   onLogout,
   user,
 }: LayoutProps) {
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isSideOpen, setIsSideOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const guideChecked = useRef(false);
 
   useEffect(() => {
-    async function checkGuide() {
-      if (!user) return;
+    if (!user?.uid) return;
+    if (guideChecked.current) return;
 
-      const userRef = doc(db, "users", user.uid);
+    const currentUser = user;
+
+    guideChecked.current = true;
+
+    async function checkGuide() {
+      const userRef = doc(db, "users", currentUser.uid);
       const snap = await getDoc(userRef);
 
-      if (!snap.exists() || !snap.data()?.hasSeenGuide) {
+      if (!snap.data()?.hasSeenGuide) {
         setIsGuideOpen(true);
-        return;
       }
     }
 
@@ -44,7 +48,7 @@ export default function Layout({
   return (
     <Container>
       <Header
-        onClickInfo={() => setIsInfoOpen(true)}
+        onClickInfo={() => setIsGuideOpen(true)}
         onClickSide={() => setIsSideOpen(true)}
       />
 
@@ -58,15 +62,11 @@ export default function Layout({
           user={user}
         />
       )}
-      {(isInfoOpen || isGuideOpen) && (
-        <GuideModal
-          user={user}
-          onClose={() => {
-            setIsInfoOpen(false);
-            setIsGuideOpen(false);
-          }}
-        />
-      )}
+      <GuideModal
+        user={user}
+        open={isGuideOpen}
+        onClose={() => setIsGuideOpen(false)}
+      />
 
       <Content>
         <Outlet />

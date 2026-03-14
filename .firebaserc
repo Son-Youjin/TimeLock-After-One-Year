@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "timelock-5ead1"
-  }
+  },
+  "targets": {
+    "timelock-5ead1": {
+      "hosting": {
+        "main": [
+          "timelock-5ead1"
+        ],
+        "push": [
+          "timelock-push"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

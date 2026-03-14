@@ -12,6 +12,7 @@ import pwaGuideModal from "../../assets/pwaGuideModal.svg";
 
 interface GuideModalProps {
   user: User | null;
+  open: boolean;
   onClose: () => void;
 }
 
@@ -42,8 +43,9 @@ const guides = [
   },
 ];
 
-export default function GuideModal({ user, onClose }: GuideModalProps) {
+export default function GuideModal({ user, open, onClose }: GuideModalProps) {
   const [step, setStep] = useState(0);
+  if (!open) return null;
 
   const isLast = step === guides.length - 1;
 
@@ -76,7 +78,7 @@ export default function GuideModal({ user, onClose }: GuideModalProps) {
   }
 
   return (
-    <BackDrop onClick={finishGuide}>
+    <BackDrop onClick={onClose}>
       <Container onClick={(e) => e.stopPropagation()}>
         <Header>
           <Title>가이드</Title>

@@ -90,6 +90,7 @@ export async function createLetter({
     openAt,
     isOpened: false,
     createdAt: serverTimestamp(),
+    pushSent: false,
 
     song: {
       name: musicTitle,

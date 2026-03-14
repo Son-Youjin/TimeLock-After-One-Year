@@ -10,14 +10,10 @@ import { getNextComingLetter } from "../../api/letters";
 import type { User } from "firebase/auth";
 import { isOpenByDate } from "../../utils/isOpenByDate";
 import { formatDate } from "../../utils/formatDate";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../api/firebase";
-import GuideModal from "../Header/GuideModal";
 import DdayCardSkeleton from "./DdayCardSkeleton";
 
 export default function LoginMain({ user }: { user: User | null }) {
   const [comingOpen, setComingOpen] = useState<Letter | null>(null);
-  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const name = user?.displayName ?? "";
 
@@ -28,26 +24,12 @@ export default function LoginMain({ user }: { user: User | null }) {
 
     async function fetch() {
       try {
-        const userRef = doc(db, "users", uid);
-        const [letter, snap] = await Promise.all([
-          getNextComingLetter(uid),
-          getDoc(userRef),
-        ]);
+        const letter = await getNextComingLetter(uid);
 
         if (letter && isOpenByDate(letter.openAt)) {
           setComingOpen(null);
         } else {
           setComingOpen(letter);
-        }
-
-        if (snap.exists()) {
-          const userData = snap.data();
-
-          if (!userData.hasSeenGuide) {
-            setTimeout(() => {
-              setIsGuideOpen(true);
-            }, 800);
-          }
         }
       } finally {
         setLoading(false);
@@ -83,10 +65,6 @@ export default function LoginMain({ user }: { user: User | null }) {
         </Card>
       </Container>
       <CreateButton />
-
-      {isGuideOpen && (
-        <GuideModal user={user} onClose={() => setIsGuideOpen(false)} />
-      )}
     </>
   );
 }
