@@ -7,6 +7,9 @@ import type { User } from "firebase/auth";
 import GuideModal from "../components/Header/GuideModal";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../api/firebase";
+import { enablePush } from "../api/pushNotification";
+import isPWA from "../utils/isPWA";
+import ShowPushModal from "../components/main/ShowPushModal";
 
 interface LayoutProps {
   isLogin: boolean;
@@ -23,15 +26,18 @@ export default function Layout({
 }: LayoutProps) {
   const [isSideOpen, setIsSideOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [showPush, setShowPush] = useState(
+    isPWA() && Notification.permission === "default",
+  );
   const guideChecked = useRef(false);
 
   useEffect(() => {
     if (!user?.uid) return;
     if (guideChecked.current) return;
-
-    const currentUser = user;
+    if (!isPWA()) return;
 
     guideChecked.current = true;
+    const currentUser = user;
 
     async function checkGuide() {
       const userRef = doc(db, "users", currentUser.uid);
@@ -44,6 +50,13 @@ export default function Layout({
 
     checkGuide();
   }, [user]);
+
+  const handlePush = async () => {
+    if (!user) return;
+
+    await enablePush(user.uid);
+    setShowPush(false);
+  };
 
   return (
     <Container>
@@ -67,6 +80,13 @@ export default function Layout({
         open={isGuideOpen}
         onClose={() => setIsGuideOpen(false)}
       />
+
+      {showPush && user && (
+        <ShowPushModal
+          onClose={() => setIsGuideOpen(false)}
+          onClick={handlePush}
+        />
+      )}
 
       <Content>
         <Outlet />

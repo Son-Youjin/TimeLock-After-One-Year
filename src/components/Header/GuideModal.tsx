@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
-import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
 import Button from "../common/Button";
 import type { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../api/firebase";
+import logo from "../../assets/logo.svg";
 import loginMainImg from "../../assets/loginMainImg.svg";
 import DdayImg from "../../assets/Dday.svg";
 import lockedPageImg from "../../assets/lockedPageImg.svg";
 import pwaGuideModal from "../../assets/pwaGuideModal.svg";
+import Modal from "../common/Modal";
 
 interface GuideModalProps {
   user: User | null;
@@ -20,6 +21,7 @@ const guides = [
   {
     title: "TimeLock",
     desc: "지금의 생각을 기록하면,\n1년 뒤 열어볼 수 있는 편지가 됩니다.",
+    img: logo,
   },
   {
     title: "편지 작성",
@@ -78,15 +80,8 @@ export default function GuideModal({ user, open, onClose }: GuideModalProps) {
   }
 
   return (
-    <BackDrop onClick={onClose}>
-      <Container onClick={(e) => e.stopPropagation()}>
-        <Header>
-          <Title>가이드</Title>
-          <Button onClick={onClose}>
-            <IoMdClose size={20} />
-          </Button>
-        </Header>
-
+    <Modal onClose={onClose} title={"가이드"}>
+      <Container>
         <Content>
           <GuideTitle>{guides[step].title}</GuideTitle>
           <GuideText>{guides[step].desc}</GuideText>
@@ -97,75 +92,35 @@ export default function GuideModal({ user, open, onClose }: GuideModalProps) {
           )}
         </Content>
 
-        <Dots>
-          {guides.map((_, i) => (
-            <Dot key={i} active={i === step} />
-          ))}
-        </Dots>
+        <Bottom>
+          <Dots>
+            {guides.map((_, i) => (
+              <Dot key={i} active={i === step} />
+            ))}
+          </Dots>
 
-        <Footer>
-          {step > 0 ? <NavButton onClick={prev}>이전</NavButton> : <div />}
+          <Footer>
+            {step > 0 ? <NavButton onClick={prev}>이전</NavButton> : <div />}
 
-          <NavButton onClick={isLast ? finishGuide : next}>
-            {isLast ? "편지 쓰기" : "다음"}
-          </NavButton>
-        </Footer>
+            <NavButton onClick={isLast ? finishGuide : next}>
+              {isLast ? "편지 쓰기" : "다음"}
+            </NavButton>
+          </Footer>
+        </Bottom>
       </Container>
-    </BackDrop>
+    </Modal>
   );
 }
 
-const BackDrop = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-`;
-
-const Container = styled.section`
-  width: 320px;
-  min-height: 340px;
-  max-height: 420px;
-  padding: 22px;
-  transform: translateY(-20%);
-
-  background: white;
-  border-radius: 16px;
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-
-  animation: modalIn 0.25s ease;
-
-  @keyframes modalIn {
-    from {
-      opacity: 0;
-      transform: translateY(-30%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(-20%);
-    }
-  }
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Title = styled.h2`
-  font-size: 16px;
-  font-weight: 600;
+  justify-content: space-around;
 `;
 
 const Content = styled.div`
   flex: 1;
-  display: flex;
-  flex-direction: column;
+
   justify-content: center;
   text-align: center;
 `;
@@ -198,6 +153,8 @@ const GuideImg = styled.img`
   height: 100%;
   object-fit: contain;
 `;
+
+const Bottom = styled.div``;
 
 const Dots = styled.div`
   display: flex;

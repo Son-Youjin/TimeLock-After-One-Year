@@ -59,14 +59,11 @@ exports.openLetterBatch = onRequest(
 
         if (!shouldSend) continue;
 
-        const letterData = shouldSend;
+        const letter = shouldSend;
 
-        if (!letterData.userId) continue;
+        if (!letter.userId) continue;
 
-        const userDoc = await db
-          .collection("users")
-          .doc(letterData.userId)
-          .get();
+        const userDoc = await db.collection("users").doc(letter.userId).get();
         const user = userDoc.data();
 
         if (user?.fcmToken) {
@@ -74,7 +71,7 @@ exports.openLetterBatch = onRequest(
             token: user.fcmToken,
             notification: {
               title: "편지가 열렸어요",
-              body: letterData.title,
+              body: letter.title,
             },
           });
         }

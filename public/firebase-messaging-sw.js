@@ -15,9 +15,8 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 messaging.onBackgroundMessage(function (payload) {
-  const title =
-    payload.notification?.title || payload.data?.title || "TimeLock";
-  const body = payload.notification?.body || payload.data?.body || "";
+  const title = payload.notification?.title || "TimeLock";
+  const body = payload.notification?.body || "";
 
   self.registration.showNotification(title, {
     body,
