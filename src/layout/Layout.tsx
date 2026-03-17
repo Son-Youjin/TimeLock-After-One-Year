@@ -81,12 +81,16 @@ export default function Layout({
         onClose={() => setIsGuideOpen(false)}
       />
 
-      {showPush && user && (
+      <ShowPushModal
+        onClose={() => setIsGuideOpen(false)}
+        onClick={handlePush}
+      />
+      {/* {showPush && user && (
         <ShowPushModal
           onClose={() => setIsGuideOpen(false)}
           onClick={handlePush}
         />
-      )}
+      )} */}
 
       <Content>
         <Outlet />

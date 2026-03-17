@@ -54,16 +54,18 @@ const BackDrop = styled.div`
 
 const Container = styled.section`
   width: 320px;
-  min-height: 340px;
+  min-height: 200px;
   max-height: 420px;
   overflow-y: auto;
-  padding: 22px;
+  padding: 24px 20px;
   transform: translateY(-20%);
 
   background: white;
-  border-radius: 16px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
   animation: modalIn 0.25s ease;
 
@@ -83,6 +85,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 const Title = styled.h2`
