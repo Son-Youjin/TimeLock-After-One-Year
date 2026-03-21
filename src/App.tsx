@@ -62,6 +62,7 @@ function App() {
             element={<HomePage isLogin={isLogin} user={user} />}
           />
 
+          {/* TODO: 라우트 제거 */}
           <Route path="/inappbrowser" element={<InAppBrowserBlock />} />
 
           <Route
