@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import { useEffect, useState } from "react";
 
 interface ClockProps {
@@ -37,7 +37,7 @@ export default function Clock({ progress }: ClockProps) {
           cy="50"
           r={r}
           fill="transparent"
-          stroke="rgba(0,0,0,0.06)"
+          stroke={style.colors.Border}
           strokeWidth={stroke}
         />
 
@@ -47,14 +47,14 @@ export default function Clock({ progress }: ClockProps) {
           cy="50"
           r={r}
           fill="transparent"
-          stroke={colors.ClearBlue}
+          stroke={style.colors.ClearBlue}
           strokeWidth={stroke}
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
           transform="rotate(-90 50 50)"
           style={{
-            transition: "stroke-dashoffset 0.8s cubic-bezier(.4,0,.2,1)",
+            transition: `stroke-dashoffset ${style.motion.card}`,
           }}
         />
       </svg>
@@ -66,8 +66,8 @@ export default function Clock({ progress }: ClockProps) {
 
 const ClockContainer = styled.div`
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: 200px;
+  height: 200px;
 `;
 
 const Day = styled.h1`
@@ -78,8 +78,8 @@ const Day = styled.h1`
   align-items: center;
   justify-content: center;
 
-  font-size: 34px;
-  letter-spacing: -0.5px;
+  font-size: 32px;
   font-weight: 700;
-  color: ${colors.Darkblue};
+  letter-spacing: -0.5px;
+  color: ${style.colors.Darkblue};
 `;

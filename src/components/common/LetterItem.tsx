@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
 import type { ReactNode } from "react";
 import { FaLock } from "react-icons/fa";
@@ -11,8 +11,6 @@ interface LetterItemProps {
 
 export default function LetterItem({ children, letterId }: LetterItemProps) {
   const navigate = useNavigate();
-
-  // TODO: letter id 수정
 
   return (
     <LetterBox onClick={() => navigate(`/letter/${letterId}`)}>
@@ -27,28 +25,31 @@ export default function LetterItem({ children, letterId }: LetterItemProps) {
 
 const LetterBox = styled.div`
   display: flex;
-  width: 100%;
-  padding-top: 34px;
+  align-items: center;
   justify-content: center;
 
-  border-top: 1px dashed rgba(0, 0, 0, 0.12);
-  margin-bottom: 10px;
+  width: 100%;
+  padding-top: ${style.spacing.sectionGap};
+  margin-bottom: ${style.spacing.contentGap};
+  border-top: 1px dashed ${style.colors.Border};
 
-  font-weight: 600;
-  color: ${colors.Active};
+  cursor: pointer;
+
+  color: ${style.colors.Text_light};
+  font-weight: 500;
 `;
 
 const Icon = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 10px;
-  color: ${colors.Text_light};
+  margin-right: ${style.spacing.tightGap};
+  color: ${style.colors.Text_light};
 `;
 
 const Text = styled.div`
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 16px;
-  color: ${colors.Text_light};
 `;

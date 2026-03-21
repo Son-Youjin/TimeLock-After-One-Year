@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "../common/Button";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import ProgressBar from "../ProgressBar";
 import { useNavigate } from "react-router-dom";
 
@@ -19,8 +19,8 @@ export default function PreviewMain() {
       </Container>
       <Button
         style={{ width: "100%", height: "60px" }}
-        bgcolor={colors.ClearBlue}
-        color={colors.Background}
+        bgcolor={style.colors.ClearBlue}
+        color={style.colors.Background}
         onClick={() => navigate("/auth")}
       >
         지금 이 순간 기록하기
@@ -38,7 +38,7 @@ const Container = styled.section`
 
 const SubText = styled.p`
   font-size: 16px;
-  color: ${colors.Text};
+  color: ${style.colors.Text};
   text-align: center;
   line-height: 1.45;
   margin: 10px 0px;

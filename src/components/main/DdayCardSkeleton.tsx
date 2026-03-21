@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { style } from "../../styles/theme";
 
 export default function DdayCardSkeleton() {
   return (
@@ -13,9 +14,9 @@ export default function DdayCardSkeleton() {
 const shimmer = `
   background: linear-gradient(
     90deg,
-    rgba(0,0,0,0.04) 25%,
-    rgba(0,0,0,0.08) 37%,
-    rgba(0,0,0,0.04) 63%
+    ${style.colors.Background} 25%,
+    ${style.colors.Border} 37%,
+    ${style.colors.Background} 63%
   );
   background-size: 400% 100%;
   animation: shimmer 1.4s ease infinite;
@@ -31,29 +32,29 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 12px;
+  margin-top: ${style.spacing.contentGap};
 `;
 
 const Day = styled.div`
-  width: 140px;
-  height: 52px;
-  border-radius: 12px;
-  margin: 20px 0 18px;
+  width: 120px;
+  height: 48px;
+  border-radius: ${style.radius.input};
+  margin: ${style.spacing.sectionGap} 0 ${style.spacing.contentGap};
   ${shimmer}
 `;
 
 const Date = styled.div`
-  width: 180px;
-  height: 18px;
-  border-radius: 8px;
-  margin-bottom: 28px;
+  width: 160px;
+  height: 16px;
+  border-radius: ${style.radius.input};
+  margin-bottom: ${style.spacing.sectionGap};
   ${shimmer}
 `;
 
 const Title = styled.div`
   width: 100%;
-  max-width: 280px;
-  height: 56px;
-  border-radius: 14px;
+  max-width: 260px;
+  height: ${style.size.inputHeight};
+  border-radius: ${style.radius.button};
   ${shimmer}
 `;

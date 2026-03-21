@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import Button from "./Button";
 
 export default function CreateButton() {
@@ -11,9 +11,11 @@ export default function CreateButton() {
 
   return (
     <Button
-      style={{ width: "100%", height: "60px" }}
-      bgcolor={colors.ClearBlue}
-      color={colors.Background}
+      // TODO: 버튼 사이즈 확인 후 수정
+      style={{ width: "100%", height: style.size.buttonHeight }}
+      // style={{ width: "100%", height: "60px" }}
+      bgcolor={style.colors.ClearBlue}
+      color={style.colors.Background}
       onClick={handleGoWrite}
     >
       새 편지 쓰기

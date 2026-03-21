@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import DDayCard from "../clock/DDayCard";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import type { Letter } from "../../types/letter";
 import { FaLock } from "react-icons/fa";
 
@@ -29,40 +29,34 @@ export default function LockedLetter({ letter }: LockedLetterProps) {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: auto;
   align-items: center;
-  margin-top: 40px;
+  width: 100%;
 
-  background-color: ${colors.Background};
-  border-radius: 20px;
-
-  padding: 20px 10px;
+  margin-top: ${style.spacing.sectionGap};
+  padding: ${style.spacing.cardPadding};
+  background-color: ${style.colors.Surface};
+  border-radius: ${style.radius.card};
 `;
 
 const Title = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  gap: 8px;
+  gap: ${style.spacing.tightGap};
+  margin-top: ${style.spacing.contentGap};
 `;
 
 const Icon = styled.div`
   display: flex;
   align-items: center;
-  color: ${colors.Text};
-  margin-bottom: 2px;
+  color: ${style.colors.Text_light};
 `;
 
 const Text = styled.div`
-  font-size: 18px;
-  color: ${colors.Text};
+  font-size: ${style.font.sectionTitle};
   font-weight: 600;
-
+  color: ${style.colors.Text};
   text-align: center;
-  white-space: normal;
-  word-break: keep-all;
   line-height: 1.5;
-  max-width: 280px;
+  word-break: keep-all;
 `;

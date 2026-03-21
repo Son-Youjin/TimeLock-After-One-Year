@@ -7,7 +7,7 @@ import MusicList from "./MusicList";
 import SelectedMusic from "./SelectedMusic";
 import Title from "./Title";
 import Button from "../common/Button";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import SuccessModal from "./SuccessModal";
 import { Timestamp } from "firebase/firestore";
 import { createLetter } from "../../api/letters";
@@ -129,9 +129,12 @@ export default function Write({ user }: { user: User }) {
       />
 
       <Button
-        style={{ width: "100%", height: "54px" }}
-        bgcolor={colors.ClearBlue}
-        color={colors.Background}
+        style={{
+          width: "100%",
+          height: style.size.buttonHeight,
+        }}
+        bgcolor={style.colors.ClearBlue}
+        color={style.colors.Background}
         onClick={handleSubmit}
         disabled={!content.trim()}
       >
@@ -146,13 +149,13 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 20px 0;
+  margin: ${style.layout.padding} 0;
 `;
 
 const SearchSection = styled.div`
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: ${style.spacing.sectionGap};
 `;
 
 const Backdrop = styled.div`
@@ -165,23 +168,24 @@ const Backdrop = styled.div`
 const Content = styled.textarea<{ paperColor: string }>`
   width: 100%;
   min-height: 52vh;
-  border-radius: 20px;
-  padding: 20px;
+  padding: ${style.spacing.cardPadding};
+
+  font-size: ${style.font.body};
   line-height: 1.6;
-  font-size: 15px;
 
   background-color: ${({ paperColor }) => paperColor};
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
+  border: 1px solid ${style.colors.Border};
+  border-radius: ${style.radius.card};
+  margin-bottom: ${style.spacing.sectionGap};
 
-  margin-bottom: 24px;
+  transition: ${style.motion.card};
 
   &::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+    color: ${style.colors.Text_light};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 1px rgba(120, 140, 255, 0.25);
+    box-shadow: 0 0 0 1px ${style.colors.Focus};
   }
 `;

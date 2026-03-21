@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { style } from "../../styles/theme";
 
 export default function InAppBrowserBlock() {
   return (
@@ -13,14 +14,20 @@ export default function InAppBrowserBlock() {
 
       <StepCard>
         <Step>STEP 1</Step>
-        <StepText>하단 공유 버튼을 선택하거나</StepText>
+        <StepText>
+          하단
+          <Icon src="/shareIcon.png" />
+          공유 버튼을 선택하거나
+        </StepText>
         <Image src="/share.png" />
 
         <Line>또는</Line>
 
-        <StepText>: 버튼을 선택하여</StepText>
-        {/* 이미지 안드로이드 버전으로 수정 예정 */}
-        <Image src="/linkShare.png" />
+        <StepText>
+          <Icon src="/dotIcon.png" />
+          버튼을 선택하여
+        </StepText>
+        <Image src="/androidShare.png" />
       </StepCard>
 
       <StepCard>
@@ -30,9 +37,8 @@ export default function InAppBrowserBlock() {
 
         <Line>또는</Line>
 
-        {/* 안드로이드 버전으로 이미지 수정 예정 */}
-        <StepText>"인터넷에서 열기"를 선택해주세요</StepText>
-        <Image src="/openSafari.png" />
+        <StepText>"다른 브라우저로 열기"를 선택해주세요</StepText>
+        <Image src="/androidOpen.png" />
       </StepCard>
     </Container>
   );
@@ -41,44 +47,49 @@ export default function InAppBrowserBlock() {
 const Container = styled.div`
   margin: 0 auto;
   width: 100%;
-  max-width: 360px;
-  padding: 20px;
+  max-width: ${style.layout.maxWidth};
+  padding: ${style.layout.padding};
 `;
 
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: ${style.font.title};
   font-weight: 700;
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: ${style.spacing.contentGap};
 `;
 
 const Desc = styled.p`
-  font-size: 14px;
-  color: #666;
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
   text-align: center;
   line-height: 1.5;
-  margin-bottom: 24px;
+  margin-bottom: ${style.spacing.sectionGap};
 `;
 
 const StepCard = styled.div`
-  background: #fff;
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  background: ${style.colors.Surface};
+  border-radius: ${style.radius.card};
+  padding: ${style.spacing.cardPadding};
+  margin-bottom: ${style.spacing.sectionGap};
+  box-shadow: ${style.shadow.card};
 `;
 
 const Step = styled.p`
-  font-size: 12px;
-  color: #4a90e2;
+  font-size: ${style.font.caption};
+  color: ${style.colors.ClearBlue};
   font-weight: 600;
   margin-bottom: 6px;
 `;
 
 const StepText = styled.p`
-  font-size: 15px;
+  font-size: ${style.font.littleTitle};
   font-weight: 600;
   margin-bottom: 12px;
+`;
+
+const Icon = styled.img`
+  height: 14px;
+  margin: 0 6px;
 `;
 
 const Image = styled.img`
@@ -90,8 +101,8 @@ const Line = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #aaa;
-  font-size: 12px;
+  color: ${style.colors.Line};
+  font-size: ${style.font.caption};
   padding: 10px 0;
 
   &::before,
@@ -99,6 +110,6 @@ const Line = styled.div`
     content: "";
     flex: 1;
     height: 1px;
-    background: rgba(0, 0, 0, 0.2);
+    background: ${style.colors.Line};
   }
 `;

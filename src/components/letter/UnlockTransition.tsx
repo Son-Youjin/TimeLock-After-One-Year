@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { IoLockClosedOutline, IoLockOpenOutline } from "react-icons/io5";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 
 export default function UnlockTransition() {
   const [open, setOpen] = useState(false);
@@ -38,9 +38,9 @@ const Container = styled.div`
   justify-content: center;
 
   min-height: 60vh;
-  gap: 14px;
+  gap: ${style.spacing.contentGap};
 
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn ${style.motion.page};
 
   @keyframes fadeIn {
     from {
@@ -55,7 +55,7 @@ const Container = styled.div`
 `;
 
 const OpenIcon = styled.div`
-  color: #4b6cff;
+  color: ${style.colors.ClearBlue};
 
   animation: pop 0.5s ease;
 
@@ -77,7 +77,7 @@ const OpenIcon = styled.div`
 `;
 
 const ClosedIcon = styled.div`
-  color: ${colors.DeepBlue};
+  color: ${style.colors.DeepBlue};
 
   animation: shake 0.5s ease;
 
@@ -101,11 +101,11 @@ const ClosedIcon = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 18px;
+  font-size: ${style.font.sectionTitle};
   font-weight: 600;
   letter-spacing: -0.2px;
 
-  opacity: 0.85;
+  color: ${style.colors.Text_light};
 
   animation: textFade 0.6s ease;
 
@@ -114,7 +114,7 @@ const Title = styled.h1`
       opacity: 0;
     }
     to {
-      opacity: 0.85;
+      opacity: 1;
     }
   }
 `;

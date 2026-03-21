@@ -10,6 +10,7 @@ import DdayImg from "../../assets/Dday.svg";
 import lockedPageImg from "../../assets/lockedPageImg.svg";
 import pwaGuideModal from "../../assets/pwaGuideModal.svg";
 import Modal from "../common/Modal";
+import { style } from "../../styles/theme";
 
 interface GuideModalProps {
   user: User | null;
@@ -17,6 +18,7 @@ interface GuideModalProps {
   onClose: () => void;
 }
 
+// TODO: 멘트 수정
 const guides = [
   {
     title: "TimeLock",
@@ -115,35 +117,35 @@ export default function GuideModal({ user, open, onClose }: GuideModalProps) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const Content = styled.div`
   flex: 1;
-
-  justify-content: center;
   text-align: center;
 `;
 
 const GuideTitle = styled.h3`
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: ${style.font.sectionTitle};
+  font-weight: 600;
+  margin-bottom: ${style.spacing.contentGap};
 `;
 
 const GuideText = styled.p`
-  font-size: 14px;
-  color: #555;
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
   white-space: pre-line;
+  line-height: 1.5;
 `;
 
 const ImageBox = styled.div`
-  width: 100%;
-  height: 120px;
-  margin: 14px 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+  height: 120px;
+  margin: ${style.spacing.contentGap} 0;
 
   overflow: hidden;
 `;
@@ -159,22 +161,29 @@ const Bottom = styled.div``;
 const Dots = styled.div`
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin: 14px 0 20px 0;
+  gap: ${style.spacing.tightGap};
+  margin: ${style.spacing.contentGap} 0 ${style.spacing.sectionGap};
 `;
 
 const Dot = styled.div<{ active: boolean }>`
   width: 8px;
   height: 8px;
-  border-radius: 50%;
-  background: ${({ active }) => (active ? "#4f6f8f" : "#d3d3d3")};
+  border-radius: ${style.radius.pill};
+  background: ${({ active }) =>
+    active ? style.colors.Darkblue : style.colors.Gray};
 `;
 
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: ${style.spacing.contentGap};
 `;
 
 const NavButton = styled(Button)`
-  padding: 6px 14px;
+  height: ${style.size.buttonHeight};
+  padding: 0 ${style.spacing.contentGap};
+  border-radius: ${style.radius.button};
+
+  font-size: ${style.font.body};
+  font-weight: 500;
 `;

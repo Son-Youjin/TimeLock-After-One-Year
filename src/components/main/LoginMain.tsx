@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import CreateButton from "../common/CreateButton";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import LetterItem from "../common/LetterItem";
 import { useEffect, useState } from "react";
 import type { Letter } from "../../types/letter";
@@ -43,7 +43,9 @@ export default function LoginMain({ user }: { user: User | null }) {
     <>
       <Container>
         <Title>
-          <Name>{name}님,</Name> 오늘의 시간도 차곡차곡 쌓이고 있어요.
+          <Name>{name}님,</Name>
+          <br />
+          오늘의 시간도 차곡차곡 쌓이고 있어요.
         </Title>
 
         <Card>
@@ -72,42 +74,43 @@ export default function LoginMain({ user }: { user: User | null }) {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 20px 0px 24px 0px;
+  margin: ${style.layout.padding} 0 ${style.spacing.sectionGap};
 `;
 
 const Title = styled.span`
-  font-size: 16px;
-  color: ${colors.Text_light};
+  font-size: ${style.font.sectionTitle};
+  color: ${style.colors.Text_light};
   font-weight: 500;
-  margin-top: 12px;
+  margin-top: ${style.spacing.contentGap};
 `;
 
 const Name = styled(Title)`
   font-weight: 600;
+  color: ${style.colors.Text};
 `;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   width: 100%;
   min-height: 200px;
 
-  border-radius: ${colors.radius};
-  background-color: ${colors.Card_Background};
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid ${style.colors.Border};
+  border-radius: ${style.radius.card};
+  background-color: ${style.colors.Card_Background};
+  box-shadow: ${style.shadow.card};
 
-  padding: 32px 20px;
-  margin: 24px 0px 28px 0px;
+  padding: 32px ${style.layout.padding};
+  margin: ${style.spacing.sectionGap} 0;
 `;
 
 const SubText = styled.p`
-  font-size: 14px;
+  font-size: ${style.font.body};
   font-weight: 500;
-  opacity: 0.7;
-  color: ${colors.Text_light};
+  color: ${style.colors.Text_light};
 `;
 
 const Day = styled.h1`
@@ -116,20 +119,17 @@ const Day = styled.h1`
 
   font-size: 40px;
   font-weight: 700;
-  color: ${colors.Darkblue};
-  margin: 16px 0;
+  color: ${style.colors.Darkblue};
+  margin: ${style.spacing.contentGap} 0;
 `;
 
 const OpenDate = styled.p`
-  font-size: 14px;
-  color: ${colors.Text};
-  opacity: 0.5;
-  margin-bottom: 22px;
+  font-size: ${style.font.body};
+  color: ${style.colors.Text};
+  margin-bottom: ${style.spacing.sectionGap};
 `;
 
 const EmptyText = styled.p`
-  font-size: 15px;
-  color: ${colors.Text_light};
-  opacity: 0.8;
-  margin: 48px 0 20px;
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
 `;

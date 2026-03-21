@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import type { MusicMeta } from "../../types/musicMeta";
 import { IoIosMusicalNotes } from "react-icons/io";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 
 interface SelectedMusicProps {
   music: MusicMeta;
@@ -25,22 +25,24 @@ export default function SelectedMusic({ music, onOpen }: SelectedMusicProps) {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  height: 34px;
-  border-radius: 16px;
-  padding: 0 12px;
+
+  height: ${style.size.inputHeight};
+  padding: 0 ${style.spacing.contentGap};
+  border: 1px solid ${style.colors.Border};
+  border-radius: ${style.radius.input};
+  background-color: ${style.colors.Surface};
 
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
+
+  transition: ${style.motion.card};
 
   &:active {
-    background-color: rgba(120, 140, 255, 0.1);
+    background-color: ${style.colors.Active};
   }
 
   @media (hover: hover) {
     &:hover {
-      background-color: rgba(120, 140, 255, 0.1);
+      background-color: ${style.colors.Active};
     }
   }
 `;
@@ -48,13 +50,13 @@ const Container = styled.div`
 const Icon = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 8px;
-  color: rgba(0, 0, 0, 0.45);
+  margin-right: ${style.spacing.tightGap};
+  color: ${style.colors.Text_light};
 `;
 
 const Text = styled.div`
-  font-size: 16px;
-  color: ${colors.Text};
+  font-size: ${style.font.body};
+  color: ${style.colors.Text};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

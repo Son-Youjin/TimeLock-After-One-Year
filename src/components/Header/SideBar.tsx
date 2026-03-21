@@ -7,7 +7,7 @@ import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
 import { getLettersByUser } from "../../api/letters";
 import type { User } from "firebase/auth";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 
 interface SideBarProps {
   isLogin: boolean;
@@ -72,7 +72,7 @@ export default function SideBar({
               <Button
                 style={{ width: "30px", height: "30px" }}
                 onClick={handleClose}
-                bgcolor={colors.Card_Background}
+                bgcolor={style.colors.Card_Background}
               >
                 <IoMdClose size={22} />
               </Button>
@@ -95,11 +95,13 @@ export default function SideBar({
               </ContentArea>
             )}
 
-            <LogInOut onClick={isLogin ? onLogout : onLogin}>
-              {isLogin ? "로그아웃" : "로그인"}
-            </LogInOut>
+            <BottomArea>
+              <LogInOut onClick={isLogin ? onLogout : onLogin}>
+                {isLogin ? "로그아웃" : "로그인"}
+              </LogInOut>
 
-            <BottomText>당신의 1년을 함께 기다립니다.</BottomText>
+              <BottomText>당신의 1년을 함께 기다립니다.</BottomText>
+            </BottomArea>
           </Container>
         </BackDrop>
       )}
@@ -113,7 +115,7 @@ const BackDrop = styled.div<{ isOpen: boolean }>`
   background-color: rgba(0, 0, 0, 0.1);
 
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  transition: opacity 0.3s ease;
+  transition: opacity ${style.motion.modal};
 
   pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
 
@@ -123,51 +125,64 @@ const BackDrop = styled.div<{ isOpen: boolean }>`
 const Container = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-
   width: min(82vw, 320px);
   height: 100vh;
-  background-color: ${colors.Card_Background};
+  padding: ${style.spacing.tightGap} ${style.spacing.contentGap};
+  background-color: ${style.colors.Card_Background};
 
-  padding: 8px 12px;
   transform: translateX(${({ isOpen }) => (isOpen ? "0" : "-100%")});
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform ${style.motion.page};
 `;
 
 const ContentArea = styled.div`
   flex: 1;
   overflow-y: auto;
+  padding-bottom: ${style.spacing.contentGap};
+`;
+
+const BottomArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${style.spacing.tightGap};
+  padding-top: ${style.spacing.contentGap};
+  padding-bottom: calc(${style.spacing.tightGap} + env(safe-area-inset-bottom));
+
+  background: ${style.colors.Card_Background};
 `;
 
 const CloseWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-top: 8px;
+  padding-top: ${style.spacing.tightGap};
 `;
 
 const GuestMessage = styled.div`
-  margin-top: 32px;
-  margin-bottom: 0;
+  margin-top: ${style.spacing.sectionGap};
   text-align: center;
-  font-size: 14px;
+
+  font-size: ${style.font.body};
+  line-height: 1.5;
+  color: ${style.colors.Text};
 `;
 
 const LogInOut = styled.button`
-  margin-top: auto;
-  margin-bottom: 8px;
+  width: 100%;
+  height: ${style.size.buttonHeight};
 
   border: none;
-  border-radius: 12px;
-  padding: 18px;
+  border-radius: ${style.radius.button};
+  background-color: ${style.colors.Background_warm};
 
-  background-color: ${colors.Background_warm};
-  color: ${colors.Text};
+  font-size: ${style.font.body};
+  font-weight: 500;
+  color: ${style.colors.Text};
 `;
 
 const BottomText = styled.p`
-  color: ${colors.Text_light};
-  margin-bottom: 8px;
-  opacity: 0.7;
-  font-size: 14px;
+  color: ${style.colors.Text_light};
+  margin-bottom: ${style.spacing.tightGap};
+
+  font-size: ${style.font.caption};
   text-align: center;
 `;

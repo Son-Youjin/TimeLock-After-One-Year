@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import type { Letter } from "../../types/letter";
 import Iframe from "./Iframe";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import { formatLetterDate } from "../../utils/formatDate";
 
 interface OpenedLetterProps {
@@ -28,42 +28,41 @@ export default function OpenedLetter({ letter }: OpenedLetterProps) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  margin: 24px 0 40px;
+  gap: ${style.spacing.sectionGap};
+  margin: ${style.layout.padding} 0 ${style.spacing.sectionGap};
 `;
 
 const Header = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: ${style.spacing.tightGap};
 `;
 
 const Title = styled.h1`
-  font-size: 20px;
+  font-size: ${style.font.title};
   font-weight: 600;
-  color: ${colors.Text};
+  color: ${style.colors.Text};
   line-height: 1.4;
 `;
 
 const Music = styled.div`
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.5);
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
 `;
 
 const Content = styled.div`
-  border-radius: 20px;
-  padding: 24px;
-  font-size: 16px;
-  line-height: 1.9;
+  /* TODO: 폰트 사이즈 확인 후 수정 */
+  /* font-size: ${style.font.littleTitle}; */
+  font-size: ${style.font.body};
+  line-height: 1.8;
   letter-spacing: -0.2px;
   white-space: pre-wrap;
 
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.6),
-    0 12px 30px rgba(0, 0, 0, 0.05);
+  background: ${style.colors.Surface};
+  border: 1px solid ${style.colors.Border};
+  border-radius: ${style.radius.card};
+  box-shadow: ${style.shadow.card};
+  padding: ${style.spacing.cardPadding};
 `;
 
 const DateText = styled.div`

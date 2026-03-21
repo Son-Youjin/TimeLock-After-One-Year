@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useEffect, type ReactNode } from "react";
 import Button from "./Button";
 import { IoMdClose } from "react-icons/io";
+import { style } from "../../styles/theme";
 
 interface ModalProps {
   onClose?: () => void;
@@ -31,7 +32,13 @@ export default function Modal({ onClose, title, children }: ModalProps) {
       <Container onClick={(e) => e.stopPropagation()}>
         <Header>
           <Title>{title}</Title>
-          <Button onClick={onClose}>
+          <Button
+            style={{
+              width: "40px",
+              height: "40px",
+            }}
+            onClick={onClose}
+          >
             <IoMdClose size={20} />
           </Button>
         </Header>
@@ -49,34 +56,36 @@ const BackDrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: ${style.spacing.sectionGap};
   z-index: 999;
 `;
 
 const Container = styled.section`
-  width: 320px;
+  width: 100%;
+  max-width: ${style.layout.maxWidth};
   min-height: 200px;
-  max-height: 420px;
+  max-height: 80vh;
   overflow-y: auto;
-  padding: 24px 20px;
-  transform: translateY(-20%);
 
-  background: white;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: ${style.spacing.cardPadding};
 
-  animation: modalIn 0.25s ease;
+  background: ${style.colors.Surface};
+  border-radius: ${style.radius.modal};
+  box-shadow: ${style.shadow.modal};
+
+  animation: modalIn ${style.motion.modal};
 
   @keyframes modalIn {
     from {
       opacity: 0;
-      transform: translateY(-30%);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
-      transform: translateY(-20%);
+      transform: translateY(0);
     }
   }
 `;
@@ -85,12 +94,13 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: ${style.spacing.contentGap};
 `;
 
 const Title = styled.h2`
-  font-size: 16px;
+  font-size: ${style.font.sectionTitle};
   font-weight: 600;
+  color: ${style.colors.Text};
 `;
 
 const Content = styled.div`

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 
 interface TitleProps {
   value: string;
@@ -22,35 +22,38 @@ export default function Title({ value, onChange }: TitleProps) {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
+  gap: ${style.spacing.tightGap};
+
+  margin-bottom: ${style.spacing.contentGap};
 `;
 
 const Label = styled.p`
   flex-shrink: 0;
-  font-size: 14px;
+  font-size: ${style.font.body};
   font-weight: 500;
-  color: ${colors.Text};
+  color: ${style.colors.Text};
 `;
 
 const Input = styled.input`
   flex: 1;
-  height: 46px;
-  font-size: 15px;
+  height: ${style.size.inputHeight};
+  font-size: ${style.font.body};
+  color: ${style.colors.Text};
   line-height: 1.4;
-  border-radius: 16px;
-  padding: 0 16px;
 
-  background-color: ${colors.White};
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
+  background-color: ${style.colors.Surface};
+  border: 1px solid ${style.colors.Border};
+  border-radius: ${style.radius.input};
+  padding: 0 ${style.spacing.contentGap};
+
+  transition: ${style.motion.card};
 
   &::placeholder {
-    color: rgba(0, 0, 0, 0.5);
+    color: ${style.colors.Text_light};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 1px rgba(120, 140, 255, 0.25);
+    box-shadow: 0 0 0 1px ${style.colors.Focus};
   }
 `;

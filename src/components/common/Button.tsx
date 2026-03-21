@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { style } from "../../styles/theme";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   bgcolor?: string;
@@ -21,9 +22,9 @@ export default function Button({
 
 const Btn = styled.button<{ bgcolor?: string; color?: string }>`
   border: none;
-  font-size: 16px;
-  border-radius: 12px;
-  padding: 0px;
+  font-size: ${style.font.littleTitle};
+  border-radius: ${style.radius.button};
+  padding: 0;
 
   color: ${({ color }) => color};
   background-color: ${({ bgcolor }) => bgcolor};
@@ -31,8 +32,8 @@ const Btn = styled.button<{ bgcolor?: string; color?: string }>`
   cursor: pointer;
 
   &:disabled {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: rgba(255, 255, 255, 0.7);
+    background-color: ${style.colors.Gray};
+    color: ${style.colors.Text_light};
     cursor: not-allowed;
   }
 `;

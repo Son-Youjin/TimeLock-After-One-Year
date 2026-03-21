@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { style } from "../../styles/theme";
 
 export default function Iframe({ videoId }: { videoId: string }) {
   if (!videoId) return null;
@@ -19,21 +20,18 @@ const Wrapper = styled.div`
   width: 100%;
   padding-bottom: 56.25%;
   height: 0;
-
-  border-radius: 16px;
   overflow: hidden;
 
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(2px);
+  border: 1px solid ${style.colors.Border};
+  border-radius: ${style.radius.card};
+  box-shadow: ${style.shadow.card};
+  background: ${style.colors.Surface};
+  backdrop-filter: blur(1.5px);
 `;
 
 const StyledIframe = styled.iframe`
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: none;

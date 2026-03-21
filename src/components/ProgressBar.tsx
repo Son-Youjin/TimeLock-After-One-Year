@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from "../styles/theme";
+import { style } from "../styles/theme";
 
 export default function ProgressBar() {
   const now = new Date();
@@ -31,39 +31,40 @@ const Container = styled.div`
 
   width: 100%;
   min-height: 140px;
-  border-radius: ${colors.radius};
 
-  background-color: #fffdf8;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-radius: ${style.radius.card};
+  background-color: ${style.colors.Surface};
+  border: 1px solid ${style.colors.Border};
+  box-shadow: ${style.shadow.card};
 
-  padding: 6px 18px;
-  margin: 20px 0px;
+  padding: ${style.spacing.cardPadding};
+  margin: ${style.spacing.sectionGap} 0;
 `;
 
 const BarLine = styled.div`
-  height: 16px;
-  background-color: ${colors.Gray};
-  border-radius: 8px;
+  height: 14px;
+  background-color: ${style.colors.Gray};
+  border-radius: ${style.radius.pill};
   overflow: hidden;
 `;
 
 const Fill = styled.div<{ progress: number }>`
   width: ${({ progress }) => progress}%;
   height: 100%;
-  border-radius: 8px;
-  background-color: ${colors.Skyblue};
-  transition: width 0.6s ease;
+  border-radius: ${style.radius.pill};
+  background-color: ${style.colors.Skyblue};
+  transition: width ${style.motion.card};
 `;
 
 const SubText = styled.p`
-  font-size: 18px;
+  font-size: ${style.font.littleTitle};
   text-align: center;
-  margin-bottom: 14px;
+  margin-bottom: ${style.spacing.contentGap};
+  color: ${style.colors.Text};
 `;
 
 const Number = styled.span`
-  font-size: 20px;
+  font-size: ${style.font.sectionTitle};
   font-weight: 600;
-  color: ${colors.Darkblue};
+  color: ${style.colors.Darkblue};
 `;

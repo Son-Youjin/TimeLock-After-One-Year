@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import Clock from "./Clock";
 import type { Letter } from "../../types/letter";
 import { getLetterTime } from "../../utils/getLetterStatus";
@@ -27,11 +27,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 24px 16px;
+  margin: ${style.spacing.sectionGap} ${style.spacing.contentGap};
 `;
 
 const SubText = styled.p`
-  font-size: 16px;
-  color: ${colors.Text_light};
-  margin-top: 16px;
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
+  margin-top: ${style.spacing.contentGap};
 `;

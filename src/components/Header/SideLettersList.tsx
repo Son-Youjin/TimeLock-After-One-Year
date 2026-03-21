@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import type { Letter } from "../../types/letter";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import { IoIosArrowForward } from "react-icons/io";
 
 interface SideLettersListProps {
@@ -41,65 +41,54 @@ export default function SideLettersList({
 const Container = styled.ul`
   display: flex;
   flex-direction: column;
-  margin: 8px 8px 10px 8px;
+  margin: ${style.spacing.tightGap} ${style.spacing.contentGap};
+  padding: 0;
 `;
 
 const Title = styled.div`
-  font-size: 16px;
+  font-size: ${style.font.sectionTitle};
   font-weight: 600;
-  color: ${colors.Text};
-  margin: 20px 12px 0px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  padding-bottom: 12px;
+  color: ${style.colors.Text};
+
+  margin-top: ${style.spacing.sectionGap};
+  padding-bottom: ${style.spacing.contentGap};
+  border-bottom: 1px solid ${style.colors.Border};
 `;
 
 const ListItem = styled.li`
+  list-style: none;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
-  list-style: none;
+  padding: ${style.spacing.contentGap} 0;
 
-  padding: 14px 10px;
-
-  transition:
-    background-color 0.3s ease,
-    transform 0.15s ease,
-    box-shadow 0.2s ease;
+  transition: ${style.motion.card};
 
   &:active {
-    transform: translateY(0) scale(0.98);
-    background-color: ${colors.Active};
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${colors.Focus};
-    outline-offset: 2px;
+    background-color: ${style.colors.Active};
   }
 
   @media (hover: hover) {
     &:hover {
-      background-color: ${colors.Active};
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      background-color: ${style.colors.Active};
     }
   }
 `;
 
 const Text = styled.p`
-  font-size: 16px;
+  /* TODO: 사이즈 확인 후 수정 */
+  font-size: ${style.font.body};
+  /* font-size: ${style.font.littleTitle}; */
+  color: ${style.colors.Text};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: ${colors.Text};
 `;
 
 const Icon = styled.div`
-  color: ${colors.Text_light};
   display: flex;
   align-items: center;
-  padding-left: 6px;
+  margin-left: ${style.spacing.tightGap};
+  color: ${style.colors.Text_light};
 `;

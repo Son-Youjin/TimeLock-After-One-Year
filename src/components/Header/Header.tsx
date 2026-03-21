@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 interface HeaderProps {
@@ -34,9 +34,10 @@ const Container = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  height: 60px;
-  padding: 0 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  height: ${style.size.headerHeight};
+  padding: 0 ${style.spacing.contentGap};
+
+  border-bottom: 1px solid ${style.colors.Border};
 `;
 
 const Title = styled.h1`
@@ -45,12 +46,14 @@ const Title = styled.h1`
   top: 50%;
   transform: translate(-50%, -50%);
 
-  font-size: 20px;
+  font-size: ${style.font.title};
   font-weight: 600;
   letter-spacing: -0.3px;
-
-  color: ${colors.Text};
+  color: ${style.colors.Text};
   cursor: pointer;
+
+  line-height: 1;
+  pointer-events: auto;
 `;
 
 const IconButton = styled(Button)`
@@ -58,17 +61,23 @@ const IconButton = styled(Button)`
   align-items: center;
   justify-content: center;
 
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
 
-  color: ${colors.Text};
-  opacity: 0.85;
+  color: ${style.colors.Text};
   cursor: pointer;
+
+  border-radius: ${style.radius.pill};
+
+  &:active {
+    background-color: ${style.colors.Active};
+  }
 
   @media (hover: hover) {
     &:hover {
-      background-color: ${colors.Active};
-      border-radius: 25px;
+      background-color: ${style.colors.Active};
     }
   }
 `;

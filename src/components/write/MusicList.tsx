@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import type { MusicMeta } from "../../types/musicMeta";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 
 interface MusicListProps {
   onSearchResults: MusicMeta[];
@@ -35,34 +35,33 @@ const Ul = styled.ul`
   max-height: 240px;
   overflow-y: auto;
 
-  border-radius: 16px;
-  padding: 8px 0;
+  border-radius: ${style.radius.card};
+  background: ${style.colors.Surface};
+  box-shadow: ${style.shadow.card};
+  border: 1px solid ${style.colors.Border};
+  padding: ${style.spacing.tightGap} 0;
   margin: 0;
-
-  background: ${colors.White};
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 
   z-index: 50;
 `;
 
 const Li = styled.li`
   list-style: none;
-  font-size: 16px;
   width: 100%;
-  padding: 12px;
+
+  /* 사이즈 확인 */
+  /* font-size: ${style.font.littleTitle}; */
+  font-size: ${style.font.body};
+  padding: ${style.spacing.contentGap};
+  color: ${style.colors.Text};
 
   &:active {
-    transform: translateY(0) scale(0.98);
-    background-color: ${colors.Border};
+    background-color: ${style.colors.Active};
   }
 
   @media (hover: hover) {
     &:hover {
-      background-color: ${colors.Border};
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      background-color: ${style.colors.Active};
     }
   }
 `;

@@ -7,7 +7,6 @@ import type { User } from "firebase/auth";
 import Layout from "./layout/Layout";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import AuthLoading from "./pages/auth/AuthLoading";
-import InAppBrowserBlock from "./components/auth/InAppBrowserBlock";
 
 const HomePage = lazy(() => import("./pages/home/HomePage"));
 const AuthPage = lazy(() => import("./pages/auth/AuthPage"));
@@ -61,9 +60,6 @@ function App() {
             path="/"
             element={<HomePage isLogin={isLogin} user={user} />}
           />
-
-          {/* TODO: 라우트 제거 */}
-          <Route path="/inappbrowser" element={<InAppBrowserBlock />} />
 
           <Route
             path="/write"

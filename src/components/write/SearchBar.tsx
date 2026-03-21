@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import type { ChangeEvent } from "react";
 import { IoIosSearch } from "react-icons/io";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 
 interface SearchBarProps {
   value: string;
@@ -40,23 +40,24 @@ const Container = styled.div`
 
 const Search = styled.input`
   width: 100%;
-  height: 46px;
-  font-size: 15px;
-  border-radius: 16px;
+  height: ${style.size.inputHeight};
+
+  font-size: ${style.font.body};
+  color: ${style.colors.Text};
+  background: ${style.colors.Surface};
+  border: 1px solid ${style.colors.Border};
+  border-radius: ${style.radius.input};
   padding-left: 40px;
 
-  background: ${colors.White};
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
-  color: ${colors.Text};
+  transition: ${style.motion.card};
 
   &::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+    color: ${style.colors.Text_light};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 1px rgba(120, 140, 255, 0.25);
+    box-shadow: 0 0 0 1px ${style.colors.Focus};
   }
 `;
 
@@ -64,13 +65,12 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 25px;
-  pointer-events: none;
-  color: ${colors.Text};
 
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 50%;
+  left: ${style.spacing.contentGap};
+  transform: translateY(-50%);
+
+  pointer-events: none;
+  color: ${style.colors.Text_light};
 `;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import { IoCheckmark } from "react-icons/io5";
 import { useEffect, useState } from "react";
 
@@ -27,7 +27,7 @@ export default function SuccessModal({ onClose }: SuccessModalProps) {
     <Container onClick={(e) => e.stopPropagation()}>
       <Header>
         <Icon>
-          <IoCheckmark size={34} color="#62c080" />
+          <IoCheckmark size={34} color={style.colors.Green} />
         </Icon>
 
         <Title>저장 완료</Title>
@@ -42,28 +42,32 @@ export default function SuccessModal({ onClose }: SuccessModalProps) {
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -80%);
 
   width: 260px;
   min-height: 100px;
-  padding: 22px 20px;
+  padding: ${style.spacing.cardPadding};
 
-  background-color: ${colors.Surface};
-  border-radius: 14px;
+  background-color: ${style.colors.Surface};
+  border-radius: ${style.radius.modal};
 `;
 
 const Header = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
 const Icon = styled.div`
-  margin-bottom: 6px;
+  margin-bottom: ${style.spacing.tightGap};
 
   animation: pop 0.4s ease;
 
@@ -83,17 +87,20 @@ const Icon = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 17px;
-  margin-bottom: 4px;
+  font-size: ${style.font.sectionTitle};
+  font-weight: 600;
+  margin-bottom: ${style.spacing.tightGap};
+  color: ${style.colors.Text};
 `;
 
 const Text = styled.p`
-  font-size: 14px;
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
 `;
 
 const Guide = styled.p`
-  font-size: 12px;
-  color: gray;
+  font-size: ${style.font.caption};
+  color: ${style.colors.Text_light};
   text-align: center;
-  margin-top: 20px;
+  margin-top: ${style.spacing.sectionGap};
 `;

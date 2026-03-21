@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import AuthButton from "./AuthButton";
 import { signInWithGoogle } from "../../api/auth";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 
 export default function Auth() {
   return (
@@ -19,28 +19,32 @@ export default function Auth() {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+
   min-height: 100vh;
   width: 100%;
-  max-width: 380px;
+  max-width: ${style.layout.maxWidth};
 
-  padding: 160px 0 140px;
-  margin-bottom: 20px;
+  padding: ${style.layout.padding};
+  margin: 0 auto;
 `;
 
 const TextContainer = styled.div`
   text-align: center;
+  margin-bottom: 48px;
 `;
 
 const Title = styled.h1`
-  font-size: 30px;
-  letter-spacing: -0.5px;
-  margin-bottom: 12px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: ${style.colors.Text};
+  margin-bottom: 8px;
 `;
 
 const Subtitle = styled.p`
-  font-size: 16px;
-  color: ${colors.Text};
-  opacity: 0.8;
+  font-size: ${style.font.body};
+  color: ${style.colors.Text_light};
   letter-spacing: -0.2px;
 `;

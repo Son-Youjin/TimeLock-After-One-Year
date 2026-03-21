@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Auth from "../../components/auth/Auth";
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { colors } from "../../styles/theme";
+import { style } from "../../styles/theme";
 import { isInAppBrowser } from "../../utils/isInAppBrowser";
 import InAppBrowserBlock from "../../components/auth/InAppBrowserBlock";
 
@@ -40,7 +40,6 @@ const PageWrapper = styled.div`
 
   background: linear-gradient(
     180deg,
-    ${colors.Primary} 0%,
-    ${colors.Background_warm} 100%
+    ${style.colors.Background_warm} 100% ${style.colors.Primary} 0%
   );
 `;

@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
-import Header from "../components/Header/Header";
+import Header from "../components/header/Header";
 import { useEffect, useRef, useState } from "react";
-import SideBar from "../components/Header/SideBar";
+import SideBar from "../components/header/SideBar";
 import type { User } from "firebase/auth";
-import GuideModal from "../components/Header/GuideModal";
+import GuideModal from "../components/header/GuideModal";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../api/firebase";
 import { enablePush } from "../api/pushNotification";
