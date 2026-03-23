@@ -51,8 +51,6 @@ const Music = styled.div`
 `;
 
 const Content = styled.div`
-  /* TODO: 폰트 사이즈 확인 후 수정 */
-  /* font-size: ${style.font.littleTitle}; */
   font-size: ${style.font.body};
   line-height: 1.8;
   letter-spacing: -0.2px;

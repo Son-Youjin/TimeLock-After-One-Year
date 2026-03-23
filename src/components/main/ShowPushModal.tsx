@@ -8,7 +8,7 @@ interface ShowPushModalProps {
   onClose: () => void;
   onClick: () => void;
 }
-// TODO: 모달 사이즈 재수정
+
 export default function ShowPushModal({
   onClose,
   onClick,

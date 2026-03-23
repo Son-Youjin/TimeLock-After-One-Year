@@ -77,7 +77,6 @@ const ListItem = styled.li`
 `;
 
 const Text = styled.p`
-  /* TODO: 사이즈 확인 후 수정 */
   font-size: ${style.font.littleTitle};
   color: ${style.colors.Text};
   overflow: hidden;
