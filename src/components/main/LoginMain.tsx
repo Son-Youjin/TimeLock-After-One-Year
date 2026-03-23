@@ -117,8 +117,8 @@ const Day = styled.h1`
   width: 100%;
   text-align: center;
 
-  font-size: 40px;
-  font-weight: 700;
+  font-size: 44px;
+  font-weight: 900;
   color: ${style.colors.Darkblue};
   margin: ${style.spacing.contentGap} 0;
 `;

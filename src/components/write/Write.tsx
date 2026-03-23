@@ -131,7 +131,7 @@ export default function Write({ user }: { user: User }) {
       <Button
         style={{
           width: "100%",
-          height: style.size.buttonHeight,
+          height: "60px",
         }}
         bgcolor={style.colors.ClearBlue}
         color={style.colors.Background}

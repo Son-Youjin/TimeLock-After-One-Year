@@ -6,7 +6,7 @@ import { style } from "../../styles/theme";
 
 interface ModalProps {
   onClose?: () => void;
-  title?: string;
+  title?: ReactNode;
   children: ReactNode;
 }
 

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { style } from "../../styles/theme";
 import Button from "../common/Button";
 import Modal from "../common/Modal";
+import { FaBell } from "react-icons/fa";
 
 interface ShowPushModalProps {
   onClose: () => void;
@@ -13,14 +14,16 @@ export default function ShowPushModal({
   onClick,
 }: ShowPushModalProps) {
   return (
-    <Modal onClose={onClose}>
+    <Modal title="알림 설정" onClose={onClose}>
       <Container>
-        <Title>푸시 알림 받기</Title>
+        <Icon>
+          <FaBell color="#ffcf00" size={28} />
+        </Icon>
 
         <Text>
-          푸시 알림을 허용하면
+          편지가 열리면
           <br />
-          기다린 편지가 열리는 순간 바로 알려드릴게요 📩
+          바로 알려드릴게요
         </Text>
 
         <Button
@@ -29,10 +32,10 @@ export default function ShowPushModal({
           color={style.colors.Background}
           style={{
             width: "100%",
-            height: style.size.buttonHeight,
+            height: "60px",
           }}
         >
-          알림받기
+          알림 허용하기
         </Button>
       </Container>
     </Modal>
@@ -46,15 +49,34 @@ const Container = styled.div`
   gap: ${style.spacing.contentGap};
 `;
 
-const Title = styled.h1`
-  font-size: ${style.font.sectionTitle};
-  font-weight: 600;
-  color: ${style.colors.Text};
+const Icon = styled.div`
+  text-align: center;
+  margin: ${style.spacing.tightGap} 0;
+  animation: shake 0.5s ease-out 1;
+
+  @keyframes shake {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-6deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 `;
 
 const Text = styled.p`
-  font-size: ${style.font.body};
-  color: ${style.colors.Text_light};
+  font-size: ${style.font.littleTitle};
+  color: ${style.colors.Text};
   text-align: center;
   line-height: 1.5;
+  margin-bottom: ${style.spacing.contentGap};
 `;
