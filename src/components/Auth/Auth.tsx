@@ -2,8 +2,14 @@ import styled from "@emotion/styled";
 import AuthButton from "./AuthButton";
 import { signInWithGoogle } from "../../api/auth";
 import { style } from "../../styles/theme";
+import { useState } from "react";
+import SignUpEmail from "./SignUpEmail";
 
 export default function Auth() {
+  const [isEmailMode, setIsEmailMode] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <Container>
       <TextContainer>
@@ -11,7 +17,21 @@ export default function Auth() {
         <Subtitle>지금의 나를, 미래의 나에게</Subtitle>
       </TextContainer>
 
-      <AuthButton onLoginGoogle={signInWithGoogle} />
+      {!isEmailMode ? (
+        <AuthButton
+          onLoginGoogle={signInWithGoogle}
+          onLoginEmail={() => setIsEmailMode(true)}
+        />
+      ) : (
+        <>
+          <SignUpEmail
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+          />
+        </>
+      )}
     </Container>
   );
 }

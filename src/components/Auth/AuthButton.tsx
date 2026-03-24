@@ -1,13 +1,17 @@
 import styled from "@emotion/styled";
 import googleLogo from "../../assets/googleLogo.svg";
-import appleLogo from "../../assets/appleLogo_black.svg";
+import { MdEmail } from "react-icons/md";
 import { style } from "../../styles/theme";
 
 interface AuthButtonProps {
   onLoginGoogle: () => void;
+  onLoginEmail: () => void;
 }
 
-export default function AuthButton({ onLoginGoogle }: AuthButtonProps) {
+export default function AuthButton({
+  onLoginGoogle,
+  onLoginEmail,
+}: AuthButtonProps) {
   return (
     <Container>
       <AuthBtn
@@ -22,17 +26,16 @@ export default function AuthButton({ onLoginGoogle }: AuthButtonProps) {
           alt=""
           aria-hidden="true"
         />
-        Google로 시작하기
+        Google로 로그인하기
       </AuthBtn>
 
-      {/* TODO:  애플 로그인*/}
       <AuthBtn
         bgcolor="#ffffff"
-        aria-label="애플 로그인"
-        // onClick={() => onLogin("apple")}
+        aria-label="이메일 로그인"
+        onClick={onLoginEmail}
       >
-        <img src={appleLogo} width={20} height={20} alt="" aria-hidden="true" />
-        Apple로 시작하기
+        <MdEmail size={20} />
+        이메일로 로그인하기
       </AuthBtn>
     </Container>
   );

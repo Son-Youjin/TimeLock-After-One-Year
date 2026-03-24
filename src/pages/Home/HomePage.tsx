@@ -1,6 +1,7 @@
 import type { User } from "firebase/auth";
 import LoginMain from "../../components/main/LoginMain";
 import PreviewMain from "../../components/main/PreviewMain";
+import NameModal from "../../components/auth/NameModal";
 
 interface HomePageProps {
   isLogin: boolean;
@@ -8,5 +9,13 @@ interface HomePageProps {
 }
 
 export default function HomePage({ isLogin, user }: HomePageProps) {
-  return <>{isLogin ? <LoginMain user={user} /> : <PreviewMain />}</>;
+  if (!isLogin) {
+    return <PreviewMain />;
+  }
+
+  if (user && !user.displayName) {
+    return <NameModal user={user} />;
+  }
+
+  return <LoginMain user={user} />;
 }

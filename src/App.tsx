@@ -27,6 +27,12 @@ function App() {
     return unsubscribe;
   }, []);
 
+  useEffect(() => {
+    if (user && window.location.pathname === "/auth") {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
   const isLogin = user !== null;
 
   if (!authReady) {
@@ -36,6 +42,7 @@ function App() {
   const handleLogout = async () => {
     await logout();
     setUser(null);
+    navigate("/auth");
   };
 
   return (

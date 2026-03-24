@@ -4,19 +4,29 @@ import {
   signOut,
   onAuthStateChanged,
   signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase";
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
+//Google
 export function signInWithGoogle() {
   if (import.meta.env.DEV) {
-    // 로컬
-    return signInWithPopup(auth, provider);
+    return signInWithPopup(auth, googleProvider);
   }
-
   // 배포
-  return signInWithRedirect(auth, provider);
+  return signInWithRedirect(auth, googleProvider);
+}
+
+// Email
+export function signUpWithEmail(email: string, password: string) {
+  return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function signInWithEmail(email: string, password: string) {
+  return signInWithEmailAndPassword(auth, email, password);
 }
 
 export function logout() {
