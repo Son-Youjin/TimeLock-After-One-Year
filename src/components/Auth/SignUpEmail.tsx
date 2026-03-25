@@ -36,11 +36,15 @@ export default function SignUpEmail({
 
       switch (error.code) {
         case "auth/user-not-found":
-          await signUpWithEmail(email, password);
+        case "auth/invalid-credential":
+          try {
+            await signUpWithEmail(email, password);
+          } catch {
+            setErrorMsg("이메일 또는 비밀번호가 올바르지 않습니다");
+          }
           break;
 
         case "auth/wrong-password":
-        case "auth/invalid-credential":
           setErrorMsg("이메일 또는 비밀번호가 올바르지 않습니다");
           break;
 
