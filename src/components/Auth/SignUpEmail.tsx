@@ -5,6 +5,7 @@ import { FirebaseError } from "firebase/app";
 import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../api/firebase";
+import Button from "../common/Button";
 
 interface SignUpEmailProps {
   email: string;
@@ -104,9 +105,19 @@ export default function SignUpEmail({
 
       {errorMsg && <ErrorText>{errorMsg}</ErrorText>}
 
-      <StartButton onClick={handleEmailLogin} disabled={!email || !password}>
+      <Button
+        style={{
+          width: "100%",
+          height: style.size.headerHeight,
+          boxShadow: style.shadow.button,
+        }}
+        color={style.colors.Surface}
+        bgcolor={style.colors.DeepBlue}
+        onClick={handleEmailLogin}
+        disabled={!email || !password}
+      >
         시작하기
-      </StartButton>
+      </Button>
 
       <SubText onClick={handleResetPassword}>비밀번호 찾기</SubText>
     </Wrapper>
@@ -164,33 +175,6 @@ const ErrorText = styled.p`
   font-size: 12px;
   margin-top: 6px;
   margin-left: 4px;
-`;
-
-const StartButton = styled.button`
-  width: 100%;
-  max-width: 320px;
-  height: ${style.size.headerHeight};
-  margin-top: 8px;
-
-  border: none;
-  border-radius: ${style.radius.pill};
-  background: ${style.colors.DeepBlue};
-
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:active {
-    transform: scale(0.98);
-  }
-
-  &:disabled {
-    background: ${style.colors.Active};
-    cursor: not-allowed;
-  }
 `;
 
 const SubText = styled.span`

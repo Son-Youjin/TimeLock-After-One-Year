@@ -31,9 +31,14 @@ const Btn = styled.button<{ bgcolor?: string; color?: string }>`
 
   cursor: pointer;
 
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
   &:disabled {
-    background-color: ${style.colors.Gray};
-    color: ${style.colors.Text_light};
+    background: ${style.colors.Active};
     cursor: not-allowed;
   }
 `;
