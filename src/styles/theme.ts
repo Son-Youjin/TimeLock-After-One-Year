@@ -12,6 +12,7 @@ export const style = {
     Blue: "#BADEF3",
     DeepBlue: "#6082A1",
     Darkblue: "#4B7D9D",
+    Purple: "#6366f1",
     Text: "#4A5568",
     Text_light: "#6a7383ff",
     Line: "#aaaaaa",
@@ -21,6 +22,7 @@ export const style = {
     Border: "#E2E8F0",
     Gray: "#e6e6e6ff",
     Green: "#62c080",
+    Danger: "#ff4d4f",
   },
 
   layout: {
@@ -54,6 +56,7 @@ export const style = {
     card: "0 6px 16px rgba(0,0,0,0.06)",
     button: "0 4px 12px rgba(0,0,0,0.08)",
     modal: "0 12px 28px rgba(0,0,0,0.12)",
+    focus: "0 0 0 3px rgba(99, 102, 241, 0.15)",
   },
 
   font: {
