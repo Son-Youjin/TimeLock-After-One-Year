@@ -1,20 +1,22 @@
 import styled from "@emotion/styled";
-import type { Letter } from "../../types/letter";
 import { style } from "../../styles/theme";
 import { IoIosArrowForward } from "react-icons/io";
+import useLetters from "../../hooks/useLetters";
 
 interface SideLettersListProps {
-  letters: Letter[];
+  userId: string;
   onGoLetter: (id: string) => void;
   onClose: () => void;
 }
 
 export default function SideLettersList({
-  letters,
+  userId,
   onGoLetter,
   onClose,
 }: SideLettersListProps) {
-  const lettersList = [...letters];
+  const { data } = useLetters(userId);
+
+  const lettersList = data ?? [];
 
   return (
     <Container>

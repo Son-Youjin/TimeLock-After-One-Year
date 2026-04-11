@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import type { ChangeEvent } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { style } from "../../styles/theme";
 
@@ -8,29 +7,28 @@ interface SearchBarProps {
   onKeyword: (value: string) => void;
   onClick: () => void;
 }
+import { forwardRef } from "react";
 
-export default function SearchBar({
-  value,
-  onKeyword,
-  onClick,
-}: SearchBarProps) {
-  const handleInputKeyword = (e: ChangeEvent<HTMLInputElement>) => {
-    onKeyword(e.target.value);
-  };
+const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
+  ({ value, onKeyword, onClick }, ref) => {
+    return (
+      <Container>
+        <Icon>
+          <IoIosSearch size={20} />
+        </Icon>
+        <Search
+          ref={ref}
+          placeholder="노래 제목 또는 아티스트를 작성해주세요!"
+          value={value}
+          onChange={(e) => onKeyword(e.target.value)}
+          onClick={onClick}
+        />
+      </Container>
+    );
+  },
+);
 
-  return (
-    <Container onClick={onClick}>
-      <Icon>
-        <IoIosSearch size={20} />
-      </Icon>
-      <Search
-        placeholder="노래 제목 또는 아티스트를 작성해주세요!"
-        value={value}
-        onChange={handleInputKeyword}
-      />
-    </Container>
-  );
-}
+export default SearchBar;
 
 const Container = styled.div`
   position: relative;

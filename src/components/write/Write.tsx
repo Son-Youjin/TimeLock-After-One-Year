@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import SearchBar from "./SearchBar";
-import { useEffect, useState } from "react";
-import { searchKeyword } from "../../utils/searchKeyword";
+import { useEffect, useRef, useState } from "react";
 import type { MusicMeta } from "../../types/musicMeta";
 import MusicList from "./MusicList";
 import SelectedMusic from "./SelectedMusic";
@@ -15,34 +14,32 @@ import type { User } from "firebase/auth";
 import { searchYoutubeVideo } from "../../utils/searchYoutube";
 import { randomColor } from "../../utils/randomColor";
 import { useNavigate } from "react-router-dom";
-
+import useSearchKeyword from "../../hooks/useSearchKeyword";
 export default function Write({ user }: { user: User }) {
   const [keyword, setKeyword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [searchResults, setSearchResults] = useState<MusicMeta[]>([]);
+  const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
   const [selectedMusic, setSelectedMusic] = useState<MusicMeta | null>(null);
   const [videoId, setVideoId] = useState("");
   const [successSave, setSuccessSave] = useState(false);
   const [paperColor, setPaperColor] = useState(() => randomColor());
 
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const trimmed = keyword.trim();
 
-    const timer = setTimeout(async () => {
-      if (trimmed.length < 2) {
-        setSearchResults([]);
-        return;
-      }
-      const results = await searchKeyword(trimmed);
-      setSearchResults(results);
+    const timer = setTimeout(() => {
+      setDebouncedKeyword(trimmed);
     }, 300);
 
     return () => clearTimeout(timer);
   }, [keyword]);
+
+  const { data = [] } = useSearchKeyword(debouncedKeyword);
 
   const handleSubmit = async () => {
     try {
@@ -78,7 +75,7 @@ export default function Write({ user }: { user: User }) {
     setContent("");
     setSelectedMusic(null);
     setKeyword("");
-    setSearchResults([]);
+    setDebouncedKeyword("");
     setIsOpen(false);
     setSuccessSave(true);
     setPaperColor(randomColor());
@@ -90,9 +87,17 @@ export default function Write({ user }: { user: User }) {
 
       <SearchSection>
         {selectedMusic ? (
-          <SelectedMusic music={selectedMusic} onOpen={() => setIsOpen(true)} />
+          <SelectedMusic
+            music={selectedMusic}
+            onOpen={() => {
+              setSelectedMusic(null);
+              setIsOpen(true);
+              setTimeout(() => inputRef.current?.focus(), 0);
+            }}
+          />
         ) : (
           <SearchBar
+            ref={inputRef}
             value={keyword}
             onKeyword={setKeyword}
             onClick={() => setIsOpen(true)}
@@ -104,9 +109,10 @@ export default function Write({ user }: { user: User }) {
             <Backdrop onClick={() => setIsOpen(false)} />
 
             <MusicList
-              onSearchResults={searchResults}
+              onSearchResults={data}
               onSelectedMusic={async (music) => {
                 setSelectedMusic(music);
+                setKeyword(`${music.name} ${music.artist}`);
                 setIsOpen(false);
 
                 const youtubeVideoId = await searchYoutubeVideo(

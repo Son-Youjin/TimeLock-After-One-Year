@@ -2,42 +2,21 @@ import styled from "@emotion/styled";
 import CreateButton from "../common/CreateButton";
 import { style } from "../../styles/theme";
 import LetterItem from "../common/LetterItem";
-import { useEffect, useState } from "react";
-import type { Letter } from "../../types/letter";
+
 import TODAY_TIMESTAMP from "../../utils/todayTimestamp";
 import calcDDay from "../../utils/calcDDay";
-import { getNextComingLetter } from "../../api/letters";
 import type { User } from "firebase/auth";
-import { isOpenByDate } from "../../utils/isOpenByDate";
 import { formatDate } from "../../utils/formatDate";
 import DdayCardSkeleton from "./DdayCardSkeleton";
+import useNextComingLetter from "../../hooks/useNextComingLetter";
+import { isOpenByDate } from "../../utils/isOpenByDate";
 
 export default function LoginMain({ user }: { user: User | null }) {
-  const [comingOpen, setComingOpen] = useState<Letter | null>(null);
-  const [loading, setLoading] = useState(true);
   const name = user?.displayName ?? "";
+  const userId = user?.uid;
 
-  useEffect(() => {
-    if (!user) return;
-
-    const uid = user.uid;
-
-    async function fetch() {
-      try {
-        const letter = await getNextComingLetter(uid);
-
-        if (letter && isOpenByDate(letter.openAt)) {
-          setComingOpen(null);
-        } else {
-          setComingOpen(letter);
-        }
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetch();
-  }, [user]);
+  const { data, isLoading } = useNextComingLetter(userId);
+  const comingOpen = data && !isOpenByDate(data.openAt) ? data : null;
 
   return (
     <>
@@ -49,7 +28,7 @@ export default function LoginMain({ user }: { user: User | null }) {
         </Title>
 
         <Card>
-          {loading ? (
+          {isLoading ? (
             <DdayCardSkeleton />
           ) : comingOpen ? (
             <>

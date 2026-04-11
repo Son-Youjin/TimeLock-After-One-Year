@@ -1,11 +1,9 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import type { Letter } from "../../types/letter";
 import SideLettersList from "./SideLettersList";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
 import { useNavigate } from "react-router-dom";
-import { getLettersByUser } from "../../api/letters";
 import type { User } from "firebase/auth";
 import { style } from "../../styles/theme";
 
@@ -15,7 +13,7 @@ interface SideBarProps {
   onLogin: () => void;
   onLogout: () => void;
   onClose: () => void;
-  user: User | null;
+  user: User;
 }
 
 export default function SideBar({
@@ -27,27 +25,15 @@ export default function SideBar({
   onClose,
 }: SideBarProps) {
   const navigate = useNavigate();
-  const [letters, setLetters] = useState<Letter[]>([]);
   const [visible, setVisible] = useState(false);
   const shouldRender = isOpen || visible;
+  const userId = user.uid;
 
   useEffect(() => {
     if (isOpen) {
       requestAnimationFrame(() => setVisible(true));
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    if (!isLogin || !user) return;
-
-    const uid = user?.uid;
-
-    async function fetch() {
-      const data = await getLettersByUser(uid);
-      setLetters(data);
-    }
-    fetch();
-  }, [isLogin, user]);
 
   const handleGoLetter = (id: string) => {
     onClose();
@@ -81,7 +67,7 @@ export default function SideBar({
             {isLogin ? (
               <ContentArea>
                 <SideLettersList
-                  letters={letters}
+                  userId={userId}
                   onGoLetter={handleGoLetter}
                   onClose={onClose}
                 />
