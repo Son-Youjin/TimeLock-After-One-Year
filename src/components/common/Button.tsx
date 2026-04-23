@@ -35,6 +35,7 @@ const Btn = styled.button<{ bgcolor?: string; color?: string }>`
 
   &:active {
     transform: scale(0.98);
+    opacity: 0.8;
   }
 
   &:disabled {

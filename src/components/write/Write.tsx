@@ -46,6 +46,8 @@ export default function Write({ user }: { user: User }) {
   const { data = [] } = useSearchKeyword(debouncedKeyword);
 
   const handleSubmit = () => {
+    if (!content.trim() || isPending) return;
+
     const nextYear = new Date();
     nextYear.setFullYear(nextYear.getFullYear() + 1);
     nextYear.setHours(0, 0, 0, 0);
@@ -151,7 +153,7 @@ export default function Write({ user }: { user: User }) {
         bgcolor={style.colors.ClearBlue}
         color={style.colors.Background}
         onClick={handleSubmit}
-        disabled={isPending}
+        disabled={isPending || !content.trim()}
       >
         1년 뒤로 보내기
       </Button>
