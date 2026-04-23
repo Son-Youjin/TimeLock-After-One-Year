@@ -9,12 +9,13 @@ import Button from "../common/Button";
 import { style } from "../../styles/theme";
 import SuccessModal from "./SuccessModal";
 import { Timestamp } from "firebase/firestore";
-import { createLetter } from "../../api/letters";
 import type { User } from "firebase/auth";
 import { searchYoutubeVideo } from "../../utils/searchYoutube";
 import { randomColor } from "../../utils/randomColor";
 import { useNavigate } from "react-router-dom";
 import useSearchKeyword from "../../hooks/useSearchKeyword";
+import useCreateLetter from "../../hooks/useCreateLetter";
+import ErrorModal from "./ErrorModal";
 export default function Write({ user }: { user: User }) {
   const [keyword, setKeyword] = useState("");
   const [title, setTitle] = useState("");
@@ -25,9 +26,12 @@ export default function Write({ user }: { user: User }) {
   const [videoId, setVideoId] = useState("");
   const [successSave, setSuccessSave] = useState(false);
   const [paperColor, setPaperColor] = useState(() => randomColor());
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { mutate, isPending } = useCreateLetter();
 
   useEffect(() => {
     const trimmed = keyword.trim();
@@ -41,15 +45,15 @@ export default function Write({ user }: { user: User }) {
 
   const { data = [] } = useSearchKeyword(debouncedKeyword);
 
-  const handleSubmit = async () => {
-    try {
-      const nextYear = new Date();
-      nextYear.setFullYear(nextYear.getFullYear() + 1);
-      nextYear.setHours(0, 0, 0, 0);
+  const handleSubmit = () => {
+    const nextYear = new Date();
+    nextYear.setFullYear(nextYear.getFullYear() + 1);
+    nextYear.setHours(0, 0, 0, 0);
 
-      const openAt = Timestamp.fromDate(nextYear);
+    const openAt = Timestamp.fromDate(nextYear);
 
-      await createLetter({
+    mutate(
+      {
         userId: user.uid,
         title,
         content,
@@ -57,12 +61,17 @@ export default function Write({ user }: { user: User }) {
         musicTitle: selectedMusic?.name ?? "",
         musicArtist: selectedMusic?.artist ?? "",
         videoId: videoId ?? "",
-      });
-
-      handleResetText();
-    } catch (err) {
-      console.log("편지 저장 실패", err);
-    }
+      },
+      {
+        onSuccess: () => {
+          handleResetText();
+        },
+        onError: (error) => {
+          setErrorMessage(error.message ?? "에러 발생");
+          setErrorOpen(true);
+        },
+      },
+    );
   };
 
   const handleSuccessClose = () => {
@@ -142,11 +151,19 @@ export default function Write({ user }: { user: User }) {
         bgcolor={style.colors.ClearBlue}
         color={style.colors.Background}
         onClick={handleSubmit}
-        disabled={!content.trim()}
+        disabled={isPending}
       >
         1년 뒤로 보내기
       </Button>
       {successSave && <SuccessModal onClose={handleSuccessClose} />}
+      {errorOpen && (
+        <ErrorModal
+          message={errorMessage}
+          onClose={() => setErrorOpen(false)}
+          onRetry={handleSubmit}
+          isPending={isPending}
+        />
+      )}
     </Container>
   );
 }

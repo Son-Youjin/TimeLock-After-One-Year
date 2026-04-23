@@ -3,7 +3,7 @@ import { getNextComingLetter } from "../api/letters";
 
 export default function useNextComingLetter(userId?: string) {
   return useQuery({
-    queryKey: ["nextLetters", userId],
+    queryKey: ["letters", userId, "next"],
     queryFn: async () => {
       if (!userId) return null;
       return getNextComingLetter(userId);

@@ -3,7 +3,7 @@ import { getLetter } from "../api/letters";
 
 export default function useLetterItem(id: string) {
   return useQuery({
-    queryKey: ["letterItem", id],
+    queryKey: ["letter", id],
     queryFn: () => {
       return getLetter(id);
     },

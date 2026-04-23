@@ -6,6 +6,7 @@ function useLetters(userId: string) {
     queryKey: ["letters", userId],
     queryFn: () => {
       if (userId) {
+        console.count("letters fetch");
         return getLettersByUser(userId);
       }
     },

@@ -6,7 +6,7 @@ export default function useSearchKeyword(keyword: string) {
     queryKey: ["searchKeyword", keyword],
     queryFn: () => searchKeyword(keyword),
     enabled: keyword.length >= 2,
-    gcTime: 1000 * 30,
+    gcTime: 1000 * 300,
     staleTime: 1000 * 30,
   });
 }
