@@ -31,7 +31,7 @@ export default function Write({ user }: { user: User }) {
 
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { mutate, isPending } = useCreateLetter();
+  const { mutate, isPending, failureCount } = useCreateLetter();
 
   useEffect(() => {
     const trimmed = keyword.trim();
@@ -155,7 +155,13 @@ export default function Write({ user }: { user: User }) {
         onClick={handleSubmit}
         disabled={isPending || !content.trim()}
       >
-        1년 뒤로 보내기
+        {!isPending
+          ? `1년 뒤로 보내기`
+          : failureCount === 0
+            ? `저장 중...`
+            : failureCount < 3
+              ? `재시도 중...`
+              : `재시도 실패`}
       </Button>
       {successSave && <SuccessModal onClose={handleSuccessClose} />}
       {errorOpen && (

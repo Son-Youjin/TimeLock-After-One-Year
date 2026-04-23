@@ -6,6 +6,9 @@ export default function useCreateLetter() {
 
   return useMutation({
     mutationFn: createLetter,
+    retry: 3,
+    retryDelay: (attempt) => attempt * 1000,
+
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["letters", variables.userId],

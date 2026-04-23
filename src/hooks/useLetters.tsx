@@ -3,6 +3,7 @@ import { getLettersByUser } from "../api/letters";
 
 function useLetters(userId: string) {
   return useQuery({
+    retry: 3,
     queryKey: ["letters", userId],
     queryFn: () => {
       if (userId) {
