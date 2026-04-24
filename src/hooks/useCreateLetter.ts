@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createLetter } from "../api/letters";
+import { letterKeys } from "./queryKeys";
 
 export default function useCreateLetter() {
   const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ export default function useCreateLetter() {
 
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["letters", variables.userId],
+        queryKey: letterKeys.list(variables.userId),
       });
     },
     onError: (error) => {
